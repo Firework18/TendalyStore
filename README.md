@@ -1,2 +1,3 @@
 # TendalyStore
-Proyecto Ecommerce enfocados en catalogos y productos para madres emprendedoras.
+
+Proyecto Ecommerce enfocado en catalogos y productos para madres emprendedoras.
