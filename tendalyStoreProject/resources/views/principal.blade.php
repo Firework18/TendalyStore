@@ -26,7 +26,7 @@
         id="hero"
         class="hero-section relative h-96 md:h-[500px] flex items-center justify-center text-center bg-cover bg-center"
         style="
-          background-image: url('assets/fondo_evea-1024x682.jpg');
+          background-image: url('{{asset('assets/images/fondo_evea-1024x682.jpg')}}');
           background-color: rgba(88, 130, 182, 0.863);
           background-blend-mode: multiply;
         "
@@ -79,7 +79,7 @@
               class="bg-white rounded-lg shadow-lg overflow-hidden border-t-4 border-[var(--secondary-red)] transform transition-transform duration-200 hover:scale-105"
             >
               <img
-                src="assets/alimentacion.jpg"
+                src="{{asset('assets/images/alimentacion.jpg')}}"
                 alt="Alimentación"
                 class="w-full h-28 md:h-36 object-cover"
               />
@@ -104,7 +104,7 @@
               class="bg-white rounded-lg shadow-lg overflow-hidden border-t-4 border-[var(--secondary-red)] transform transition-transform duration-200 hover:scale-105"
             >
               <img
-                src="assets/cosmetica.jpg"
+                src="{{asset('assets/images/cosmetica.jpg')}}"
                 alt="Cosmética y Bienestar"
                 class="w-full h-28 md:h-36 object-cover"
               />
@@ -154,7 +154,7 @@
               class="bg-white rounded-lg shadow-lg overflow-hidden border-t-4 border-[var(--secondary-red)] transform transition-transform duration-200 hover:scale-105"
             >
               <img
-                src="assets/eficiencia.jpg"
+                src="{{asset('assets/images/eficiencia.jpg')}}"
                 alt="Eficiencia de Recursos"
                 class="w-full h-28 md:h-36 object-cover"
               />
@@ -179,7 +179,7 @@
               class="bg-white rounded-lg shadow-lg overflow-hidden border-t-4 border-[var(--secondary-red)] transform transition-transform duration-200 hover:scale-105"
             >
               <img
-                src="assets/moda.jpg"
+                src="{{asset('assets/images/moda.jpg')}}"
                 alt="Moda Sostenible"
                 class="w-full h-28 md:h-36 object-cover"
               />
@@ -295,7 +295,7 @@
             </div>
             <div class="flex-1 flex justify-center items-center mt-8 lg:mt-0">
               <img
-                src="assets/about.jpg"
+                src="{{asset('assets/images/about.jpg')}}"
                 alt="Imagen de referencia"
                 class="w-full max-w-lg h-auto object-contain rounded-2xl shadow-2xl transition-all duration-300"
               />

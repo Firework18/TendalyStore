@@ -9,7 +9,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link href="./output.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/styles.css') }}">
   </head>
   <body>
     <div class="grid-container">
@@ -22,7 +23,7 @@
           href="/"
           class="mx-auto md:mx-0 text-xl font-bold text-red-600 flex items-center justify-center w-full md:w-auto"
         >
-          <img src="assets/logo.svg" alt="LOGO TENDALY" width="100px" />
+          <img src="{{asset('assets/images/logo.svg')}}" alt="LOGO TENDALY" width="100px" />
         </a>
         <div class="hidden md:flex flex-1 mx-8 max-w-lg">
           <input
