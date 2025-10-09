@@ -39,22 +39,39 @@
         </div>
         <nav class="hidden md:flex">
           <div class="items-center space-x-4 flex">
-            <button
+            <!-- USO DE LOGIN -->
+            
+            <a
               class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
-            >
+            href="/login" >
+              LOGIN
+              <span class="text-sm"></span>
+            </a>
+
+            <!-- USO DE REGISTER -->
+            <a
+              class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
+            href="{{route('register')}}" >
+              REGISTER
+              <span class="text-sm"></span>
+            </a>
+
+            <a
+              class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
+            href="#cuenta" >
               <i class="bi bi-person text-2xl"></i>
               <span class="text-sm"></span>
-            </button>
-            <button
+            </a>
+            <a
               class="relative text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
-            >
+            href="#carrito">
               <i class="bi bi-cart text-2xl"></i>
-            </button>
-            <button
+            </a>
+            <a
               class="text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
-            >
+            href="#lista">
               <i class="bi bi-list text-2xl"></i>
-            </button>
+            </a>
           </div>
         </nav>
       </header>
@@ -64,7 +81,7 @@
         <!-- Sección de contacto / pie de página -->
       <footer
         id="contact"
-        class="footer-section pt-12 pb-24 md:pb-12 px-4 bg-[var(--primary-blue)] text-white"
+        class="footer-section pt-12 pb-24  md:pb-12 px-4 bg-[var(--primary-blue)] text-white"
       >
         <div class="content-wrapper max-w-6xl mx-auto">
           <div
@@ -147,7 +164,7 @@
             </div>
           </div>
           <div class="text-center text-sm text-gray-300 mt-8">
-            &copy; 2025 tendalyStore. Todos los derechos reservados.
+            &copy; {{now()->year}} tendalyStore. Todos los derechos reservados.
           </div>
         </div>
       </footer>

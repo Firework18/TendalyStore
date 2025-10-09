@@ -46,7 +46,7 @@
             class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center"
           >
             <a
-              href="#catalog"
+              href="/prueba"
               class="btn-primary text-white font-bold py-3 px-8 rounded-full shadow-lg text-center transition"
             >
               Explorar Catálogo
