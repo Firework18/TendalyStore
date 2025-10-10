@@ -5,9 +5,10 @@
 
 @section('contenido')
 <main class="container mx-auto mt-10 mb-4">
-<h2 class="font-extrabold text-center text-3xl mb-3 p-3">Regístrate en TendalyStore</h2>
+<h2 class="font-extrabold text-center text-3xl mb-3 p-3">Regístrate en 
+  <span class="text-red-600">TendalyStore</span></h2>
       <div class="md:flex md:justify-center md:gap-10 md:items-center p-3">
-        <div class="md:w-3/12">
+        <div class="md:w-4/12">
           <img src="{{asset('assets/images/register.png')}}" alt="Imagen de registro de usuarios">
         </div>
         <div class="class:md:w-1/2 bg-white p-6 rounded-lg shadow-xl">
@@ -68,7 +69,7 @@
                   name="password"
                   placeholder="Tu contraseña de registro"
                   class="border p-3 w-full rounded-lg  @error('password') border-red-500 @enderror"
-                  value="{{old('password')}}">
+                  >
                   @error('password')
                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>   
               @enderror
@@ -82,16 +83,14 @@
                   id="password_confirmation"
                   name="password_confirmation"
                   placeholder="Tu contraseña de registro"
-                  class="border p-3 w-full rounded-lg  @error('password_confirmation') border-red-500 @enderror"
-                  value="{{old('password_confirmation')}}">
+                  class="border p-3 w-full rounded-lg "
+                  >
             </div>
-            @error('password_confirmation')
-                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>   
-              @enderror
+            
             <input 
                   type="submit"
                   value="Crear Cuenta"
-                  class="bg-amber-700 hover:bg-amber-800 transition-colors cursor-pointer
+                  class="bg-red-500 hover:bg-red-700 transition-colors cursor-pointer
                   uppercase font-bold w-full p-3 text-white rounded-lg">
           </form>
         </div>
