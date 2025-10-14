@@ -1,0 +1,147 @@
+:root {
+  --color-primary: #c0392b; /* Color principal */
+  --color-secondary: #d35400; /* Color secundario */
+  --color-accent: #f4b400; /* Color para elementos */
+  --color-background: #fae5d3; /* Fondo principal o de secciones */
+  --color-text: #4a2c2a; /* Color del texto principal */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: white;
+  color: var(--color-text);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "header-top"
+    "hero"
+    "catalog"
+    "eco-business"
+    "about"
+    "news"
+    "footer"
+    "header-bottom";
+  grid-template-columns: 1fr;
+}
+
+.header-top {
+  grid-area: header-top;
+}
+
+.header-bottom {
+  grid-area: header-bottom;
+}
+
+.hero-section {
+  grid-area: hero;
+}
+
+.catalog-section {
+  grid-area: catalog;
+  background-color: var(--color-background);
+}
+
+.eco-business-section {
+  grid-area: eco-business;
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.about-section {
+  grid-area: about;
+  background-color: white;
+}
+
+.news-section {
+  grid-area: news;
+  background-color: var(--color-background);
+}
+
+.footer-section {
+  grid-area: footer;
+  background-color: var(--color-primary);
+  color: white;
+}
+
+@media (max-width: 767px) {
+  .header-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .grid-container {
+    padding-bottom: 60px;
+  }
+
+  .header-top {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background-color: white;
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-container {
+    grid-template-areas:
+      "header-top"
+      "header-bottom"
+      "hero"
+      "catalog"
+      "eco-business"
+      "about"
+      "news"
+      "footer";
+    padding-bottom: 0;
+  }
+
+  .header-bottom {
+    position: static;
+    border-top: none;
+  }
+
+  .header-top {
+    position: static;
+  }
+
+  .content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .about-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #a93226;
+}
+
+.btn-secondary {
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: #e09f0c;
+}
