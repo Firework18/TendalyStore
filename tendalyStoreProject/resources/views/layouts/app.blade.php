@@ -58,7 +58,7 @@
 
             <a
               class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
-            href="#cuenta" >
+            href="/perfil" >
               <i class="bi bi-person text-2xl"></i>
               <span class="text-sm"></span>
             </a>

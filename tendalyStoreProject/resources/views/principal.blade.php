@@ -46,7 +46,7 @@
             class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center"
           >
             <a
-              href="/prueba"
+              href="/#catalogo"
               class="btn-primary text-white font-bold py-3 px-8 rounded-full shadow-lg text-center transition"
             >
               Explorar Catálogo
@@ -94,7 +94,7 @@
                   para una alimentación saludable.
                 </p>
                 <a
-                  href="/catalogo"
+                  href="/#catalogo"
                   class="block text-center text-xs text-white bg-[var(--primary-blue)] py-2 rounded-full hover:bg-[#10386e] transition"
                   >Visitar el catálogo</a
                 >

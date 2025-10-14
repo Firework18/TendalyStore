@@ -10,14 +10,14 @@ use App\Http\Controllers\Controller;
 class RegisterController extends Controller
 {
     public function index(){
-    return view('register');
+    return view('auth.register');
     }
 
     public function store(Request $request){
         //dd($request);
         //dd($request->get('name'));
 
-        //Modificar el request
+        //Modificar el request evitando usuarios duplicados
         $request->request->add(['username'=> Str::slug($request->username)]);
 
         //Validación
@@ -35,6 +35,17 @@ class RegisterController extends Controller
             'password'=>$request->password,
         ]);
 
+        /*Autenticar un usuario
+        auth()->attempt([
+            'email'=>$request->email,
+            'password'=>$request->password,
+        ]);
+        */
+
+        //Otra forma
+        auth()->attempt($request->only('email','password'));
+
         //Redireccionar
+        return redirect()->route('post.index');
     }
 };
