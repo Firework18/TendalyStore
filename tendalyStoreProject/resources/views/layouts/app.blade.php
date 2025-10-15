@@ -37,31 +37,43 @@
             <i class="bi bi-search"></i>
           </button>
         </div>
+   
+        
+
+        
+
         <nav class="hidden md:flex">
           <div class="items-center space-x-4 flex">
-            <!-- USO DE LOGIN -->
-            
-            <a
-              class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
-            href="/login" >
-              LOGIN
-              <span class="text-sm"></span>
-            </a>
 
-            <!-- USO DE REGISTER -->
-            <a
-              class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
-            href="{{route('register')}}" >
-              REGISTER
-              <span class="text-sm"></span>
-            </a>
-
+            @auth
             <a
               class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
             href="/perfil" >
               <i class="bi bi-person text-2xl"></i>
               <span class="text-sm"></span>
             </a>
+            @endauth
+
+            @guest
+            <a
+              class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
+            href="/login" >
+              
+              <span class="text-sm">LOGIN</span>
+            </a>
+
+            <!-- USO DE REGISTER -->
+            <a
+              class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
+            href="{{route('register')}}" >
+              
+              <span class="text-sm">REGISTER</span>
+            </a>
+            @endguest
+            <!-- USO DE LOGIN -->
+            
+
+            
             <a
               class="relative text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
             href="#carrito">
@@ -72,6 +84,17 @@
             href="#lista">
               <i class="bi bi-list text-2xl"></i>
             </a>
+
+            @auth
+            <form action="{{route('logout')}}" method="POST">
+              @csrf
+              <button type="submit"
+                class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition">
+                <span class="text-sm">CERRAR SESIÓN</span>
+              </button>  
+            </form>  
+            @endauth
+
           </div>
         </nav>
       </header>
