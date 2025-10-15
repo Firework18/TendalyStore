@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 
+use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\Auth\PostController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -24,5 +26,11 @@ Route::post('/login',[LoginController::class,'store']);
 
 Route::post('/logout',[LogoutController::class,'store'])->name('logout');
 
-//Enviar al muro o perfil
-Route::get('/perfil',[PostController::class,'index'])->name('post.index');
+Route::get('/perfil',[PerfilController::class,'index'])->name('perfil');
+
+//Enviar al muro
+Route::get('/muro',[PostController::class,'index'])->name('post.index');
+
+//Catalogo
+Route::get('/catalogo',[CatalogoController::class,'index'])->name('catalogo');
+
