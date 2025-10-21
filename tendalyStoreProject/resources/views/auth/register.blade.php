@@ -92,7 +92,19 @@
                   value="Crear Cuenta"
                   class="bg-red-500 hover:bg-red-700 transition-colors cursor-pointer
                   uppercase font-bold w-full p-3 text-white rounded-lg">
-          </form>
+          
+                  <div class="text-center">
+              <p class="text-gray-600 text-sm">¿Ya tienes una cuenta?</p>
+                <a 
+                  href="{{ route('login') }}" 
+                  class="text-[var(--color-primary)] hover:text-[var(--color-secondary)] font-bold transition-colors duration-200"
+                >
+                Ingresa aquí
+              </a>
+        
+            </div>
+
+                </form>
         </div>
         
       </div>

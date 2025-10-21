@@ -63,6 +63,16 @@
                   value="Iniciar Sesión"
                   class="bg-red-500 hover:bg-red-700 transition-colors cursor-pointer
                   uppercase font-bold w-full p-3 text-white rounded-lg">
+
+            <div class="text-center">
+              <p class="text-gray-600 text-sm">¿No tienes una cuenta?</p>
+                <a 
+                  href="{{ route('register') }}" 
+                  class="text-[var(--color-primary)] hover:text-[var(--color-secondary)] font-bold transition-colors duration-200"
+                >
+                Crea una aquí
+              </a>
+        </div>
           </form>
         </div>
         

@@ -45,32 +45,21 @@
         <nav class="hidden md:flex">
           <div class="items-center space-x-4 flex">
 
-            @auth
+           
             <a
               class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
             href="/perfil" >
               <i class="bi bi-person text-2xl"></i>
-              <span class="text-sm"></span>
+              <span class="text-sm">
+                @auth
+                  Mi cuenta
+                @endauth
+              </span>
             </a>
-            @endauth
+            
 
-            @guest
-            <a
-              class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
-            href="/login" >
-              
-              <span class="text-sm">LOGIN</span>
-            </a>
-
-            <!-- USO DE REGISTER -->
-            <a
-              class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
-            href="{{route('register')}}" >
-              
-              <span class="text-sm">REGISTER</span>
-            </a>
-            @endguest
-            <!-- USO DE LOGIN -->
+            
+            
             
 
             

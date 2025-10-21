@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
@@ -12,7 +13,14 @@ class PostController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
-        return view('muro');
+    public function index(User $user){
+        
+        return view('muro',[
+            'user'=>$user
+        ]);
+    }
+
+    public function create(){
+        return view('negocios.create');
     }
 }

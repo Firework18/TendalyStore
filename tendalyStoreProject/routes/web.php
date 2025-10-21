@@ -27,10 +27,11 @@ Route::post('/login',[LoginController::class,'store']);
 Route::post('/logout',[LogoutController::class,'store'])->name('logout');
 
 Route::get('/perfil',[PerfilController::class,'index'])->name('perfil');
-
-//Enviar al muro
-Route::get('/muro',[PostController::class,'index'])->name('post.index');
-
 //Catalogo
 Route::get('/catalogo',[CatalogoController::class,'index'])->name('catalogo');
+
+
+//Enviar al muro
+Route::get('/{user:username}',[PostController::class,'index'])->name('post.index');
+Route::get('/negocio/create',[PostController::class,'create'])->name('post.create');
 
