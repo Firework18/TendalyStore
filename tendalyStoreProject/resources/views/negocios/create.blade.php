@@ -3,6 +3,8 @@
 @section('titulo', 'Crear Nuevo Negocio - Paso 1')
 
 @section('contenido')
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
 <main class="min-h-screen  bg-[var(--color-background)]">
     <div class="container mx-auto px-4 py-8 bg">
         <h2 class="text-2xl font-bold text-gray-800 mb-2">Registrar Nuevo Negocio</h2>
@@ -21,18 +23,31 @@
 
             <div class="mb-4">
                 <label for="nombreNegocio" class="block text-gray-700 text-sm font-semibold mb-2">Nombre del Negocio <span class="text-red-500">*</span></label>
-                <input type="text" id="nombreNegocio" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="Ej: Eco Productos Naturales">
+                <input type="text" name="nombreNegocio" id="nombreNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('nombreNegocio')
+                border-red-500    
+                @enderror" 
+                value="{{old('nombreNegocio')}}"
+                placeholder="Ej: Eco Productos Naturales">
+                @error('nombreNegocio')
+                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>   
+                @enderror
             </div>
 
             <div class="mb-4">
                 <label for="descripcionNegocio" class="block text-gray-700 text-sm font-semibold mb-2">Descripción del Negocio</label>
-                <textarea id="descripcionNegocio" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green h-24 resize-none" placeholder="Describe tu negocio, tus productos y qué te hace único..."></textarea>
+                <textarea id="descripcionNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green h-24 resize-none @error('nombreNegocio')
+                border-red-500    
+                @enderror" 
+                placeholder="Describe tu negocio, tus productos y qué te hace único...">{{old('descripcionNegocio')}}</textarea>
                 <p class="text-right text-gray-500 text-sm mt-1"><span id="charCount">0</span>/500 caracteres</p>
+                @error('nombreNegocio')
+                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>   
+                @enderror
             </div>
 
             <div class="mb-4">
                 <label for="categoria" class="block text-gray-700 text-sm font-semibold mb-2">Categoría <span class="text-red-500">*</span></label>
-                <select id="categoria" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green">
+                <select id="categoria" class="w-full px-4 py-2  border-gray-300 borderrounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green">
                     <option value="">Selecciona una categoría</option>
                     <!-- Add more categories as needed -->
                 </select>
@@ -51,26 +66,32 @@
 
             <div class="mb-4">
                 <label for="direccionCompleta" class="block text-gray-700 text-sm font-semibold mb-2">Dirección Completa <span class="text-red-500">*</span></label>
-                <input type="text" id="direccionCompleta" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="Calle, número, urbanización...">
+                <input type="text" name="direccionCompleta" id="direccionCompleta" class="w-full px-4 py-2  borderrounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('nombreNegocio')
+                border-red-500    
+                @enderror" 
+                placeholder="Calle, número, urbanización...">
+                @error('nombreNegocio')
+                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>   
+                @enderror
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label for="departamento" class="block text-gray-700 text-sm font-semibold mb-2">Departamento <span class="text-red-500">*</span></label>
-                    <select id="departamento" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green">
+                    <select id="departamento" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green">
                         <option value="">Selecciona departamento</option>
                         <!-- Add more departments as needed -->
                     </select>
                 </div>
                 <div>
                     <label for="provincia" class="block text-gray-700 text-sm font-semibold mb-2">Provincia <span class="text-red-500">*</span></label>
-                    <input type="text" id="provincia" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="Provincia">
+                    <input type="text" id="provincia" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="Provincia">
                 </div>
             </div>
 
             <div>
                 <label for="distrito" class="block text-gray-700 text-sm font-semibold mb-2">Distrito</label>
-                <input type="text" id="distrito" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="Distrito">
+                <input type="text" id="distrito" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="Distrito">
             </div>
         </section>
 
@@ -86,11 +107,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label for="emailNegocio" class="block text-gray-700 text-sm font-semibold mb-2">Email del Negocio <span class="text-red-500">*</span></label>
-                    <input type="email" id="emailNegocio" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="contacto@tunegocio.com">
+                    <input type="email" id="emailNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="contacto@tunegocio.com">
                 </div>
                 <div>
                     <label for="telefonoNegocio" class="block text-gray-700 text-sm font-semibold mb-2">Teléfono del Negocio <span class="text-red-500">*</span></label>
-                    <input type="tel" id="telefonoNegocio" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="+51 999 999 999">
+                    <input type="tel" id="telefonoNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="+51 999 999 999">
                 </div>
             </div>
         </section>
@@ -106,17 +127,10 @@
             <p class="text-gray-600 mb-4">Sube una imagen que represente tu negocio (logo o foto del negocio)</p>
 
             <div class="mb-4">
-                <label for="imagenNegocio" class="block text-gray-700 text-sm font-semibold mb-2">Imagen del Negocio <span class="text-red-500">*</span></label>
-                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center bg-gray-50">
-                    <div class="flex flex-col items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                        </svg>
-                        <p class="text-gray-600 mb-2">Haz clic para subir la imagen de tu negocio</p>
-                        <button type="button" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-tendaly-green focus:ring-opacity-50">Seleccionar Imagen</button>
-                        <input type="file" id="imagenNegocio" class="hidden" accept=".jpg,.png">
-                    </div>
-                </div>
+                <form  id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col
+                justify-center items-center">
+            
+                </form>
                 <p class="text-gray-500 text-sm mt-2">Formato: JPG, PNG. Tamaño máximo: 2MB</p>
             </div>
         </section>
@@ -140,12 +154,8 @@
         <!-- Action Buttons -->
         <div class="flex justify-end space-x-4 mb-8">
             <a href="{{route('perfil')}}" class="px-6 py-2 border bg-red-500 border-gray-300 rounded-lg text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-gray-300">Cancelar</a>
-            <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-tendaly-green focus:ring-opacity-50 flex items-center space-x-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Registrar Negocio</span>
-            </button>
+            <input type="submit" value="Registrar Negocio" 
+            class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-tendaly-green focus:ring-opacity-50 flex items-center space-x-2">
         </div>
         </form>
     </div>
