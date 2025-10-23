@@ -24,13 +24,11 @@
             <p class="text-gray-600 mb-4">Sube una imagen que represente tu negocio (logo o foto del negocio)</p>
 
             <div class="mb-4">
-                
-                    <form action="/target" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col
+                    <!-- Dropzone-->
+                    <form action="{{route('imagenes.store')}}" method="POST" enctype="multipart/form-data" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col
                     justify-center items-center">
-                    
+                    @csrf
                     </form>
-             
-                
                 <p class="text-gray-500 text-sm mt-2">Formato: JPG, PNG. Tamaño máximo: 2MB</p>
             </div>
         </section>

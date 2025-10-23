@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
+use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\Auth\PostController;
@@ -35,3 +36,5 @@ Route::get('/catalogo',[CatalogoController::class,'index'])->name('catalogo');
 Route::get('/{user:username}',[PostController::class,'index'])->name('post.index');
 Route::get('/negocio/create',[PostController::class,'create'])->name('post.create');
 
+
+Route::post('/imagenes',[ImagenController::class,'store'])->name('imagenes.store');
