@@ -5,7 +5,7 @@
 
 @section('contenido')
 <main class="container mx-auto mt-10 mb-4">
-<h2 class="font-extrabold text-center text-3xl mb-3 p-3">Inicia sesón en 
+<h2 class="font-extrabold text-center text-3xl mb-3 p-3">Inicia sesión en 
   <span class="text-red-600">TendalyStore</span></h2>
       <div class="md:flex md:justify-center md:gap-10 md:items-center p-3">
         <div class="md:w-4/12">

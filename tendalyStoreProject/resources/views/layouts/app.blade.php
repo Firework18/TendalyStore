@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TendalyStore - @yield('titulo')</title>
-    @vite('resources/css/app.css')
+    @stack('styles')
+    @vite(['resources/css/app.css'])
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
     
-    <link href="./output.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/styles.css') }}">
   </head>
   <body>
@@ -182,6 +182,7 @@
         </div>
       </footer>
     </div>
+    @vite('resources/js/app.js')
 <!-- agregar luego efectos de slides a la hero image y catalogo de productos -->
     </body>
 </html>

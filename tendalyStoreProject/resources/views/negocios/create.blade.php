@@ -2,14 +2,41 @@
 
 @section('titulo', 'Crear Nuevo Negocio - Paso 1')
 
+@push('styles')
+   <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" /> 
+@endpush
+
 @section('contenido')
-<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 
 <main class="min-h-screen  bg-[var(--color-background)]">
     <div class="container mx-auto px-4 py-8 bg">
         <h2 class="text-2xl font-bold text-gray-800 mb-2">Registrar Nuevo Negocio</h2>
         <p class="text-gray-600 mb-6">Completa el formulario para registrar tu negocio en nuestra plataforma</p>
-        <form action="" method="POST" novalidate>
+
+        <!-- Section: Foto del Negocio -->
+        <section class="bg-white p-6 rounded-lg custom-shadow mb-6">
+            <div class="flex items-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-tendaly-green mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <h3 class="text-lg font-semibold text-gray-800">Foto del Negocio</h3>
+            </div>
+            <p class="text-gray-600 mb-4">Sube una imagen que represente tu negocio (logo o foto del negocio)</p>
+
+            <div class="mb-4">
+                
+                    <form action="/target" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col
+                    justify-center items-center">
+                    
+                    </form>
+             
+                
+                <p class="text-gray-500 text-sm mt-2">Formato: JPG, PNG. Tamaño máximo: 2MB</p>
+            </div>
+        </section>
+
+
+        <form action="" method="" novalidate>
         @csrf
         <!-- Section: Información Básica del Negocio -->
         <section class="bg-white p-6 rounded-lg custom-shadow mb-6">
@@ -116,40 +143,6 @@
             </div>
         </section>
 
-        <!-- Section: Foto del Negocio -->
-        <section class="bg-white p-6 rounded-lg custom-shadow mb-6">
-            <div class="flex items-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-tendaly-green mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <h3 class="text-lg font-semibold text-gray-800">Foto del Negocio</h3>
-            </div>
-            <p class="text-gray-600 mb-4">Sube una imagen que represente tu negocio (logo o foto del negocio)</p>
-
-            <div class="mb-4">
-                <form  id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col
-                justify-center items-center">
-            
-                </form>
-                <p class="text-gray-500 text-sm mt-2">Formato: JPG, PNG. Tamaño máximo: 2MB</p>
-            </div>
-        </section>
-
-        <!-- Terms and Conditions & Privacy Policy -->
-        <section class="bg-white p-6 rounded-lg custom-shadow mb-8">
-            <div class="flex items-start mb-4">
-                <input type="checkbox" id="acceptTerms" class="form-checkbox h-5 w-5 text-tendaly-green rounded mr-2 mt-1">
-                <label for="acceptTerms" class="text-gray-700 text-sm">
-                    *Acepto los <a href="#" class="text-tendaly-green hover:underline">términos y condiciones</a> de TendalyStore
-                </label>
-            </div>
-            <div class="flex items-start">
-                <input type="checkbox" id="acceptPrivacy" class="form-checkbox h-5 w-5 text-tendaly-green rounded mr-2 mt-1">
-                <label for="acceptPrivacy" class="text-gray-700 text-sm">
-                    *Acepto la <a href="#" class="text-tendaly-green hover:underline">política de privacidad</a> y el tratamiento de mis datos personales
-                </label>
-            </div>
-        </section>
 
         <!-- Action Buttons -->
         <div class="flex justify-end space-x-4 mb-8">
@@ -158,6 +151,7 @@
             class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-tendaly-green focus:ring-opacity-50 flex items-center space-x-2">
         </div>
         </form>
+        
     </div>
     </main>
 
