@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TendalyStore - @yield('titulo')</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @stack('styles')
+    @vite(['resources/css/app.css'])
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    <link href="./output.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="{{ asset('assets/styles.css') }}">
   </head>
   <body>
@@ -37,31 +38,32 @@
             <i class="bi bi-search"></i>
           </button>
         </div>
+   
+        
+
+        
+
         <nav class="hidden md:flex">
           <div class="items-center space-x-4 flex">
-            <!-- USO DE LOGIN -->
-            
-            <a
-              class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
-            href="/login" >
-              LOGIN
-              <span class="text-sm"></span>
-            </a>
 
-            <!-- USO DE REGISTER -->
-            <a
-              class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
-            href="{{route('register')}}" >
-              REGISTER
-              <span class="text-sm"></span>
-            </a>
-
+           
             <a
               class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
             href="/perfil" >
               <i class="bi bi-person text-2xl"></i>
-              <span class="text-sm"></span>
+              <span class="text-sm">
+                @auth
+                  Mi cuenta
+                @endauth
+              </span>
             </a>
+            
+
+            
+            
+            
+
+            
             <a
               class="relative text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
             href="#carrito">
@@ -72,6 +74,17 @@
             href="#lista">
               <i class="bi bi-list text-2xl"></i>
             </a>
+
+            @auth
+            <form action="{{route('logout')}}" method="POST">
+              @csrf
+              <button type="submit"
+                class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition">
+                <span class="text-sm">CERRAR SESIÓN</span>
+              </button>  
+            </form>  
+            @endauth
+
           </div>
         </nav>
       </header>
@@ -169,6 +182,7 @@
         </div>
       </footer>
     </div>
+    @vite('resources/js/app.js')
 <!-- agregar luego efectos de slides a la hero image y catalogo de productos -->
     </body>
 </html>

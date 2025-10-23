@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //Añadimos rol_id como clave foranea
-            $table->unsignedBigInteger('rol_id')->nullable()->default(1)->foreign('rol_id')->references('id')->on('rol')->onDelete('set null');
+         
+            $table->unsignedBigInteger('rol_id')->nullable()->default(1);
+
+            $table->foreign('rol_id')
+                ->references('id')
+                ->on('rol')
+                ->onDelete('set null');
         });
     }
 
@@ -23,8 +28,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['rol_id']);
-            $table->dropColumn('rol_id');
+        
+            if (Schema::hasColumn('users', 'rol_id')) {
+                $table->dropForeign(['rol_id']);
+                $table->dropColumn('rol_id');
+            }
         });
     }
 };

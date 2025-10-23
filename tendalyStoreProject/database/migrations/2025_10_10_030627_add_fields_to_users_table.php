@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('imagen')->nullable();
             $table->string('apellido_paterno')->nullable();
             $table->string('apellido_materno')->nullable();
+            $table->string('informacion')->nullable();
             $table->string('telefono',9)->nullable();
             $table->string('direccion',50)->nullable();
             $table->boolean('tiene_negocio')->default(false);
@@ -33,6 +34,7 @@ return new class extends Migration
                 'username',
                 'apellido_paterno',
                 'apellido_materno',
+                'informacion',
                 'telefono',
                 'direccion',
                 'tiene_negocio',
