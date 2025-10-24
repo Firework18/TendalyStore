@@ -34,7 +34,7 @@
         </section>
 
 
-        <form action="" method="" novalidate>
+        <form action="{{route('negocio.store')}}" method="POST" novalidate>
         @csrf
         <!-- Section: Información Básica del Negocio -->
         <section class="bg-white p-6 rounded-lg custom-shadow mb-6">
@@ -60,19 +60,19 @@
 
             <div class="mb-4">
                 <label for="descripcionNegocio" class="block text-gray-700 text-sm font-semibold mb-2">Descripción del Negocio</label>
-                <textarea id="descripcionNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green h-24 resize-none @error('nombreNegocio')
+                <textarea id="descripcionNegocio" name="descripcionNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green h-24 resize-none @error('descripcionNegocio')
                 border-red-500    
                 @enderror" 
                 placeholder="Describe tu negocio, tus productos y qué te hace único...">{{old('descripcionNegocio')}}</textarea>
                 <p class="text-right text-gray-500 text-sm mt-1"><span id="charCount">0</span>/500 caracteres</p>
-                @error('nombreNegocio')
+                @error('descripcionNegocio')
                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>   
                 @enderror
             </div>
 
             <div class="mb-4">
                 <label for="historiaNegocio" class="block text-gray-700 text-sm font-semibold mb-2">Historia del Negocio</label>
-                <textarea id="historiaNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green h-24 resize-none @error('historiaNegocio')
+                <textarea id="historiaNegocio" name="historiaNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green h-24 resize-none @error('historiaNegocio')
                 border-red-500    
                 @enderror" 
                 placeholder="Describe tu la historia de tu negocio...">{{old('historiaNegocio')}}</textarea>
@@ -84,10 +84,21 @@
 
             <div class="mb-4">
                 <label for="categoria" class="block text-gray-700 text-sm font-semibold mb-2">Categoría <span class="text-red-500">*</span></label>
-                <select id="categoria" class="w-full px-4 py-2  border-gray-300 borderrounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green">
+                <select id="categoria" name="categoria" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('categoria')
+                border-red-500    
+                @enderror">
                     <option value="">Selecciona una categoría</option>
-                    <!-- Add more categories as needed -->
+                    @foreach ( $categorias as $categoria )
+                        <option value="{{$categoria->id}}"
+                            {{ old('categoria') == $categoria->id ? 'selected' : '' }}
+                            >{{$categoria->nombre}}</option>
+                    @endforeach
                 </select>
+                @error('categoria')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
         </section>
 
@@ -103,7 +114,7 @@
 
             <div class="mb-4">
                 <label for="direccionCompleta" class="block text-gray-700 text-sm font-semibold mb-2">Dirección Completa <span class="text-red-500">*</span></label>
-                <input type="text" name="direccionCompleta" id="direccionCompleta" class="w-full px-4 py-2  borderrounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('nombreNegocio')
+                <input type="text" name="direccionCompleta" id="direccionCompleta" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('nombreNegocio')
                 border-red-500    
                 @enderror" 
                 placeholder="Calle, número, urbanización...">
@@ -115,26 +126,47 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label for="departamento" class="block text-gray-700 text-sm font-semibold mb-2">Departamento <span class="text-red-500">*</span></label>
-                    <select id="departamento" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green">
+                    <select id="departamento" name="departamento" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('departamento')
+                         border-red-500    
+                    @enderror">
                         <option value="">Selecciona departamento</option>
                         @foreach ( $departamentos as $departamento )
-                            <option value="{{ $departamento->id }}">{{ $departamento->nombre }}</option>
+                            <option value="{{ $departamento->id }}"
+                                {{ old('departamento') == $departamento->id ? 'selected' : '' }}
+                                >{{ $departamento->nombre }}</option>
                         @endforeach
                     </select>
+                    @error('departamento')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{ $message }}
+                        </p>
+                    @enderror
                 </div>
                 <div>
                     <label for="provincia" class="block text-gray-700 text-sm font-semibold mb-2">Provincia <span class="text-red-500">*</span></label>
-                    <select id="provincia" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" disabled>
+                    <select id="provincia" name="provincia" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('provincia')
+                         border-red-500    
+                    @enderror" disabled>
                         <option value="">Selecciona provincia</option>
                     </select>
+                    @error('departamento')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{ $message }}
+                        </p>
+                    @enderror
                 </div>
             </div>
 
             <div>
                 <label for="distrito" class="block text-gray-700 text-sm font-semibold mb-2">Distrito</label>
-                <select id="distrito" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" disabled>
+                <select id="distrito" name="distrito" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('provincia')
+                         border-red-500    
+                    @enderror" disabled>
                     <option value="">Selecciona distrito</option>
-                </select>            
+                </select>  
+                @error('distrito')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
+                @enderror          
             </div>
         </section>
 
@@ -150,11 +182,25 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label for="emailNegocio" class="block text-gray-700 text-sm font-semibold mb-2">Email del Negocio <span class="text-red-500">*</span></label>
-                    <input type="email" id="emailNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="contacto@tunegocio.com">
+                    <input type="email" id="emailNegocio" name="emailNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('nombreNegocio')
+                    border-red-500    
+                    @enderror" 
+                    value="{{old('emailNegocio')}}"
+                    placeholder="contacto@tunegocio.com">
+                    @error('emailNegocio')
+                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>   
+                    @enderror
                 </div>
                 <div>
                     <label for="telefonoNegocio" class="block text-gray-700 text-sm font-semibold mb-2">Teléfono del Negocio <span class="text-red-500">*</span></label>
-                    <input type="tel" id="telefonoNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="+51 999 999 999">
+                    <input type="tel" id="telefonoNegocio" name="telefonoNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('nombreNegocio')
+                    border-red-500    
+                    @enderror" 
+                    value="{{old('telefonoNegocio')}}"
+                    placeholder="+51 999 999 999">
+                    @error('telefonoNegocio')
+                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>   
+                    @enderror
                 </div>
             </div>
         </section>
@@ -162,7 +208,7 @@
 
         <!-- Action Buttons -->
         <div class="flex justify-end space-x-4 mb-8">
-            <a href="{{route('perfil')}}" class="px-6 py-2 border bg-red-500 border-gray-300 rounded-lg text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-gray-300">Cancelar</a>
+            <a href="{{route('perfil')}}" class="px-6 py-2 border bg-red-500 border-gray-300 rounded-lg text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-gray-300 ">Cancelar</a>
             <input type="submit" value="Registrar Negocio" 
             class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-tendaly-green focus:ring-opacity-50 flex items-center space-x-2">
         </div>

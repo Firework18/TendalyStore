@@ -23,11 +23,12 @@ return new class extends Migration
             $table->string('nombre');
             $table->text('descripcion')->nullable();
             $table->text('historia')->nullable();
-            $table->string('direccion');
+            //Direccion de correo
+            $table->string('correo',255)->unique();
             $table->string('telefono',20)->nullable();
-            $table->string('ubicacion')->nullable();
-            $table->string('imagen')->nullable();
-            $table->string('estado')->default('activo');
+            $table->string('ubicacion',255)->nullable();
+            $table->string('imagen',255)->nullable();
+            $table->enum('estado',['activo','inactivo'])->default('activo');
 
             $table->timestamps();
         });

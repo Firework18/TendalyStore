@@ -169,7 +169,7 @@
                     @endif
                     
                     <div class="mt-8 text-center">
-                        <a href={{route('post.create')}} class="px-6 py-3 bg-[var(--color-accent)] hover:bg-[#e09f0c] text-[var(--color-text)] font-bold rounded-full shadow-md transition-colors duration-300">
+                        <a href={{route('negocio.create')}} class="px-6 py-3 bg-[var(--color-accent)] hover:bg-[#e09f0c] text-[var(--color-text)] font-bold rounded-full shadow-md transition-colors duration-300">
                             Registrar Nuevo Negocio <i class="bi bi-plus-circle ml-2"></i>
                         </a>
                     </div>

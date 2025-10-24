@@ -9,7 +9,7 @@ const dropzone = new Dropzone('#dropzone',{
     acceptedFiles: ".png,.jpg,.jpeg",
     addRemoveLinks: true,
     dictRemoveFile: 'Borrar Archivo',
-    maxFiles:3,
+    maxFiles:1,
     uploadMultiple: false
 })
 
