@@ -1,0 +1,61 @@
+/* Variables CSS para facilitar la referencia en el HTML/JS */
+:root {
+  --color-primary: #134686;
+  --color-accent: #feb21a;
+  --color-background: #fdf4e3;
+  --color-text: #211f1e;
+  --color-input-bg: #f1f5f9; /* Mantengo un fondo de input claro */
+  --color-input-focus: #ffffff;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+/* Estilo de Inputs */
+.form-input,
+.form-select,
+.form-textarea {
+  background-color: var(--color-input-bg);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+  color: var(--color-text);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-primary); /* Anillo de foco azul */
+  background-color: var(--color-input-focus);
+}
+
+/* Estilo para los placeholders */
+::placeholder {
+  color: #94a3b8;
+}
+
+/* Estilo para la flecha del select */
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* Estilo para checkbox personalizado */
+.form-checkbox:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.logo {
+  width: 140px;
+}

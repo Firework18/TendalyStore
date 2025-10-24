@@ -7,6 +7,7 @@ use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\Auth\PostController;
+use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -38,3 +39,7 @@ Route::get('/negocio/create',[PostController::class,'create'])->name('post.creat
 
 
 Route::post('/imagenes',[ImagenController::class,'store'])->name('imagenes.store');
+
+Route::get('/provincias/{departamento}', [UbicacionController::class, 'getProvincias']);
+Route::get('/distritos/{provincia}', [UbicacionController::class, 'getDistritos']);
+
