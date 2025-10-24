@@ -21,8 +21,4 @@ class PostController extends Controller
         ]);
     }
 
-    public function create(){
-        $departamentos = Departamento::with('provincias.distritos')->get();
-        return view('negocios.create',compact('departamentos'));
-    }
 }

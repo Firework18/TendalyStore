@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\Auth\PostController;
 use App\Http\Controllers\UbicacionController;
@@ -35,7 +36,9 @@ Route::get('/catalogo',[CatalogoController::class,'index'])->name('catalogo');
 
 //Enviar al muro
 Route::get('/{user:username}',[PostController::class,'index'])->name('post.index');
-Route::get('/negocio/create',[PostController::class,'create'])->name('post.create');
+
+//Enviar al Negocio
+Route::get('/negocio/create',[NegocioController::class,'create'])->name('negocio.create');
 
 
 Route::post('/imagenes',[ImagenController::class,'store'])->name('imagenes.store');
