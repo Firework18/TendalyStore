@@ -183,6 +183,6 @@
       </footer>
     </div>
     @vite('resources/js/app.js')
-<!-- agregar luego efectos de slides a la hero image y catalogo de productos -->
+    @stack('scripts')
     </body>
 </html>

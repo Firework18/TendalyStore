@@ -3,9 +3,12 @@
 use Illuminate\Support\Facades\Route;
 
 
+use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\Auth\PostController;
+use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -33,5 +36,13 @@ Route::get('/catalogo',[CatalogoController::class,'index'])->name('catalogo');
 
 //Enviar al muro
 Route::get('/{user:username}',[PostController::class,'index'])->name('post.index');
-Route::get('/negocio/create',[PostController::class,'create'])->name('post.create');
+
+//Enviar al Negocio
+Route::get('/negocio/create',[NegocioController::class,'create'])->name('negocio.create');
+Route::post('/negocio',[NegocioController::class,'store'])->name('negocio.store');
+
+Route::post('/imagenes',[ImagenController::class,'store'])->name('imagenes.store');
+
+Route::get('/provincias/{departamento}', [UbicacionController::class, 'getProvincias']);
+Route::get('/distritos/{provincia}', [UbicacionController::class, 'getDistritos']);
 

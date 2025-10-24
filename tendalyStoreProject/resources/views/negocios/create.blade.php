@@ -24,19 +24,17 @@
             <p class="text-gray-600 mb-4">Sube una imagen que represente tu negocio (logo o foto del negocio)</p>
 
             <div class="mb-4">
-                
-                    <form action="/target" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col
+                    <!-- Dropzone-->
+                    <form action="{{route('imagenes.store')}}" method="POST" enctype="multipart/form-data" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col
                     justify-center items-center">
-                    
+                    @csrf
                     </form>
-             
-                
                 <p class="text-gray-500 text-sm mt-2">Formato: JPG, PNG. Tamaño máximo: 2MB</p>
             </div>
         </section>
 
 
-        <form action="" method="" novalidate>
+        <form action="{{route('negocio.store')}}" method="POST" novalidate>
         @csrf
         <!-- Section: Información Básica del Negocio -->
         <section class="bg-white p-6 rounded-lg custom-shadow mb-6">
@@ -62,22 +60,45 @@
 
             <div class="mb-4">
                 <label for="descripcionNegocio" class="block text-gray-700 text-sm font-semibold mb-2">Descripción del Negocio</label>
-                <textarea id="descripcionNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green h-24 resize-none @error('nombreNegocio')
+                <textarea id="descripcionNegocio" name="descripcionNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green h-24 resize-none @error('descripcionNegocio')
                 border-red-500    
                 @enderror" 
                 placeholder="Describe tu negocio, tus productos y qué te hace único...">{{old('descripcionNegocio')}}</textarea>
                 <p class="text-right text-gray-500 text-sm mt-1"><span id="charCount">0</span>/500 caracteres</p>
-                @error('nombreNegocio')
+                @error('descripcionNegocio')
+                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>   
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label for="historiaNegocio" class="block text-gray-700 text-sm font-semibold mb-2">Historia del Negocio</label>
+                <textarea id="historiaNegocio" name="historiaNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green h-24 resize-none @error('historiaNegocio')
+                border-red-500    
+                @enderror" 
+                placeholder="Describe tu la historia de tu negocio...">{{old('historiaNegocio')}}</textarea>
+                <p class="text-right text-gray-500 text-sm mt-1"><span id="charCount">0</span>/500 caracteres</p>
+                @error('historiaNegocio')
                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>   
                 @enderror
             </div>
 
             <div class="mb-4">
                 <label for="categoria" class="block text-gray-700 text-sm font-semibold mb-2">Categoría <span class="text-red-500">*</span></label>
-                <select id="categoria" class="w-full px-4 py-2  border-gray-300 borderrounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green">
+                <select id="categoria" name="categoria" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('categoria')
+                border-red-500    
+                @enderror">
                     <option value="">Selecciona una categoría</option>
-                    <!-- Add more categories as needed -->
+                    @foreach ( $categorias as $categoria )
+                        <option value="{{$categoria->id}}"
+                            {{ old('categoria') == $categoria->id ? 'selected' : '' }}
+                            >{{$categoria->nombre}}</option>
+                    @endforeach
                 </select>
+                @error('categoria')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
         </section>
 
@@ -93,7 +114,7 @@
 
             <div class="mb-4">
                 <label for="direccionCompleta" class="block text-gray-700 text-sm font-semibold mb-2">Dirección Completa <span class="text-red-500">*</span></label>
-                <input type="text" name="direccionCompleta" id="direccionCompleta" class="w-full px-4 py-2  borderrounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('nombreNegocio')
+                <input type="text" name="direccionCompleta" id="direccionCompleta" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('nombreNegocio')
                 border-red-500    
                 @enderror" 
                 placeholder="Calle, número, urbanización...">
@@ -105,20 +126,47 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label for="departamento" class="block text-gray-700 text-sm font-semibold mb-2">Departamento <span class="text-red-500">*</span></label>
-                    <select id="departamento" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green">
+                    <select id="departamento" name="departamento" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('departamento')
+                         border-red-500    
+                    @enderror">
                         <option value="">Selecciona departamento</option>
-                        <!-- Add more departments as needed -->
+                        @foreach ( $departamentos as $departamento )
+                            <option value="{{ $departamento->id }}"
+                                {{ old('departamento') == $departamento->id ? 'selected' : '' }}
+                                >{{ $departamento->nombre }}</option>
+                        @endforeach
                     </select>
+                    @error('departamento')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{ $message }}
+                        </p>
+                    @enderror
                 </div>
                 <div>
                     <label for="provincia" class="block text-gray-700 text-sm font-semibold mb-2">Provincia <span class="text-red-500">*</span></label>
-                    <input type="text" id="provincia" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="Provincia">
+                    <select id="provincia" name="provincia" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('provincia')
+                         border-red-500    
+                    @enderror" disabled>
+                        <option value="">Selecciona provincia</option>
+                    </select>
+                    @error('departamento')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{ $message }}
+                        </p>
+                    @enderror
                 </div>
             </div>
 
             <div>
                 <label for="distrito" class="block text-gray-700 text-sm font-semibold mb-2">Distrito</label>
-                <input type="text" id="distrito" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="Distrito">
+                <select id="distrito" name="distrito" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('provincia')
+                         border-red-500    
+                    @enderror" disabled>
+                    <option value="">Selecciona distrito</option>
+                </select>  
+                @error('distrito')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
+                @enderror          
             </div>
         </section>
 
@@ -134,11 +182,25 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label for="emailNegocio" class="block text-gray-700 text-sm font-semibold mb-2">Email del Negocio <span class="text-red-500">*</span></label>
-                    <input type="email" id="emailNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="contacto@tunegocio.com">
+                    <input type="email" id="emailNegocio" name="emailNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('nombreNegocio')
+                    border-red-500    
+                    @enderror" 
+                    value="{{old('emailNegocio')}}"
+                    placeholder="contacto@tunegocio.com">
+                    @error('emailNegocio')
+                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>   
+                    @enderror
                 </div>
                 <div>
                     <label for="telefonoNegocio" class="block text-gray-700 text-sm font-semibold mb-2">Teléfono del Negocio <span class="text-red-500">*</span></label>
-                    <input type="tel" id="telefonoNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green" placeholder="+51 999 999 999">
+                    <input type="tel" id="telefonoNegocio" name="telefonoNegocio" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green @error('nombreNegocio')
+                    border-red-500    
+                    @enderror" 
+                    value="{{old('telefonoNegocio')}}"
+                    placeholder="+51 999 999 999">
+                    @error('telefonoNegocio')
+                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>   
+                    @enderror
                 </div>
             </div>
         </section>
@@ -146,7 +208,7 @@
 
         <!-- Action Buttons -->
         <div class="flex justify-end space-x-4 mb-8">
-            <a href="{{route('perfil')}}" class="px-6 py-2 border bg-red-500 border-gray-300 rounded-lg text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-gray-300">Cancelar</a>
+            <a href="{{route('perfil')}}" class="px-6 py-2 border bg-red-500 border-gray-300 rounded-lg text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-gray-300 ">Cancelar</a>
             <input type="submit" value="Registrar Negocio" 
             class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-tendaly-green focus:ring-opacity-50 flex items-center space-x-2">
         </div>
@@ -155,7 +217,56 @@
     </div>
     </main>
 
-    
+@push('scripts')
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const departamentoSelect = document.getElementById('departamento');
+    const provinciaSelect = document.getElementById('provincia');
+    const distritoSelect = document.getElementById('distrito');
+
+    // Cuando cambie el departamento
+    departamentoSelect.addEventListener('change', async (e) => {
+        const departamentoId = e.target.value;
+        provinciaSelect.innerHTML = '<option value="">Selecciona provincia</option>';
+        distritoSelect.innerHTML = '<option value="">Selecciona distrito</option>';
+        distritoSelect.disabled = true;
+
+        if (departamentoId) {
+            const res = await fetch(`/provincias/${departamentoId}`);
+            const provincias = await res.json();
+
+            provincias.forEach(p => {
+                provinciaSelect.innerHTML += `<option value="${p.id}">${p.nombre}</option>`;
+            });
+
+            provinciaSelect.disabled = false;
+        } else {
+            provinciaSelect.disabled = true;
+        }
+    });
+
+    // Cuando cambie la provincia
+    provinciaSelect.addEventListener('change', async (e) => {
+        const provinciaId = e.target.value;
+        distritoSelect.innerHTML = '<option value="">Selecciona distrito</option>';
+
+        if (provinciaId) {
+            const res = await fetch(`/distritos/${provinciaId}`);
+            const distritos = await res.json();
+
+            distritos.forEach(d => {
+                distritoSelect.innerHTML += `<option value="${d.id}">${d.nombre}</option>`;
+            });
+
+            distritoSelect.disabled = false;
+        } else {
+            distritoSelect.disabled = true;
+        }
+    });
+});
+</script>
+@endpush
+   
 @endsection
 </body>
 </html>

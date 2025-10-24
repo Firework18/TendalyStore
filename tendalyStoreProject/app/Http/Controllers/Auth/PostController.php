@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Departamento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,7 +21,4 @@ class PostController extends Controller
         ]);
     }
 
-    public function create(){
-        return view('negocios.create');
-    }
 }
