@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('negocio_id')->constrained('negocios')->cascadeOnDelete();
+            $table->string('nombre');
+            $table->text('descripcion')->nullable();
+            $table->string('imagen',255);
+            $table->decimal('precio',8,2);
+            $table->integer('stock')->default(0);
+            $table->enum('estado',['activo','inactivo'])->default('activo');
+            $table->decimal('precio_oferta',8,2)->nullable();
+            $table->string('unidad_medida',50)->nullable();
+            
             $table->timestamps();
         });
     }

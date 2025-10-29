@@ -149,26 +149,32 @@
                     @if (auth()->user()->negocios)
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Tarjeta de Negocio 1 -->
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-100 flex items-center space-x-4">
-                            <img src="{{ asset('/uploads/'. auth()->user()->negocios->imagen) }}" alt="Negocio EcoFresh" class="w-16 h-16 object-cover rounded-full flex-shrink-0">
-                            <div>
-                                <h3 class="text-xl font-bold text-[var(--color-primary)]">{{auth()->user()->negocios->nombre}}</h3>
-                                <p class="text-gray-700 text-sm">{{auth()->user()->negocios->descripcion}}</p>
-                                <a href={{route('negocio.index',auth()->user()->negocios->nombre)}} class="text-[var(--color-secondary)] hover:text-[var(--color-primary)] text-sm font-semibold mt-1 inline-block">Ver Negocio <i class="bi bi-arrow-right"></i></a>
+                            <div class="bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-100 flex items-center space-x-4">
+                                <img src="{{ asset('/uploads/'. auth()->user()->negocios->imagen) }}" alt="Negocio EcoFresh" class="w-16 h-16 object-cover rounded-full flex-shrink-0">
+                                <div>
+                                    <h3 class="text-xl font-bold text-[var(--color-primary)]">{{auth()->user()->negocios->nombre}}</h3>
+                                    <p class="text-gray-700 text-sm">{{auth()->user()->negocios->descripcion}}</p>
+                                    <a href={{route('negocio.index',auth()->user()->negocios->nombre)}} class="text-[var(--color-secondary)] hover:text-[var(--color-primary)] text-sm font-semibold mt-1 inline-block">Ver Negocio <i class="bi bi-arrow-right"></i></a>
+                                </div>
                             </div>
                         </div>
-                        
-                    </div>
+
+                        <div class="mt-8 text-center">
+                        <a href={{route('producto.create')}} class="px-6 py-3 bg-[var(--color-accent)] hover:bg-[#e09f0c] text-[var(--color-text)] font-bold rounded-full shadow-md transition-colors duration-300">
+                            Registrar Nuevo Producto <i class="bi bi-plus-circle ml-2"></i>
+                        </a>
+                        </div>
                     @else
                        No tiene un negocio asociado 
-                    @endif
-                    
 
-                    <div class="mt-8 text-center">
+                       <div class="mt-8 text-center">
                         <a href={{route('negocio.create')}} class="px-6 py-3 bg-[var(--color-accent)] hover:bg-[#e09f0c] text-[var(--color-text)] font-bold rounded-full shadow-md transition-colors duration-300">
                             Registrar Nuevo Negocio <i class="bi bi-plus-circle ml-2"></i>
                         </a>
-                    </div>
+                        </div>
+                    @endif
+                    
+                
                 </div>
 
                 <!-- Mis Pedidos (Contenido de ejemplo) -->

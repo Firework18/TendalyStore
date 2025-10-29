@@ -73,11 +73,8 @@
     </div>
 
     {{-- Sección "Nuestros Productos" --}}
-    @if ($negocio)
-        
-    @else
-
-    <div class="mb-8">
+    @if ($negocio->productos)
+        <div class="mb-8">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-bold text-gray-800">Nuestros Productos</h2>
             <div class="flex space-x-2">
@@ -86,14 +83,14 @@
             </div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {{-- Producto 1: Sérum Facial de Camu Camu --}}
-            <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+            @foreach ( $negocio->productos as $producto )
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
                 <div class="relative">
                     <img src="{{ asset('assets/images/serum_camu_camu.webp') }}" alt="Sérum Facial de Camu Camu" class="w-full h-40 object-cover"> {{-- Altura ajustada --}}
                     <button class="absolute top-2 right-2 bg-white p-1.5 rounded-full text-gray-600 hover:text-red-500 transition"><i class="bi bi-heart text-sm"></i></button>
                 </div>
                 <div class="p-3"> {{-- Padding ajustado --}}
-                    <h3 class="font-semibold text-gray-800 text-base mb-1">Sérum Facial de Camu Camu</h3>
+                    <h3 class="font-semibold text-gray-800 text-base mb-1">{{$producto->nombre}}</h3>
                     <p class="text-gray-500 text-xs mb-2">Cuidado Facial</p>
                     <div class="flex items-center text-xs">
                         <i class="bi bi-star-fill text-yellow-500 mr-0.5"></i>
@@ -102,56 +99,15 @@
                     </div>
                 </div>
             </div>
-            {{-- Producto 2: Crema Hidratante de Sacha Inchi --}}
-            <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
-                <div class="relative">
-                    <img src="{{ asset('assets/images/crema_sacha_inchi.webp') }}" alt="Crema Hidratante de Sacha Inchi" class="w-full h-40 object-cover">
-                    <button class="absolute top-2 right-2 bg-white p-1.5 rounded-full text-gray-600 hover:text-red-500 transition"><i class="bi bi-heart text-sm"></i></button>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-semibold text-gray-800 text-base mb-1">Crema Hidratante de Sacha Inchi</h3>
-                    <p class="text-gray-500 text-xs mb-2">Cuidado Corporal</p>
-                    <div class="flex items-center text-xs">
-                        <i class="bi bi-star-fill text-yellow-500 mr-0.5"></i>
-                        <span class="text-gray-700 mr-0.5">4.7</span>
-                        <span class="text-gray-400">(90)</span>
-                    </div>
-                </div>
-            </div>
-            {{-- Producto 3: Aceite Corporal de Copaiba --}}
-            <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
-                <div class="relative">
-                    <img src="{{ asset('assets/images/aceite_copaiba.webp') }}" alt="Aceite Corporal de Copaiba" class="w-full h-40 object-cover">
-                    <button class="absolute top-2 right-2 bg-white p-1.5 rounded-full text-gray-600 hover:text-red-500 transition"><i class="bi bi-heart text-sm"></i></button>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-semibold text-gray-800 text-base mb-1">Aceite Corporal de Copaiba</h3>
-                    <p class="text-gray-500 text-xs mb-2">Cuidado Corporal</p>
-                    <div class="flex items-center text-xs">
-                        <i class="bi bi-star-fill text-yellow-500 mr-0.5"></i>
-                        <span class="text-gray-700 mr-0.5">4.8</span>
-                        <span class="text-gray-400">(150)</span>
-                    </div>
-                </div>
-            </div>
-            {{-- Producto 4: Añadido para completar la fila, como en la imagen --}}
-            <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
-                <div class="relative">
-                    <img src="{{ asset('assets/images/producto_generico_4.webp') }}" alt="Producto Genérico" class="w-full h-40 object-cover">
-                    <button class="absolute top-2 right-2 bg-white p-1.5 rounded-full text-gray-600 hover:text-red-500 transition"><i class="bi bi-heart text-sm"></i></button>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-semibold text-gray-800 text-base mb-1">Producto Genérico</h3>
-                    <p class="text-gray-500 text-xs mb-2">Categoría</p>
-                    <div class="flex items-center text-xs">
-                        <i class="bi bi-star-fill text-yellow-500 mr-0.5"></i>
-                        <span class="text-gray-700 mr-0.5">4.2</span>
-                        <span class="text-gray-400">(75)</span>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+            {{-- Producto 1: Sérum Facial de Camu Camu --}}
+            
+            
         </div>
     </div>
+    @else
+
+    
 
     @endif
     

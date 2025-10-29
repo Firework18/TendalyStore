@@ -1,18 +1,20 @@
-@extends('layouts.app')
-@section('titulo')
-  Bienvenido
-@endsection
+@extends('layouts.app') 
+
+@section('titulo', 'Crear Nuevo Producto')
+
+@push('styles')
+   <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" /> 
+@endpush
 
 @section('contenido')
-<main class="container mx-auto mt-10 mb-4">
-<h2 class="font-extrabold text-center text-3xl mb-3 p-3">Regístrate en 
-  <span class="text-red-600">TendalyStore</span></h2>
-      <div class="md:flex md:justify-center md:gap-10 md:items-center p-3">
-        <div class="md:w-4/12">
-          <img src="{{asset('assets/images/register.png')}}" alt="Imagen de registro de usuarios">
+
+
+    <div class="md:flex md:items-center p-5">
+        <div class="md:w-1/2 px-10">
+            imagen aqui
         </div>
-        <div class="class:md:w-1/2 bg-white p-6 rounded-lg shadow-xl">
-          <form action="{{route('register')}}" method="POST" novalidate>
+        <div class="md:w-1/2 px-10">
+            <form action="{{route('register')}}" method="POST" novalidate>
             @csrf
             <div class="mb-5">
               <label for="name" class="mb-2 block uppercase text-gray-500 font-bold">
@@ -103,11 +105,13 @@
             </div>
           </form>
         </div>
-        
-      </div>
-</main>
-      
+    </div>
+
+
+@push('scripts')
+
+@endpush
+   
 @endsection
-  
-  </body>
+</body>
 </html>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Negocio;
+use App\Models\Producto;
 use App\Models\Departamento;
 use Illuminate\Http\Request;
 use App\Models\CategoriaNegocio;
@@ -14,9 +15,10 @@ class NegocioController extends Controller
     }
 
     public function index(Negocio $negocio){
+        $productos = Producto::all();
         return view('negocios.negocio',[
             'negocio'=>$negocio
-        ]);
+        ],compact('productos'));
     }
 
     public function create(){
