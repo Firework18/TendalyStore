@@ -24,4 +24,8 @@ class Negocio extends Model
         'imagen',
         'user_id',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
+    }
 }

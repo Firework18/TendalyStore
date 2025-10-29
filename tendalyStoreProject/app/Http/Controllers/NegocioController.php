@@ -10,11 +10,13 @@ use App\Models\CategoriaNegocio;
 class NegocioController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index']);
     }
 
-    public function index(){
-        
+    public function index(Negocio $negocio){
+        return view('negocios.negocio',[
+            'negocio'=>$negocio
+        ]);
     }
 
     public function create(){

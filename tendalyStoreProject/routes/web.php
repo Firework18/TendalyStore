@@ -34,12 +34,15 @@ Route::get('/perfil',[PerfilController::class,'index'])->name('perfil');
 Route::get('/catalogo',[CatalogoController::class,'index'])->name('catalogo');
 
 
-//Enviar al muro
-Route::get('/{user:username}',[PostController::class,'index'])->name('post.index');
+
 
 //Enviar al Negocio
+Route::get('/negocios/{negocio:nombre}',[NegocioController::class,'index'])->name('negocio.index');
 Route::get('/negocio/create',[NegocioController::class,'create'])->name('negocio.create');
 Route::post('/negocio',[NegocioController::class,'store'])->name('negocio.store');
+
+//Enviar al muro
+Route::get('/{user:username}',[PostController::class,'index'])->name('post.index');
 
 Route::post('/imagenes',[ImagenController::class,'store'])->name('imagenes.store');
 
