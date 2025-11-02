@@ -86,7 +86,7 @@
             @foreach ( $negocio->productos as $producto )
                 <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
                 <div class="relative">
-                    <img src="{{ asset('assets/images/serum_camu_camu.webp') }}" alt="Sérum Facial de Camu Camu" class="w-full h-40 object-cover"> {{-- Altura ajustada --}}
+                    <img src="{{ asset('/uploads/' . $producto->imagen) }}" alt="Sérum Facial de Camu Camu" class="w-full h-40 object-cover"> {{-- Altura ajustada --}}
                     <button class="absolute top-2 right-2 bg-white p-1.5 rounded-full text-gray-600 hover:text-red-500 transition"><i class="bi bi-heart text-sm"></i></button>
                 </div>
                 <div class="p-3"> {{-- Padding ajustado --}}
@@ -100,9 +100,7 @@
                 </div>
             </div>
             @endforeach
-            {{-- Producto 1: Sérum Facial de Camu Camu --}}
-            
-            
+
         </div>
     </div>
     @else

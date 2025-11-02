@@ -36,4 +36,3 @@ dropzone.on('removedfile',function(file,message){
 })
 
 
-//Imagen Producto

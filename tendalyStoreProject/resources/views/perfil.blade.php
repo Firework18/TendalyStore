@@ -160,7 +160,7 @@
                         </div>
 
                         <div class="mt-8 text-center">
-                        <a href={{route('producto.create')}} class="px-6 py-3 bg-[var(--color-accent)] hover:bg-[#e09f0c] text-[var(--color-text)] font-bold rounded-full shadow-md transition-colors duration-300">
+                        <a href={{route('producto.create'),auth()->user()->negocios->id}} class="px-6 py-3 bg-[var(--color-accent)] hover:bg-[#e09f0c] text-[var(--color-text)] font-bold rounded-full shadow-md transition-colors duration-300">
                             Registrar Nuevo Producto <i class="bi bi-plus-circle ml-2"></i>
                         </a>
                         </div>

@@ -2,6 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+  
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TendalyStore - @yield('titulo')</title>
     @stack('styles')
@@ -26,23 +27,7 @@
         >
           <img src="{{asset('assets/images/logo.svg')}}" alt="LOGO TENDALY" width="100px" />
         </a>
-        <div class="hidden md:flex flex-1 mx-8 max-w-lg">
-          <input
-            type="search"
-            placeholder="Buscar productos..."
-            class="w-full p-2 border-2 border-gray-300 rounded-l-lg focus:outline-none focus:border-[var(--primary-blue)] transition"
-          />
-          <button
-            class="bg-[var(--primary-blue)] text-white p-2 rounded-r-lg hover:bg-[#10386e] transition"
-          >
-            <i class="bi bi-search"></i>
-          </button>
-        </div>
-   
         
-
-        
-
         <nav class="hidden md:flex">
           <div class="items-center space-x-4 flex">
 

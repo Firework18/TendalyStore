@@ -41,11 +41,13 @@ Route::post('/negocio',[NegocioController::class,'store'])->name('negocio.store'
 
 //Producto
 Route::get('/producto/create',[ProductoController::class,'create'])->name('producto.create');
+Route::post('/producto',[ProductoController::class,'store'])->name('producto.store');
 
 //Enviar al muro
 Route::get('/{user:username}',[PostController::class,'index'])->name('post.index');
 
 Route::post('/imagenes',[ImagenController::class,'store'])->name('imagenes.store');
+
 
 Route::get('/provincias/{departamento}', [UbicacionController::class, 'getProvincias']);
 Route::get('/distritos/{provincia}', [UbicacionController::class, 'getDistritos']);

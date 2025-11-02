@@ -18,8 +18,6 @@ class Producto extends Model
         'precio',
         'stock',
         'negocio_id',
-        'estado',
-        'precio_oferta',
         'unidad_medida',
     ];
 

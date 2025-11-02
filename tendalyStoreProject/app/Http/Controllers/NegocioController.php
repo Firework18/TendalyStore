@@ -15,7 +15,7 @@ class NegocioController extends Controller
     }
 
     public function index(Negocio $negocio){
-        $productos = Producto::all();
+        $productos = Producto::where('negocio_id',$negocio->id);
         return view('negocios.negocio',[
             'negocio'=>$negocio
         ],compact('productos'));
