@@ -2,7 +2,7 @@
 @section('titulo', 'Mi Perfil')
 
 @section('contenido')
-<main class="min-h-screen pt-24 pb-12 bg-[var(--color-background)]">
+<main class="min-h-screen pt-10 pb-12 ">
     <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden">
 
         <!-- Banner de Perfil -->
@@ -23,7 +23,7 @@
                     <!-- Nombre y Datos Básicos -->
                     <div class="text-center md:text-left mt-4 md:mt-0">
                         <p class="text-white text-sm">{{auth()->user()->username}}</p>
-                        <h1 class="text-4xl font-extrabold text-[var(--color-text)] mt-1 mb-2">{{auth()->user()->name}} {{auth()->user()->apellido_paterno}}</h1>
+                        <h1 class="text-4xl font-extrabold text-red-600 mt-1 mb-2">{{auth()->user()->name}} {{auth()->user()->apellido_paterno}}</h1>
                         <div class="flex items-center justify-center md:justify-start space-x-3 text-sm text-gray-600">
                             <span class="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 font-semibold">
                                 <i class="bi bi-check-circle-fill mr-1"></i> Vendedor Verificado
@@ -36,7 +36,7 @@
                 </div>
 
                 <!-- Botón Editar Perfil -->
-                <a href="#" class="mt-6 md:mt-0 px-6 py-2 border-2 border-[var(--color-primary)] text-[var(--color-primary)] font-bold rounded-full hover:bg-red-50 transition-all duration-200 flex items-center shadow-md">
+                <a href="#" class="mt-6 md:mt-0 px-6 py-2 border-2 bg-red-500 font-bold rounded-full hover:bg-red-700 transition-all duration-200 flex items-center shadow-md">
                     <i class="bi bi-pencil-square mr-2"></i> Editar Perfil
                 </a>
             </div>
@@ -78,6 +78,9 @@
                     <button class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="configuracion">
                         <i class="bi bi-gear-fill mr-2"></i> Configuración
                     </button>
+                    <a href="{{route('post.index',auth()->user()->username)}}" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="configuracion">
+                        <i class="bi bi-gear-fill mr-2"></i> Muro
+                    </a>
                 </nav>
             </div>
 
@@ -137,42 +140,41 @@
                     </div>
                 </div>
 
-                <!-- Mis Negocios (Contenido de ejemplo) -->
+                <!-- Mi Negocio -->
                 <div id="tab-negocios" class="tab-content hidden">
                     <h2 class="text-2xl font-bold text-[var(--color-primary)] mb-5 flex items-center">
                         <i class="bi bi-shop text-3xl mr-3 text-[var(--color-secondary)]"></i>
-                        Mis Negocios Registrados
+                        Mi Negocio registrado
                     </h2>
-                    @if (auth()->user()->tiene_negocio)
+                    @if (auth()->user()->negocios)
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Tarjeta de Negocio 1 -->
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-100 flex items-center space-x-4">
-                            <img src="{{ asset('assets/images/frutas.jpg') }}" alt="Negocio EcoFresh" class="w-16 h-16 object-cover rounded-full flex-shrink-0">
-                            <div>
-                                <h3 class="text-xl font-bold text-[var(--color-primary)]">EcoFresh Orgánicos</h3>
-                                <p class="text-gray-700 text-sm">Alimentos frescos y cultivados sin químicos.</p>
-                                <a href="#" class="text-[var(--color-secondary)] hover:text-[var(--color-primary)] text-sm font-semibold mt-1 inline-block">Ver detalles <i class="bi bi-arrow-right"></i></a>
+                            <div class="bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-100 flex items-center space-x-4">
+                                <img src="{{ asset('/uploads/'. auth()->user()->negocios->imagen) }}" alt="Negocio EcoFresh" class="w-16 h-16 object-cover rounded-full flex-shrink-0">
+                                <div>
+                                    <h3 class="text-xl font-bold text-[var(--color-primary)]">{{auth()->user()->negocios->nombre}}</h3>
+                                    <p class="text-gray-700 text-sm">{{auth()->user()->negocios->descripcion}}</p>
+                                    <a href={{route('negocio.index',auth()->user()->negocios->nombre)}} class="text-[var(--color-secondary)] hover:text-[var(--color-primary)] text-sm font-semibold mt-1 inline-block">Ver Negocio <i class="bi bi-arrow-right"></i></a>
+                                </div>
                             </div>
                         </div>
-                        <!-- Tarjeta de Negocio 2 -->
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-100 flex items-center space-x-4">
-                            <img src="{{ asset('assets/images/moda.jpg') }}" alt="Negocio Moda Sostenible" class="w-16 h-16 object-cover rounded-full flex-shrink-0">
-                            <div>
-                                <h3 class="text-xl font-bold text-[var(--color-primary)]">Moda Sostenible</h3>
-                                <p class="text-gray-700 text-sm">Ropa ecológica con fibras naturales.</p>
-                                <a href="#" class="text-[var(--color-secondary)] hover:text-[var(--color-primary)] text-sm font-semibold mt-1 inline-block">Ver detalles <i class="bi bi-arrow-right"></i></a>
-                            </div>
+
+                        <div class="mt-8 text-center">
+                        <a href={{route('producto.create'),auth()->user()->negocios->id}} class="px-6 py-3 bg-[var(--color-accent)] hover:bg-[#e09f0c] text-[var(--color-text)] font-bold rounded-full shadow-md transition-colors duration-300">
+                            Registrar Nuevo Producto <i class="bi bi-plus-circle ml-2"></i>
+                        </a>
                         </div>
-                    </div>
                     @else
                        No tiene un negocio asociado 
-                    @endif
-                    
-                    <div class="mt-8 text-center">
+
+                       <div class="mt-8 text-center">
                         <a href={{route('negocio.create')}} class="px-6 py-3 bg-[var(--color-accent)] hover:bg-[#e09f0c] text-[var(--color-text)] font-bold rounded-full shadow-md transition-colors duration-300">
                             Registrar Nuevo Negocio <i class="bi bi-plus-circle ml-2"></i>
                         </a>
-                    </div>
+                        </div>
+                    @endif
+                    
+                
                 </div>
 
                 <!-- Mis Pedidos (Contenido de ejemplo) -->

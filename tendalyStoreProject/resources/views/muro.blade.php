@@ -81,14 +81,14 @@ Perfil de {{$user->username}}
                         Negocio Asociado
                     </h2>
 
-                    @if ($user->tiene_negocio)
+                    @if ($user->negocios)
                         
                     <div class="bg-[var(--color-background)] p-4 rounded-lg shadow-sm border border-gray-200">
-                        <h3 class="text-xl font-bold text-[var(--color-primary)] mb-2">EcoFresh Orgánicos</h3>
+                        <h3 class="text-xl font-bold text-[var(--color-primary)] mb-2">{{$user->negocios->nombre}}</h3>
                         <p class="text-gray-700 text-sm mb-3 line-clamp-2">
-                            Ofrecemos alimentos frescos y orgánicos, cultivados directamente, sin pesticidas ni químicos.
+                            {{$user->negocios->descripcion}}
                         </p>
-                        <a href="#" class="inline-flex items-center text-[var(--color-secondary)] hover:text-[var(--color-primary)] font-semibold transition-colors duration-200">
+                        <a href={{route('negocio.index',$user->negocios)}} class="inline-flex items-center text-[var(--color-secondary)] hover:text-[var(--color-primary)] font-semibold transition-colors duration-200">
                             Ver Negocio <i class="bi bi-arrow-right ml-2"></i>
                         </a>
                     </div>

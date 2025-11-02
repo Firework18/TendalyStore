@@ -14,11 +14,13 @@ class ImagenController extends Controller
 
         $nombreImagen = Str::uuid() . "." . $imagen->extension();
 
-        $imagenServidor = Image::read($imagen)->resize(1800,1000);
+        $imagenServidor = Image::read($imagen)->resize(1200,1000);
 
         $imagenPath = public_path('uploads') . '/' . $nombreImagen;
         $imagenServidor->save($imagenPath);
 
         return response()->json(['imagen'=>$nombreImagen]);
     }
+
+    
 }

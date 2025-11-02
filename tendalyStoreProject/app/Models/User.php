@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Negocio;
 use App\Models\Distrito;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,6 +28,10 @@ class User extends Authenticatable
 
     public function distrito(){
         return $this->belongsTo(Distrito::class);
+    }
+
+    public function Negocios(){
+        return $this->hasOne(Negocio::class,'user_id');
     }
 
     /**

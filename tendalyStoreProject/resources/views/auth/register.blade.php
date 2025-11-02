@@ -97,14 +97,11 @@
                   <p class="text-gray-600 text-sm">¿Ya tienes una cuenta?</p>
                     <a 
                       href="{{ route('login') }}" 
-                      class="text-[var(--color-primary)] hover:text-[var(--color-secondary)] font-bold transition-colors duration-200"
-                    >
+                      class="text-[var(--color-primary)] hover:text-[var(--color-secondary)] font-bold transition-colors duration-200">
                     Ingresa aquí
-                  </a>
-        
+                    </a>
             </div>
-
-                </form>
+          </form>
         </div>
         
       </div>
