@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Distrito;
 use App\Models\Producto;
+use App\Models\Provincia;
+use App\Models\Departamento;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -32,5 +35,17 @@ class Negocio extends Model
 
     public function productos(){
         return $this->hasMany(Producto::class);
+    }
+
+    public function distrito(){
+        return $this->belongsTo(Distrito::class);
+    }
+
+    public function provincia(){
+        return $this->belongsTo(Provincia::class);
+    }
+
+    public function departamento(){
+        return $this->belongsTo(Departamento::class);
     }
 }

@@ -5,12 +5,10 @@
 
 @section('contenido')
       <div
-        class="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--primary-blue)] z-40 shadow-lg"
+        class="md:hidden fixed bottom-0 left-0 right-0 bg-red-800  z-40 shadow-lg"
       >
-        <div class="flex items-center justify-between px-4 py-4">
-          <button>
-            <i class="bi bi-search text-2xl text-white"></i>
-          </button>
+        <div class="flex items-center  justify-between px-4 py-4">
+          
           <button>
             <i class="bi bi-person text-2xl text-white"></i>
           </button>
@@ -52,7 +50,7 @@
               Explorar Catálogo
             </a>
             <a
-              href="#eco-business"
+              href="{{route('negocio.create')}}"
               class="btn-secondary font-bold py-3 px-8 rounded-full shadow-lg text-center transition"
             >
               Registrar mi tienda

@@ -4,7 +4,7 @@ Perfil de {{$user->username}}
 @endsection
 
 @section('contenido')
-<main class="min-h-screen pt-2 pb-12 bg-[var(--color-background)] flex items-center justify-center p-4">
+<main class="min-h-screen pt-2 pb-12  flex items-center justify-center p-4">
     <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-4xl ">
 
         <!-- Banner de Perfil (Opcional, para un toque más profesional) -->
@@ -81,14 +81,14 @@ Perfil de {{$user->username}}
                         Negocio Asociado
                     </h2>
 
-                    @if ($user->negocios)
-                        
+                    @if ($negocio)
+                
                     <div class="bg-[var(--color-background)] p-4 rounded-lg shadow-sm border border-gray-200">
-                        <h3 class="text-xl font-bold text-[var(--color-primary)] mb-2">{{$user->negocios->nombre}}</h3>
+                        <h3 class="text-xl font-bold text-[var(--color-primary)] mb-2">{{$negocio->nombre}}</h3>
                         <p class="text-gray-700 text-sm mb-3 line-clamp-2">
-                            {{$user->negocios->descripcion}}
+                            {{$negocio->descripcion}}
                         </p>
-                        <a href={{route('negocio.index',$user->negocios)}} class="inline-flex items-center text-[var(--color-secondary)] hover:text-[var(--color-primary)] font-semibold transition-colors duration-200">
+                        <a href={{route('negocio.index',$negocio)}} class="inline-flex items-center text-[var(--color-secondary)] hover:text-[var(--color-primary)] font-semibold transition-colors duration-200">
                             Ver Negocio <i class="bi bi-arrow-right ml-2"></i>
                         </a>
                     </div>

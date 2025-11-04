@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Negocio;
 use Illuminate\Http\Request;
 
 class PerfilController extends Controller
@@ -12,6 +13,8 @@ class PerfilController extends Controller
     }
 
     public function index(){
-        return view('perfil');
+        return view('dashboard.user.principal');
     }
+
+    
 }

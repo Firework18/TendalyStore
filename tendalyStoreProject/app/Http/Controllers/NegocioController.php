@@ -21,6 +21,11 @@ class NegocioController extends Controller
         ],compact('productos'));
     }
 
+    public function negocioDashboard(){
+        $negocio = auth()->user()->negocios;
+        return view('dashboard.user.negocio',compact('negocio'));
+    }
+
     public function create(){
         $departamentos = Departamento::with('provincias.distritos')->get();
         $categorias = CategoriaNegocio::all();

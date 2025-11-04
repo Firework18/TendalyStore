@@ -30,7 +30,8 @@ Route::post('/login',[LoginController::class,'store']);
 
 Route::post('/logout',[LogoutController::class,'store'])->name('logout');
 
-Route::get('/perfil',[PerfilController::class,'index'])->name('perfil');
+Route::get('/dashboard',[PerfilController::class,'index'])->name('dashboard');
+
 //Catalogo
 Route::get('/catalogo',[CatalogoController::class,'index'])->name('catalogo');
 
@@ -38,6 +39,7 @@ Route::get('/catalogo',[CatalogoController::class,'index'])->name('catalogo');
 Route::get('/negocios/{negocio:nombre}',[NegocioController::class,'index'])->name('negocio.index');
 Route::get('/negocio/create',[NegocioController::class,'create'])->name('negocio.create');
 Route::post('/negocio',[NegocioController::class,'store'])->name('negocio.store');
+Route::get('/dashboard/negocio',[NegocioController::class,'negocioDashboard'])->name('dashboard.negocio');
 
 //Producto
 Route::get('/producto/create',[ProductoController::class,'create'])->name('producto.create');

@@ -39,7 +39,7 @@ class ProductoController extends Controller
             'unidad_medida'=>$request->unidad_medida,
         ]);
         
-        return redirect()->route('negocio.index',auth()->user()->negocios);
+        return redirect()->route('dashboard.negocio');
     }
 
 }

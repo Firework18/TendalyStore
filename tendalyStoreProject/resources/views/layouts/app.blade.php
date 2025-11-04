@@ -2,7 +2,6 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-  
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TendalyStore - @yield('titulo')</title>
     @stack('styles')
@@ -11,7 +10,6 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    
     <link rel="stylesheet" href="{{ asset('assets/styles.css') }}">
   </head>
   <body>
@@ -34,7 +32,7 @@
            
             <a
               class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
-            href="/perfil" >
+            href="/dashboard" >
               <i class="bi bi-person text-2xl"></i>
               <span class="text-sm">
                 @auth
@@ -42,13 +40,7 @@
                 @endauth
               </span>
             </a>
-            
-
-            
-            
-            
-
-            
+    
             <a
               class="relative text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
             href="#carrito">

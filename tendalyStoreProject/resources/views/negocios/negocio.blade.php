@@ -85,20 +85,41 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @foreach ( $negocio->productos as $producto )
                 <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
-                <div class="relative">
-                    <img src="{{ asset('/uploads/' . $producto->imagen) }}" alt="Sérum Facial de Camu Camu" class="w-full h-40 object-cover"> {{-- Altura ajustada --}}
-                    <button class="absolute top-2 right-2 bg-white p-1.5 rounded-full text-gray-600 hover:text-red-500 transition"><i class="bi bi-heart text-sm"></i></button>
-                </div>
-                <div class="p-3"> {{-- Padding ajustado --}}
-                    <h3 class="font-semibold text-gray-800 text-base mb-1">{{$producto->nombre}}</h3>
-                    <p class="text-gray-500 text-xs mb-2">Cuidado Facial</p>
-                    <div class="flex items-center text-xs">
-                        <i class="bi bi-star-fill text-yellow-500 mr-0.5"></i>
-                        <span class="text-gray-700 mr-0.5">4.5</span>
-                        <span class="text-gray-400">(120)</span>
-                    </div>
-                </div>
-            </div>
+    <div class="relative">
+        <img src="{{ asset('/uploads/' . $producto->imagen) }}" alt="{{ $producto->nombre }}" class="w-full h-40 object-cover"> {{-- Altura ajustada --}}
+        <button class="absolute top-2 right-2 bg-white p-1.5 rounded-full text-gray-600 hover:text-red-500 transition"><i class="bi bi-heart text-sm"></i></button>
+        {{-- Etiqueta de oferta, si aplica --}}
+        @if($producto->precio_oferta && $producto->precio_oferta < $producto->precio)
+            <span class="absolute bottom-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">Oferta</span>
+        @endif
+    </div>
+    <div class="p-3"> 
+        <h3 class="font-semibold text-gray-800 text-base mb-1">{{$producto->nombre}}</h3>
+        <p class="text-gray-500 text-xs mb-2">{{$producto->descripcion}}</p> {{-- Asumiendo una categoría fija o que viene de $producto->categoria --}}
+        
+        {{-- Sección de Precios --}}
+        <div class="flex items-baseline mb-2">
+            @if($producto->precio_oferta && $producto->precio_oferta < $producto->precio)
+                <span class="text-red-700 font-bold text-lg mr-2">S/.{{ number_format($producto->precio_oferta, 2) }}</span>
+                <span class="text-gray-500 line-through text-sm">S/.{{ number_format($producto->precio, 2) }}</span>
+            @else
+                <span class="text-gray-800 font-bold text-lg">S/.{{ number_format($producto->precio, 2) }}</span>
+            @endif
+        </div>
+
+        {{-- Valoración --}}
+        <div class="flex items-center text-xs mb-3">
+            <i class="bi bi-star-fill text-yellow-500 mr-0.5"></i>
+            <span class="text-gray-700 mr-0.5">4.5</span> {{-- Asumiendo un valor fijo o que viene de $producto->rating --}}
+            <span class="text-gray-400">(120)</span> {{-- Asumiendo un valor fijo o que viene de $producto->reviews_count --}}
+        </div>
+
+        {{-- Botón Añadir al Carrito --}}
+        <button class="w-full bg-red-700 text-white py-2 px-4 rounded-md hover:bg-red-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+            Añadir al Carrito
+        </button>
+    </div>
+</div>
             @endforeach
 
         </div>

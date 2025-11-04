@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('dashboard.user.app') 
 
 @section('titulo', 'Crear Nuevo Producto')
 
@@ -9,6 +9,10 @@
 @section('contenido')
 
 <main class="container mx-auto mt-10 mb-4">
+  <div class="mb-5 flex items-center text-gray-500 hover:text-gray-700 transition duration-150 ease-in-out">
+        <i class="bi bi-chevron-left mr-1 text-base"></i>
+        <a href="{{route('dashboard.negocio')}}" class="text-sm font-normal text-[#555]">Volver al negocio</a>
+    </div>
 <h2 class="font-extrabold text-center text-3xl mb-3 p-3">Crear Nuevo Producto </h2>
 
     <div class="md:flex md:items-center p-5">
