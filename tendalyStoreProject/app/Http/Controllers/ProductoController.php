@@ -8,12 +8,19 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
+
     public function __construct(){
         $this->middleware('auth')->except(['index']);
     }
 
+    public function productoDashboard(){
+        $negocio = auth()->user()->negocios;
+        $productos = $negocio ? Producto::where('negocio_id',$negocio->id)->paginate(4) : collect(); 
+        return view('dashboard.user.productos.productos',compact('productos','negocio'));
+    }
+
     public function create(){
-        return view('productos.create');
+        return view('dashboard.user.productos.create');
     }
 
     public function store(Request $request){
@@ -27,8 +34,6 @@ class ProductoController extends Controller
             'unidad_medida'=>'required',
         ]);
     
-
-
         Producto::create([
             'nombre'=>$request->nombre,
             'descripcion'=>$request->descripcion,

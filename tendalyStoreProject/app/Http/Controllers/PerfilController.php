@@ -13,7 +13,13 @@ class PerfilController extends Controller
     }
 
     public function index(){
-        return view('dashboard.user.principal');
+        $user = auth()->user();
+        return view('dashboard.user.principal',compact('user'));
+    }
+
+    public function perfil(){
+        $user = auth()->user();
+        return view('dashboard.user.perfil',compact('user'));
     }
 
     

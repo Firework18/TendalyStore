@@ -31,6 +31,7 @@ Route::post('/login',[LoginController::class,'store']);
 Route::post('/logout',[LogoutController::class,'store'])->name('logout');
 
 Route::get('/dashboard',[PerfilController::class,'index'])->name('dashboard');
+Route::get('/dashboard/perfil',[PerfilController::class,'perfil'])->name('dashboard.perfil');
 
 //Catalogo
 Route::get('/catalogo',[CatalogoController::class,'index'])->name('catalogo');
@@ -44,6 +45,7 @@ Route::get('/dashboard/negocio',[NegocioController::class,'negocioDashboard'])->
 //Producto
 Route::get('/producto/create',[ProductoController::class,'create'])->name('producto.create');
 Route::post('/producto',[ProductoController::class,'store'])->name('producto.store');
+Route::get('/dashboard/productos',[ProductoController::class,'productoDashboard'])->name('dashboard.producto');
 
 //Enviar al muro
 Route::get('/{user:username}',[PostController::class,'index'])->name('post.index');

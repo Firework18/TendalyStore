@@ -69,7 +69,7 @@
                         @endif --}}
                         <a href="{{route('producto.create')}}" class="text-red-600 hover:text-red-700 font-semibold mt-4 block">Registrar Nuevo Producto &rarr;</a>
                         
-                        <a href="#" class="text-red-600 hover:text-red-700 font-semibold mt-4 block">Gestionar Productos &rarr;</a>
+                        <a href="{{route('dashboard.producto')}}" class="text-red-600 hover:text-red-700 font-semibold mt-4 block">Gestionar Productos &rarr;</a>
                     @endif
                 </div>
             </div>

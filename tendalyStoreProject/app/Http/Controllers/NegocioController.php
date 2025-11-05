@@ -15,10 +15,11 @@ class NegocioController extends Controller
     }
 
     public function index(Negocio $negocio){
-        $productos = Producto::where('negocio_id',$negocio->id);
+        $productos = Producto::where('negocio_id',$negocio->id)->paginate(4);
+        $categoria = CategoriaNegocio::where('id',$negocio->categoria_negocio_id)->get();
         return view('negocios.negocio',[
             'negocio'=>$negocio
-        ],compact('productos'));
+        ],compact('productos','categoria'));
     }
 
     public function negocioDashboard(){

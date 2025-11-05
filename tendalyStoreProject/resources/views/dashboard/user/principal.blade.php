@@ -8,7 +8,7 @@ Resumen del dashboard
 @endsection
 
 @section('primera_descripcion')
-Bienvenido de nuevo, {{auth()->user()->name}} Aquí tienes un resumen de la actividad de tu negocio.
+Bienvenido de nuevo, {{$user->name}} Aquí tienes un resumen de la actividad de tu negocio.
 @endsection
 
 @section('contenido')

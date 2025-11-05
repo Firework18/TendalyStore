@@ -33,7 +33,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div id="userMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden">
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Mi Perfil</a>
+                        <a href="{{route('dashboard.perfil')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Mi Perfil</a>
                         <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Configuración</a>
                         <form action="{{route('logout')}}" method="POST">
                             @csrf
@@ -60,7 +60,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
+                    <a href="{{route('dashboard.perfil')}}" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
                         <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         Mi Perfil
                     </a>
@@ -72,7 +72,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
+                    <a href="{{route('dashboard.producto')}}" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
                         <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5m-5 0h-2a2 2 0 00-2 2v4m0 0v4a2 2 0 002 2h2m4-4h4m-4 0a2 2 0 002-2V7a2 2 0 00-2-2h-4V3.01"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20v-4a2 2 0 012-2h4a2 2 0 012 2v4m-6 0a2 2 0 002 2h4a2 2 0 002-2"></path></svg>
                         Productos
                     </a>

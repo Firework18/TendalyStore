@@ -6,6 +6,7 @@ use App\Models\Distrito;
 use App\Models\Producto;
 use App\Models\Provincia;
 use App\Models\Departamento;
+use App\Models\CategoriaNegocio;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -47,5 +48,9 @@ class Negocio extends Model
 
     public function departamento(){
         return $this->belongsTo(Departamento::class);
+    }
+
+    public function categoria(){
+        return $this->belongsTo(CategoriaNegocio::class,'categoria_negocio_id');
     }
 }
