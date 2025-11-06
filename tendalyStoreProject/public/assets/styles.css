@@ -44,7 +44,7 @@ body {
 
 .catalog-section {
   grid-area: catalog;
-  background-color: var(--color-background);
+  
 }
 
 .eco-business-section {

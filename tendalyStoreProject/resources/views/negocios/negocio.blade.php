@@ -128,12 +128,6 @@
                                     @endif
                                 </div>
 
-                                <div class="flex items-center text-sm mb-4">
-                                    <i class="bi bi-star-fill text-yellow-400 mr-1"></i>
-                                    <span class="text-gray-700 font-semibold mr-1">4.5</span>
-                                    <span class="text-gray-400">(120)</span>
-                                </div>
-
                                 <button
                                     class="w-full bg-red-700 text-white py-2.5 px-4 rounded-lg hover:bg-red-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 font-semibold">
                                     Añadir al Carrito
@@ -153,41 +147,69 @@
         @endif
     </div>
 
-    {{-- Nueva Sección de Comentarios --}}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
         <h2 class="text-3xl font-bold text-gray-900 mb-6">Comentarios</h2>
 
-        {{-- Formulario para añadir un nuevo comentario --}}
-        <div class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-gray-100">
-            <h3 class="text-xl font-semibold text-gray-800 mb-4">Deja tu comentario</h3>
-            <form action="#" method="POST"> {{-- 'action' y 'method' son placeholders --}}
-                @csrf
-                <div class="mb-4">
-                    <label for="comment" class="sr-only">Tu Comentario</label>
-                    <textarea id="comment" name="comment" rows="4"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 text-gray-700 placeholder-gray-400 text-sm"
-                        placeholder="Escribe tu comentario aquí..." required></textarea>
+        @auth
+            @if ($negocio->user_id !== auth()->user()->negocios->id)
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-gray-100">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Deja tu comentario</h3>
+                    <form action="#" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="comentario" class="sr-only">Tu Comentario</label>
+                            <textarea id="comentario" name="comentario" rows="4"
+                                class="w-full px-4 py-2 border rounded-lg 
+                                focus:ring-red-500 focus:border-red-500 text-gray-700 placeholder-gray-400 text-sm
+                                @error('comentario')
+                                    border-red-500
+                                @enderror"
+                                placeholder="Escribe tu comentario aquí..." required></textarea>
+                        </div>
+                        <div class="mb-4 flex items-center">
+                            <label for="rating" class="block text-sm font-medium text-gray-700 mr-3">Tu Valoración:</label>
+                            <div class="flex space-x-1">
+                                <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
+                                <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
+                                <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
+                                <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
+                                <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
+                            </div>
+                            <input type="hidden" name="rating" id="rating" value="0">
+                        </div>
+                        <button type="submit"
+                            class="bg-red-700 text-white py-2.5 px-6 rounded-lg hover:bg-red-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 font-semibold text-sm">
+                            Publicar Comentario
+                        </button>
+                    </form>
                 </div>
-                <div class="mb-4 flex items-center">
-                    <label for="rating" class="block text-sm font-medium text-gray-700 mr-3">Tu Valoración:</label>
-                    <div class="flex space-x-1">
-                        {{-- Estrellas de valoración interactivas (solo diseño) --}}
-                        <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
-                        <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
-                        <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
-                        <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
-                        <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
-                    </div>
-                    <input type="hidden" name="rating" id="rating" value="0"> {{-- Campo oculto para la valoración --}}
-                </div>
-                <button type="submit"
-                    class="bg-red-700 text-white py-2.5 px-6 rounded-lg hover:bg-red-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 font-semibold text-sm">
-                    Publicar Comentario
-                </button>
-            </form>
-        </div>
+            @endif
 
-        {{-- Lista de comentarios existentes --}}
+        @endauth
+
+        @guest
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 rounded-md">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <!-- Heroicon name: solid/exclamation-triangle -->
+                        <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M8.257 3.099c.765-1.506 2.723-1.506 3.488 0l.75 1.485.801 1.587A.75.75 0 0113.843 7.5h-7.686a.75.75 0 01.647-1.329l.801-1.587.75-1.485zM4.09 9.5a.75.75 0 01.75-.75h10.32a.75.75 0 01.75.75v5.5a.75.75 0 01-.75.75H4.84a.75.75 0 01-.75-.75v-5.5zm11.16 2.5a.75.75 0 01-.75-.75V11a.75.75 0 00-1.5 0v.25a.75.75 0 01-.75.75h-.25a.75.75 0 000 1.5h.25a.75.75 0 01.75.75v.25a.75.75 0 001.5 0v-.25a.75.75 0 01.75-.75h.25a.75.75 0 000-1.5h-.25zM12.5 11a.75.75 0 01-.75-.75V11a.75.75 0 00-1.5 0v.25a.75.75 0 01-.75.75H11a.75.75 0 000 1.5h.25a.75.75 0 01.75.75v.25a.75.75 0 001.5 0v-.25a.75.75 0 01.75-.75h.25a.75.75 0 000-1.5h-.25z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-yellow-800">
+                            Necesitas <a href="{{ route('login') }}"
+                                class="font-medium underline text-yellow-800 hover:text-yellow-900">iniciar sesión</a> para
+                            dejar un comentario.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        @endguest
+
         <div class="space-y-6">
             {{-- Comentario 1 --}}
             <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
@@ -209,52 +231,6 @@
                 <p class="text-gray-700 text-base leading-relaxed">
                     ¡Excelente atención y productos de muy buena calidad! Me encantó el aceite de coco. ¡Totalmente
                     recomendado!
-                </p>
-            </div>
-
-            {{-- Comentario 2 --}}
-            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                <div class="flex items-center mb-3">
-                    <img src="https://via.placeholder.com/40" alt="Avatar de Usuario"
-                        class="w-10 h-10 rounded-full mr-4 object-cover">
-                    <div>
-                        <p class="font-semibold text-gray-800">Carlos Mendoza</p>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="bi bi-star-fill text-yellow-400 mr-1"></i>
-                            <i class="bi bi-star-fill text-yellow-400 mr-1"></i>
-                            <i class="bi bi-star-fill text-yellow-400 mr-1"></i>
-                            <i class="bi bi-star-fill text-yellow-400 mr-1"></i>
-                            <i class="bi bi-star-fill text-yellow-400 mr-1"></i>
-                            <span class="ml-2 text-gray-500 text-xs">Hace 1 semana</span>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-gray-700 text-base leading-relaxed">
-                    Siempre encuentro lo que busco aquí. Los productos orgánicos son fantásticos y el servicio al cliente
-                    es de primera.
-                </p>
-            </div>
-
-            {{-- Comentario 3 --}}
-            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                <div class="flex items-center mb-3">
-                    <img src="https://via.placeholder.com/40" alt="Avatar de Usuario"
-                        class="w-10 h-10 rounded-full mr-4 object-cover">
-                    <div>
-                        <p class="font-semibold text-gray-800">Sofía Ramos</p>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="bi bi-star-fill text-yellow-400 mr-1"></i>
-                            <i class="bi bi-star-fill text-yellow-400 mr-1"></i>
-                            <i class="bi bi-star-fill text-yellow-400 mr-1"></i>
-                            <i class="bi bi-star text-yellow-400 mr-1"></i>
-                            <i class="bi bi-star text-yellow-400 mr-1"></i>
-                            <span class="ml-2 text-gray-500 text-xs">Hace 3 semanas</span>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-gray-700 text-base leading-relaxed">
-                    Los productos son buenos, aunque el envío tardó un poco más de lo esperado. Me gustaría ver más opciones
-                    de entrega.
                 </p>
             </div>
 
@@ -360,3 +336,6 @@
         });
     </script>
 @endpush
+</body>
+
+</html>

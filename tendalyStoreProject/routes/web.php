@@ -37,7 +37,7 @@ Route::get('/dashboard/perfil',[PerfilController::class,'perfil'])->name('dashbo
 Route::get('/catalogo',[CatalogoController::class,'index'])->name('catalogo');
 
 //Enviar al Negocio
-Route::get('/negocios/{negocio:nombre}',[NegocioController::class,'index'])->name('negocio.index');
+Route::get('/negocios/{negocio:nombre}',[NegocioController::class,'show'])->name('negocio.show');
 Route::get('/negocio/create',[NegocioController::class,'create'])->name('negocio.create');
 Route::post('/negocio',[NegocioController::class,'store'])->name('negocio.store');
 Route::get('/dashboard/negocio',[NegocioController::class,'negocioDashboard'])->name('dashboard.negocio');

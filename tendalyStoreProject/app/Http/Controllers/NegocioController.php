@@ -11,10 +11,10 @@ use App\Models\CategoriaNegocio;
 class NegocioController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth')->except(['index']);
+        $this->middleware('auth')->except(['show']);
     }
 
-    public function index(Negocio $negocio){
+    public function show(Negocio $negocio){
         $productos = Producto::where('negocio_id',$negocio->id)->paginate(4);
         $categoria = CategoriaNegocio::where('id',$negocio->categoria_negocio_id)->get();
         return view('negocios.negocio',[

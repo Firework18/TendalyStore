@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard TendalyStore - @yield('titulo')</title>
     @stack('styles')
     @vite(['resources/css/app.css'])
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="{{ asset('assets/stylesDashboard.css') }}">
 </head>
+
 <body class="bg-gray-100 font-sans antialiased">
 
     <!-- Navbar Superior -->
@@ -20,24 +19,36 @@
         <div class="container mx-auto flex justify-between items-center">
 
             <button id="sidebarToggle" class="text-red-500 lg:hidden mr-4 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
             </button>
 
             <a href="/" class="text-red-600 text-2xl font-bold">TendalyStore</a>
             <div class="flex items-center space-x-4">
-                
+
                 <div class="relative">
-                    <button class="flex items-center space-x-2 hover:text-red-200 focus:outline-none" id="userMenuButton">
-                        <img src="{{asset('assets/images/about.jpg')}}" alt="Avatar" class="w-8 h-8 rounded-full border-2 bg-red-500">
-                        <span>{{auth()->user()->username}}</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <button class="flex items-center space-x-2 hover:text-red-200 focus:outline-none"
+                        id="userMenuButton">
+                        <img src="{{ asset('assets/images/about.jpg') }}" alt="Avatar"
+                            class="w-8 h-8 rounded-full border-2 bg-red-500">
+                        <span>{{ auth()->user()->username }}</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
                     </button>
                     <div id="userMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden">
-                        <a href="{{route('dashboard.perfil')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Mi Perfil</a>
+                        <a href="{{ route('dashboard.perfil') }}"
+                            class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Mi Perfil</a>
                         <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Configuración</a>
-                        <form action="{{route('logout')}}" method="POST">
+                        <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Cerrar Sesión</button>
+                            <button type="submit" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Cerrar
+                                Sesión</button>
 
                         </form>
                     </div>
@@ -54,44 +65,90 @@
         <nav class="mt-5">
             <ul>
                 <li>
-                    <a href="{{route('dashboard')}}" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200 active-link">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    <a href="{{ route('dashboard') }}"
+                        class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200 active-link">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
                         Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('dashboard.perfil')}}" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    <a href="{{ route('dashboard.perfil') }}"
+                        class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
                         Mi Perfil
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('dashboard.negocio')}}" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.25V7A2.75 2.75 0 0018.25 4H5.75A2.75 2.75 0 003 7v10.5A2.75 2.75 0 005.75 20h12.5A2.75 2.75 0 0021 17.25v-4"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7v5"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l-3-3-3 3"></path></svg>
+                    <a href="{{ route('dashboard.negocio') }}"
+                        class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 13.25V7A2.75 2.75 0 0018.25 4H5.75A2.75 2.75 0 003 7v10.5A2.75 2.75 0 005.75 20h12.5A2.75 2.75 0 0021 17.25v-4">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7v5"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l-3-3-3 3">
+                            </path>
+                        </svg>
                         Mi Negocio
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('dashboard.producto')}}" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5m-5 0h-2a2 2 0 00-2 2v4m0 0v4a2 2 0 002 2h2m4-4h4m-4 0a2 2 0 002-2V7a2 2 0 00-2-2h-4V3.01"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20v-4a2 2 0 012-2h4a2 2 0 012 2v4m-6 0a2 2 0 002 2h4a2 2 0 002-2"></path></svg>
+                    <a href="{{ route('dashboard.producto') }}"
+                        class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 7h.01M7 3h5m-5 0h-2a2 2 0 00-2 2v4m0 0v4a2 2 0 002 2h2m4-4h4m-4 0a2 2 0 002-2V7a2 2 0 00-2-2h-4V3.01">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20v-4a2 2 0 012-2h4a2 2 0 012 2v4m-6 0a2 2 0 002 2h4a2 2 0 002-2"></path>
+                        </svg>
                         Productos
                     </a>
                 </li>
                 <li>
                     <a href="#" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6a2 2 0 00-2-2H5a2 2 0 00-2 2v13m6 0a2 2 0 002 2h2a2 2 0 002-2m-6 0H9m7 0h2a2 2 0 002-2v-3m-6 0a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2m-6 0H6"></path></svg>
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19V6a2 2 0 00-2-2H5a2 2 0 00-2 2v13m6 0a2 2 0 002 2h2a2 2 0 002-2m-6 0H9m7 0h2a2 2 0 002-2v-3m-6 0a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2m-6 0H6">
+                            </path>
+                        </svg>
                         Ventas
                     </a>
                 </li>
                 <li>
                     <a href="#" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                        </svg>
                         Reportes
                     </a>
                 </li>
                 <li>
                     <a href="#" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
                         Configuración
                     </a>
                 </li>
@@ -111,70 +168,71 @@
     </main>
 
     <script>
-    // Script para el menú desplegable del usuario
-    const userMenuButton = document.getElementById('userMenuButton');
-    const userMenu = document.getElementById('userMenu');
+        // Script para el menú desplegable del usuario
+        const userMenuButton = document.getElementById('userMenuButton');
+        const userMenu = document.getElementById('userMenu');
 
-    if (userMenuButton) { // Asegúrate de que el botón exista antes de añadir el listener
-        userMenuButton.addEventListener('click', (event) => {
-            userMenu.classList.toggle('hidden');
-            event.stopPropagation(); // Evita que el clic se propague al window y cierre el menú inmediatamente
-        });
-    }
-
-    // Ocultar el menú de usuario si se hace clic fuera
-    window.addEventListener('click', (event) => {
-        if (userMenu && !userMenu.contains(event.target) && userMenuButton && !userMenuButton.contains(event.target)) {
-            userMenu.classList.add('hidden');
-        }
-    });
-
-    // Script para la interactividad de la sidebar (active link)
-    document.querySelectorAll('.sidebar a').forEach(item => {
-        item.addEventListener('click', event => {
-            document.querySelectorAll('.sidebar a').forEach(link => {
-                link.classList.remove('active-link');
+        if (userMenuButton) { // Asegúrate de que el botón exista antes de añadir el listener
+            userMenuButton.addEventListener('click', (event) => {
+                userMenu.classList.toggle('hidden');
+                event.stopPropagation(); // Evita que el clic se propague al window y cierre el menú inmediatamente
             });
-            event.currentTarget.classList.add('active-link');
+        }
 
-            // Cierra la sidebar en mobile al hacer clic en un enlace
-            if (window.innerWidth < 1024) { // Menor que el breakpoint 'lg' de Tailwind
-                document.getElementById('sidebar').classList.remove('active');
-                document.getElementById('sidebarOverlay').classList.remove('active');
+        // Ocultar el menú de usuario si se hace clic fuera
+        window.addEventListener('click', (event) => {
+            if (userMenu && !userMenu.contains(event.target) && userMenuButton && !userMenuButton.contains(event
+                    .target)) {
+                userMenu.classList.add('hidden');
             }
         });
-    });
 
-    // Script para la barra lateral responsiva (toggle con botón de hamburguesa)
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    const sidebar = document.getElementById('sidebar');
-    const sidebarOverlay = document.getElementById('sidebarOverlay');
+        // Script para la interactividad de la sidebar (active link)
+        document.querySelectorAll('.sidebar a').forEach(item => {
+            item.addEventListener('click', event => {
+                document.querySelectorAll('.sidebar a').forEach(link => {
+                    link.classList.remove('active-link');
+                });
+                event.currentTarget.classList.add('active-link');
 
-    if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            sidebarOverlay.classList.toggle('active');
+                // Cierra la sidebar en mobile al hacer clic en un enlace
+                if (window.innerWidth < 1024) { // Menor que el breakpoint 'lg' de Tailwind
+                    document.getElementById('sidebar').classList.remove('active');
+                    document.getElementById('sidebarOverlay').classList.remove('active');
+                }
+            });
         });
-    }
 
-    // Cerrar la sidebar cuando se hace clic en el overlay
-    if (sidebarOverlay) {
-        sidebarOverlay.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-        });
-    }
+        // Script para la barra lateral responsiva (toggle con botón de hamburguesa)
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
 
-    // Asegurarse de que la sidebar se ajuste en resize (desktop vs mobile)
-    window.addEventListener('resize', () => {
-        if (window.innerWidth >= 1024) { // Si es desktop (>= lg breakpoint)
-            sidebar.classList.remove('active'); // Asegura que no tenga la clase active de mobile
-            sidebarOverlay.classList.remove('active'); // Oculta el overlay
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                sidebarOverlay.classList.toggle('active');
+            });
         }
-    });
-    
-</script>
-@vite('resources/js/app.js')
-@stack('scripts')
+
+        // Cerrar la sidebar cuando se hace clic en el overlay
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            });
+        }
+
+        // Asegurarse de que la sidebar se ajuste en resize (desktop vs mobile)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) { // Si es desktop (>= lg breakpoint)
+                sidebar.classList.remove('active'); // Asegura que no tenga la clase active de mobile
+                sidebarOverlay.classList.remove('active'); // Oculta el overlay
+            }
+        });
+    </script>
+    @vite('resources/js/app.js')
+    @stack('scripts')
 </body>
+
 </html>
