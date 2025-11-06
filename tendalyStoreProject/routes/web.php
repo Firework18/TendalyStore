@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\Auth\PostController;
 use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -46,6 +47,9 @@ Route::get('/dashboard/negocio',[NegocioController::class,'negocioDashboard'])->
 Route::get('/producto/create',[ProductoController::class,'create'])->name('producto.create');
 Route::post('/producto',[ProductoController::class,'store'])->name('producto.store');
 Route::get('/dashboard/productos',[ProductoController::class,'productoDashboard'])->name('dashboard.producto');
+
+//Comentarios
+Route::post('/comentario',[ComentarioController::class,'store'])->name('comentario.store');
 
 //Enviar al muro
 Route::get('/{user:username}',[PostController::class,'index'])->name('post.index');

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('comentarios', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('negocio_id')->constrained();
+            $table->string('comentario');
+            $table->unsignedTinyInteger('rating')->default(0);
             $table->timestamps();
         });
     }

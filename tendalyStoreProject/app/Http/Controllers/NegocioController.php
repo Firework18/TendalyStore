@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Negocio;
 use App\Models\Producto;
+use App\Models\Comentario;
 use App\Models\Departamento;
 use Illuminate\Http\Request;
 use App\Models\CategoriaNegocio;
@@ -15,12 +16,13 @@ class NegocioController extends Controller
     }
 
     public function show(Negocio $negocio){
-        $productos = Producto::where('negocio_id',$negocio->id)->paginate(4);
-        $categoria = CategoriaNegocio::where('id',$negocio->categoria_negocio_id)->get();
-        return view('negocios.negocio',[
-            'negocio'=>$negocio
-        ],compact('productos','categoria'));
+        $productos = Producto::where('negocio_id', $negocio->id)->paginate(4);
+        $categoria = CategoriaNegocio::where('id', $negocio->categoria_negocio_id)->get();
+        $comentarios = Comentario::where('negocio_id', $negocio->id)->get();
+
+        return view('negocios.negocio', compact('negocio', 'productos', 'categoria', 'comentarios'));
     }
+
 
     public function negocioDashboard(){
         $negocio = auth()->user()->negocios;

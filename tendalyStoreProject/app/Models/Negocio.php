@@ -53,4 +53,8 @@ class Negocio extends Model
     public function categoria(){
         return $this->belongsTo(CategoriaNegocio::class,'categoria_negocio_id');
     }
+
+    public function comentarios(){
+        return $this->hasMany(Comentario::class);
+    }
 }

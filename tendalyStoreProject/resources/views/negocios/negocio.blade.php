@@ -151,31 +151,38 @@
         <h2 class="text-3xl font-bold text-gray-900 mb-6">Comentarios</h2>
 
         @auth
-            @if ($negocio->user_id !== auth()->user()->negocios->id)
+            @if ($negocio->user_id !== auth()->user()->id)
+                {{-- Asegúrate de que esta lógica sea correcta, auth()->user()->negocios->id no siempre es el ID del usuario --}}
                 <div class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-gray-100">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Deja tu comentario</h3>
-                    <form action="#" method="POST">
+                    <form action="{{ route('comentario.store') }}" method="POST" novalidate>
                         @csrf
+                        <input type="hidden" id="negocio_id" name="negocio_id" value="{{ $negocio->id }}">
                         <div class="mb-4">
                             <label for="comentario" class="sr-only">Tu Comentario</label>
                             <textarea id="comentario" name="comentario" rows="4"
-                                class="w-full px-4 py-2 border rounded-lg 
+                                class="w-full px-4 py-2 border rounded-lg
                                 focus:ring-red-500 focus:border-red-500 text-gray-700 placeholder-gray-400 text-sm
                                 @error('comentario')
                                     border-red-500
                                 @enderror"
                                 placeholder="Escribe tu comentario aquí..." required></textarea>
+                            @error('comentario')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="mb-4 flex items-center">
                             <label for="rating" class="block text-sm font-medium text-gray-700 mr-3">Tu Valoración:</label>
-                            <div class="flex space-x-1">
-                                <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
-                                <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
-                                <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
-                                <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
-                                <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"></i>
+                            <div class="flex space-x-1" id="star-rating">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"
+                                        data-rating="{{ $i }}"></i>
+                                @endfor
                             </div>
                             <input type="hidden" name="rating" id="rating" value="0">
+                            @error('rating')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
                         <button type="submit"
                             class="bg-red-700 text-white py-2.5 px-6 rounded-lg hover:bg-red-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 font-semibold text-sm">
@@ -183,15 +190,31 @@
                         </button>
                     </form>
                 </div>
+            @else
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-8 rounded-md">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-blue-800">
+                                Eres el propietario de este negocio, no puedes dejar un comentario.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             @endif
-
         @endauth
 
         @guest
             <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 rounded-md">
                 <div class="flex">
                     <div class="flex-shrink-0">
-                        <!-- Heroicon name: solid/exclamation-triangle -->
                         <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                             fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -207,135 +230,136 @@
                         </p>
                     </div>
                 </div>
-            </div>
-        @endguest
+            @endguest
 
-        <div class="space-y-6">
-            {{-- Comentario 1 --}}
-            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                <div class="flex items-center mb-3">
-                    <img src="https://via.placeholder.com/40" alt="Avatar de Usuario"
-                        class="w-10 h-10 rounded-full mr-4 object-cover">
-                    <div>
-                        <p class="font-semibold text-gray-800">Ana García</p>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="bi bi-star-fill text-yellow-400 mr-1"></i>
-                            <i class="bi bi-star-fill text-yellow-400 mr-1"></i>
-                            <i class="bi bi-star-fill text-yellow-400 mr-1"></i>
-                            <i class="bi bi-star-fill text-yellow-400 mr-1"></i>
-                            <i class="bi bi-star text-yellow-400 mr-1"></i>
-                            <span class="ml-2 text-gray-500 text-xs">Hace 2 días</span>
-                        </div>
+            <div class="space-y-6">
+                @if ($negocio->comentarios->count())
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        @foreach ($negocio->comentarios as $comentario)
+                            <div
+                                class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center mb-3">
+                                        <img src="{{ $comentario->usuarios->imagen ? asset('profiles/' . $comentario->usuarios->imagen) : asset('assets/images/default-profile.png') }}"
+                                            alt="Avatar de Usuario" class="w-12 h-12 rounded-full mr-4 object-cover">
+                                        <div>
+                                            <p class="font-semibold text-gray-800 text-lg">
+                                                {{ $comentario->usuarios->name }}</p>
+                                            <div class="flex items-center text-sm text-gray-600">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    <i
+                                                        class="bi {{ $i <= $comentario->rating ? 'bi-star-fill' : 'bi-star' }} text-yellow-400 text-base mr-1"></i>
+                                                @endfor
+                                                <span
+                                                    class="ml-2 text-gray-500 text-xs">{{ $comentario->created_at->diffForHumans() }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 text-base leading-relaxed mt-4">
+                                        {{ $comentario->comentario }}
+                                    </p>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                </div>
-                <p class="text-gray-700 text-base leading-relaxed">
-                    ¡Excelente atención y productos de muy buena calidad! Me encantó el aceite de coco. ¡Totalmente
-                    recomendado!
-                </p>
-            </div>
+                @else
+                    <div class="bg-white rounded-xl shadow-sm p-6 text-center text-gray-600 border border-gray-100">
+                        <p class="text-lg font-medium">Sé el primero en dejar un comentario para este negocio.</p>
+                    </div>
+                @endif
 
-            {{-- Aquí iría la paginación de comentarios si fuera necesario --}}
-            <div class="mt-6 text-center">
-                <button
-                    class="bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 transition duration-200 font-semibold text-sm">Cargar
-                    más comentarios</button>
+                {{-- Aquí iría la paginación de comentarios si fuera necesario (si usas paginación en el controlador) --}}
+                {{-- <div class="mt-6 text-center">
+        {{ $negocio->comentarios->links() }}
+    </div> --}}
             </div>
         </div>
-    </div>
 
-    {{-- Sección Negocios Similares --}}
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Negocios Similares</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 xl:gap-8">
-            <a href="#"
-                class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
-                <img src="{{ asset('assets/images/logo_amazonia_verde.webp') }}" alt="Logo Amazonia Verde"
-                    class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
-                <h3 class="font-semibold text-gray-800 text-base">Amazonia Verde</h3>
-            </a>
+        {{-- Sección Negocios Similares --}}
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">Negocios Similares</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 xl:gap-8">
+                <a href="#"
+                    class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
+                    <img src="{{ asset('assets/images/logo_amazonia_verde.webp') }}" alt="Logo Amazonia Verde"
+                        class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
+                    <h3 class="font-semibold text-gray-800 text-base">Amazonia Verde</h3>
+                </a>
 
-            <a href="#"
-                class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
-                <img src="{{ asset('assets/images/logo_spa_amazonico.webp') }}" alt="Logo SPA Amazónico"
-                    class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
-                <h3 class="font-semibold text-gray-800 text-base">SPA Amazónico</h3>
-            </a>
+                <a href="#"
+                    class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
+                    <img src="{{ asset('assets/images/logo_spa_amazonico.webp') }}" alt="Logo SPA Amazónico"
+                        class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
+                    <h3 class="font-semibold text-gray-800 text-base">SPA Amazónico</h3>
+                </a>
 
-            <a href="#"
-                class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
-                <img src="{{ asset('assets/images/logo_botanika_natural.webp') }}" alt="Logo Botanika Natural"
-                    class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
-                <h3 class="font-semibold text-gray-800 text-base">Botanika Natural</h3>
-            </a>
+                <a href="#"
+                    class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
+                    <img src="{{ asset('assets/images/logo_botanika_natural.webp') }}" alt="Logo Botanika Natural"
+                        class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
+                    <h3 class="font-semibold text-gray-800 text-base">Botanika Natural</h3>
+                </a>
 
-            <a href="#"
-                class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
-                <img src="{{ asset('assets/images/logo_negocio_similar_4.webp') }}" alt="Logo El Jardín Orgánico"
-                    class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
-                <h3 class="font-semibold text-gray-800 text-base">El Jardín Orgánico</h3>
-            </a>
+                <a href="#"
+                    class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
+                    <img src="{{ asset('assets/images/logo_negocio_similar_4.webp') }}" alt="Logo El Jardín Orgánico"
+                        class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
+                    <h3 class="font-semibold text-gray-800 text-base">El Jardín Orgánico</h3>
+                </a>
 
-            <a href="#"
-                class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
-                <img src="{{ asset('assets/images/logo_negocio_similar_5.webp') }}" alt="Logo Sabor Andino"
-                    class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
-                <h3 class="font-semibold text-gray-800 text-base">Sabor Andino</h3>
-            </a>
+                <a href="#"
+                    class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
+                    <img src="{{ asset('assets/images/logo_negocio_similar_5.webp') }}" alt="Logo Sabor Andino"
+                        class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
+                    <h3 class="font-semibold text-gray-800 text-base">Sabor Andino</h3>
+                </a>
+            </div>
         </div>
-    </div>
-@endsection
+    @endsection
 
-@push('scripts')
-    {{-- Script básico para manejar la selección de estrellas (solo frontend) --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const stars = document.querySelectorAll(
-                '.mb-4.flex.items-center .bi-star, .mb-4.flex.items-center .bi-star-fill');
-            const ratingInput = document.getElementById('rating');
+    @push('scripts')
+        {{-- Script para manejar la selección de estrellas y enviar el rating --}}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const starRatingContainer = document.getElementById('star-rating');
+                const ratingInput = document.getElementById('rating');
 
-            stars.forEach((star, index) => {
-                star.addEventListener('click', () => {
-                    ratingInput.value = index + 1;
-                    stars.forEach((s, i) => {
-                        if (i <= index) {
-                            s.classList.remove('bi-star');
-                            s.classList.add('bi-star-fill');
-                        } else {
-                            s.classList.remove('bi-star-fill');
-                            s.classList.add('bi-star');
-                        }
+                if (starRatingContainer && ratingInput) {
+                    const stars = starRatingContainer.querySelectorAll('.bi-star, .bi-star-fill');
+
+                    const updateStars = (selectedRating) => {
+                        stars.forEach((star, index) => {
+                            if (index < selectedRating) {
+                                star.classList.remove('bi-star');
+                                star.classList.add('bi-star-fill');
+                            } else {
+                                star.classList.remove('bi-star-fill');
+                                star.classList.add('bi-star');
+                            }
+                        });
+                    };
+
+                    // Inicializar las estrellas si ya hay un valor
+                    updateStars(parseInt(ratingInput.value));
+
+                    stars.forEach(star => {
+                        star.addEventListener('click', () => {
+                            const newRating = parseInt(star.dataset.rating);
+                            ratingInput.value = newRating;
+                            updateStars(newRating);
+                        });
+
+                        star.addEventListener('mouseover', () => {
+                            const hoverRating = parseInt(star.dataset.rating);
+                            updateStars(hoverRating);
+                        });
+
+                        star.addEventListener('mouseout', () => {
+                            const currentRating = parseInt(ratingInput.value);
+                            updateStars(currentRating);
+                        });
                     });
-                });
-
-                star.addEventListener('mouseover', () => {
-                    stars.forEach((s, i) => {
-                        if (i <= index) {
-                            s.classList.remove('bi-star');
-                            s.classList.add('bi-star-fill');
-                        } else {
-                            s.classList.remove('bi-star-fill');
-                            s.classList.add('bi-star');
-                        }
-                    });
-                });
-
-                star.addEventListener('mouseout', () => {
-                    // Restaura al valor actual si no se ha hecho clic
-                    const currentRating = parseInt(ratingInput.value);
-                    stars.forEach((s, i) => {
-                        if (i < currentRating) {
-                            s.classList.remove('bi-star');
-                            s.classList.add('bi-star-fill');
-                        } else {
-                            s.classList.remove('bi-star-fill');
-                            s.classList.add('bi-star');
-                        }
-                    });
-                });
+                }
             });
-        });
-    </script>
-@endpush
-</body>
-
-</html>
+        </script>
+    @endpush
