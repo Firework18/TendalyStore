@@ -26,7 +26,10 @@
                 </svg>
             </button>
 
-            <a href="/" class="text-red-600 text-2xl font-bold">TendalyStore</a>
+            <a href="/"
+                class="mx-auto md:mx-0 text-xl font-bold text-red-600 flex items-center justify-center w-full md:w-auto">
+                <img src="{{ asset('assets/images/logo.svg') }}" alt="LOGO TENDALY" width="100px" />
+            </a>
             <div class="flex items-center space-x-4">
 
                 <div class="relative">

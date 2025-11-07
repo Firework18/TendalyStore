@@ -16,11 +16,28 @@ class NegocioController extends Controller
     }
 
     public function show(Negocio $negocio){
+        $negociosSimilares = Negocio::where('categoria_negocio_id',$negocio->categoria_negocio_id)
+                                ->where('id','!=',$negocio->id)
+                                ->take(4)
+                                ->get();
         $productos = Producto::where('negocio_id', $negocio->id)->paginate(4);
         $categoria = CategoriaNegocio::where('id', $negocio->categoria_negocio_id)->get();
-        $comentarios = Comentario::where('negocio_id', $negocio->id)->get();
+        
+     
 
-        return view('negocios.negocio', compact('negocio', 'productos', 'categoria', 'comentarios'));
+        $user_id = auth()->id();
+
+        $comentarios = Comentario::where('negocio_id', $negocio->id)
+                        ->orderByRaw('CASE WHEN user_id = ? THEN 0 ELSE 1 END',[$user_id])
+                        ->get();
+
+        $puntuacion = $comentarios->avg('rating');
+
+        $comentarioUsuario = Comentario::where('negocio_id',$negocio->id)
+                                ->where('user_id',$user_id)
+                                ->first();
+
+        return view('negocios.negocio', compact('negocio', 'productos', 'categoria', 'comentarios','comentarioUsuario','puntuacion','negociosSimilares'));
     }
 
 

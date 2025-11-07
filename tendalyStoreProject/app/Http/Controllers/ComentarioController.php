@@ -16,12 +16,20 @@ class ComentarioController extends Controller
     public function store(Request $request){
 
         $user = auth()->user();
-        $nombre_negocio = Negocio::find($request->negocio_id);
+        $negocio = Negocio::find($request->negocio_id);
 
         $this->validate($request,[
             'comentario'=>'required|string|max:255',
             'rating'=>'required|integer|min:1|max:5'
         ]);
+
+        $yaComento = Comentario::where('user_id',auth()->id())
+                        ->where('negocio_id',$request->negocio_id)
+                        ->exists();
+
+        if($yaComento){
+            return redirect()->route('negocio.show',$negocio)->with('error','Ya has dejado un comentario en este negocio');
+        }
 
         Comentario::create([
             'user_id' => $user->id,
@@ -30,6 +38,6 @@ class ComentarioController extends Controller
             'rating'=>$request->rating,
         ]);
         
-        return redirect()->route('negocio.show',$nombre_negocio);
+        return redirect()->route('negocio.show',$negocio)->with('success','Comentario enviado correctamente');
     }
 }

@@ -5,9 +5,13 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Negocio;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Comentario extends Model
 {
+
+     use HasFactory;
+
     protected $fillable = [
         'user_id',
         'negocio_id',

@@ -34,7 +34,9 @@
                 </h1>
                 <div class="flex items-center mb-5 text-sm text-gray-600">
                     <i class="bi bi-star-fill text-yellow-400 mr-1 text-base"></i>
-                    <span class="font-semibold">4.9</span> <span class="text-gray-500 ml-1">(282 reseñas)</span>
+                    <span class="font-semibold">{{ $puntuacion }}</span> <span
+                        class="text-gray-500 ml-1">({{ $comentarios->count() }}
+                        reseñas)</span>
                     <span class="mx-3 text-gray-300">|</span>
                     <i class="bi bi-geo-alt-fill mr-1 text-base text-gray-500"></i>
                     <span>Lima, Perú</span>
@@ -68,15 +70,14 @@
                 <div class="bg-white rounded-xl shadow-md p-6 md:p-8 border border-gray-100">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Información de Contacto</h3>
                     <div class="space-y-3 text-gray-700 text-sm">
-                        <p class="flex items-center"><i class="bi bi-whatsapp mr-3 text-base text-green-600"></i>991 967 654
+                        <p class="flex items-center"><i
+                                class="bi bi-whatsapp mr-3 text-base text-green-600"></i>{{ $negocio->telefono }}
                         </p>
+
                         <p class="flex items-center"><i
-                                class="bi bi-globe mr-3 text-base text-blue-600"></i>www.pachamama.pe</p>
+                                class="bi bi-envelope mr-3 text-base text-red-600"></i>{{ $negocio->correo }}</p>
                         <p class="flex items-center"><i
-                                class="bi bi-envelope mr-3 text-base text-red-600"></i>info@pachamama.pe</p>
-                        <p class="flex items-center"><i class="bi bi-geo-alt-fill mr-3 text-base text-gray-500"></i>Av.
-                            Arequipa 4520,
-                            Miraflores, Lima</p>
+                                class="bi bi-geo-alt-fill mr-3 text-base text-gray-500"></i>{{ $negocio->ubicacion }}</p>
                     </div>
                 </div>
             </div>
@@ -88,14 +89,7 @@
             <div class="mb-10">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-3xl font-bold text-gray-900">Nuestros Productos</h2>
-                    <div class="hidden md:flex space-x-3">
-                        <button
-                            class="p-2.5 rounded-full border border-gray-200 text-gray-600 hover:bg-gray-100 transition duration-200"><i
-                                class="bi bi-chevron-left text-base"></i></button>
-                        <button
-                            class="p-2.5 rounded-full border border-gray-200 text-gray-600 hover:bg-gray-100 transition duration-200"><i
-                                class="bi bi-chevron-right text-base"></i></button>
-                    </div>
+
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 xl:gap-8">
                     @foreach ($productos as $producto)
@@ -148,48 +142,79 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Comentarios</h2>
-
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Reseñas</h2>
+        @if (session('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <strong class="font-bold">¡Error!</strong>
+                <span class="block sm:inline">{{ session('error') }}</span>
+            </div>
+        @elseif (session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <strong class="font-bold">¡Éxito!</strong>
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        @endif
         @auth
             @if ($negocio->user_id !== auth()->user()->id)
-                {{-- Asegúrate de que esta lógica sea correcta, auth()->user()->negocios->id no siempre es el ID del usuario --}}
-                <div class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-gray-100">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Deja tu comentario</h3>
-                    <form action="{{ route('comentario.store') }}" method="POST" novalidate>
-                        @csrf
-                        <input type="hidden" id="negocio_id" name="negocio_id" value="{{ $negocio->id }}">
-                        <div class="mb-4">
-                            <label for="comentario" class="sr-only">Tu Comentario</label>
-                            <textarea id="comentario" name="comentario" rows="4"
-                                class="w-full px-4 py-2 border rounded-lg
+                @if ($comentarioUsuario)
+                    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-8 rounded-md">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-blue-800">
+                                    Ya has comentado anteriormente
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    {{-- Asegúrate de que esta lógica sea correcta, auth()->user()->negocios->id no siempre es el ID del usuario --}}
+                    <div class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-gray-100">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Deja tu comentario</h3>
+                        <form action="{{ route('comentario.store') }}" method="POST" novalidate>
+                            @csrf
+                            <input type="hidden" id="negocio_id" name="negocio_id" value="{{ $negocio->id }}">
+                            <div class="mb-4">
+                                <label for="comentario" class="sr-only">Tu Comentario</label>
+                                <textarea id="comentario" name="comentario" rows="4"
+                                    class="w-full px-4 py-2 border rounded-lg
                                 focus:ring-red-500 focus:border-red-500 text-gray-700 placeholder-gray-400 text-sm
                                 @error('comentario')
                                     border-red-500
                                 @enderror"
-                                placeholder="Escribe tu comentario aquí..." required></textarea>
-                            @error('comentario')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="mb-4 flex items-center">
-                            <label for="rating" class="block text-sm font-medium text-gray-700 mr-3">Tu Valoración:</label>
-                            <div class="flex space-x-1" id="star-rating">
-                                @for ($i = 1; $i <= 5; $i++)
-                                    <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"
-                                        data-rating="{{ $i }}"></i>
-                                @endfor
+                                    placeholder="Escribe tu comentario aquí..." required></textarea>
+                                @error('comentario')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
-                            <input type="hidden" name="rating" id="rating" value="0">
-                            @error('rating')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <button type="submit"
-                            class="bg-red-700 text-white py-2.5 px-6 rounded-lg hover:bg-red-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 font-semibold text-sm">
-                            Publicar Comentario
-                        </button>
-                    </form>
-                </div>
+                            <div class="mb-4 flex items-center">
+                                <label for="rating" class="block text-sm font-medium text-gray-700 mr-3">Tu
+                                    Valoración:</label>
+                                <div class="flex space-x-1" id="star-rating">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <i class="bi bi-star text-yellow-400 text-xl cursor-pointer hover:text-yellow-500"
+                                            data-rating="{{ $i }}"></i>
+                                    @endfor
+                                </div>
+                                <input type="hidden" name="rating" id="rating" value="0">
+                                @error('rating')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <button type="submit"
+                                class="bg-red-700 text-white py-2.5 px-6 rounded-lg hover:bg-red-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 font-semibold text-sm">
+                                Publicar Comentario
+                            </button>
+                        </form>
+                    </div>
+                @endif
             @else
                 <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-8 rounded-md">
                     <div class="flex">
@@ -243,8 +268,9 @@
                                         <img src="{{ $comentario->usuarios->imagen ? asset('profiles/' . $comentario->usuarios->imagen) : asset('assets/images/default-profile.png') }}"
                                             alt="Avatar de Usuario" class="w-12 h-12 rounded-full mr-4 object-cover">
                                         <div>
-                                            <p class="font-semibold text-gray-800 text-lg">
-                                                {{ $comentario->usuarios->name }}</p>
+                                            <a href="{{ route('post.index', $comentario->usuarios->username) }}"
+                                                class="font-semibold text-gray-800 text-lg">
+                                                {{ $comentario->usuarios->name }}</a>
                                             <div class="flex items-center text-sm text-gray-600">
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     <i
@@ -270,8 +296,8 @@
 
                 {{-- Aquí iría la paginación de comentarios si fuera necesario (si usas paginación en el controlador) --}}
                 {{-- <div class="mt-6 text-center">
-        {{ $negocio->comentarios->links() }}
-    </div> --}}
+                        {{ $negocio->comentarios->links() }}
+                    </div> --}}
             </div>
         </div>
 
@@ -279,40 +305,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
             <h2 class="text-3xl font-bold text-gray-900 mb-6">Negocios Similares</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 xl:gap-8">
-                <a href="#"
-                    class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
-                    <img src="{{ asset('assets/images/logo_amazonia_verde.webp') }}" alt="Logo Amazonia Verde"
-                        class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
-                    <h3 class="font-semibold text-gray-800 text-base">Amazonia Verde</h3>
-                </a>
-
-                <a href="#"
-                    class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
-                    <img src="{{ asset('assets/images/logo_spa_amazonico.webp') }}" alt="Logo SPA Amazónico"
-                        class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
-                    <h3 class="font-semibold text-gray-800 text-base">SPA Amazónico</h3>
-                </a>
-
-                <a href="#"
-                    class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
-                    <img src="{{ asset('assets/images/logo_botanika_natural.webp') }}" alt="Logo Botanika Natural"
-                        class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
-                    <h3 class="font-semibold text-gray-800 text-base">Botanika Natural</h3>
-                </a>
-
-                <a href="#"
-                    class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
-                    <img src="{{ asset('assets/images/logo_negocio_similar_4.webp') }}" alt="Logo El Jardín Orgánico"
-                        class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
-                    <h3 class="font-semibold text-gray-800 text-base">El Jardín Orgánico</h3>
-                </a>
-
-                <a href="#"
-                    class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
-                    <img src="{{ asset('assets/images/logo_negocio_similar_5.webp') }}" alt="Logo Sabor Andino"
-                        class="w-28 h-28 object-contain mb-3 rounded-full border border-gray-200 p-2 shadow-sm">
-                    <h3 class="font-semibold text-gray-800 text-base">Sabor Andino</h3>
-                </a>
+                @foreach ($negociosSimilares as $negocioSimilar)
+                    <a href="{{ route('negocio.show', $negocioSimilar) }}"
+                        class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
+                        <img src="{{ asset('uploads/' . $negocioSimilar->imagen) }}" alt="Logo Amazonia Verde"
+                            class="w-28 h-28  mb-3 rounded-full border border-gray-200  shadow-sm">
+                        <h3 class="font-semibold text-gray-800 text-base">{{ $negocioSimilar->nombre }}</h3>
+                    </a>
+                @endforeach
             </div>
         </div>
     @endsection

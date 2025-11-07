@@ -47,4 +47,9 @@ class ProductoController extends Controller
         return redirect()->route('dashboard.negocio');
     }
 
+    public function destroy(Producto $producto){
+        $producto->delete();
+        return redirect()->back()->with('success','Producto eliminado correctamente');
+    }
+
 }
