@@ -18,8 +18,8 @@ class ComentarioFactory extends Factory
     {
         return [
             'comentario'=>$this->faker->sentence(3),
-            'rating'=>$this->faker->numberBetween(1,2,3,4,5),
-            'negocio_id'=>$this->faker->randomElement([5]),
+            'rating'=>$this->faker->numberBetween(1,5),
+            'negocio_id'=>$this->faker->randomElement([8]),
             'user_id'=>$this->faker->randomElement([6,7,8,9,10,11,12,13,14,15]),
         ];
     }

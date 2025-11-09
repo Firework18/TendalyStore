@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\NegocioController;
@@ -15,10 +16,7 @@ use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 
-Route::get('/', function () {
-    return view('principal');
-});
-
+Route::get('/',HomeController::class)->name('home');
 
 //Vista register
 Route::get('/register',[RegisterController::class,'index'])->name('register');
@@ -33,6 +31,7 @@ Route::post('/logout',[LogoutController::class,'store'])->name('logout');
 
 Route::get('/dashboard',[PerfilController::class,'index'])->name('dashboard');
 Route::get('/dashboard/perfil',[PerfilController::class,'perfil'])->name('dashboard.perfil');
+Route::post('/dashboard/perfil',[PerfilController::class,'store'])->name('dashboard.perfil.store');
 
 //Catalogo
 Route::get('/catalogo',[CatalogoController::class,'index'])->name('catalogo');
@@ -48,6 +47,7 @@ Route::get('/producto/create',[ProductoController::class,'create'])->name('produ
 Route::post('/producto',[ProductoController::class,'store'])->name('producto.store');
 Route::get('/dashboard/productos',[ProductoController::class,'productoDashboard'])->name('dashboard.producto');
 Route::delete('/productos/{producto}',[ProductoController::class,'destroy'])->name('producto.destroy');
+Route::patch('/productos/{id}/restore',[ProductoController::class,'restore'])->name('producto.restore');
 
 //Comentarios
 Route::post('/comentario',[ComentarioController::class,'store'])->name('comentario.store');

@@ -15,18 +15,11 @@
         <div class="md:flex max-w-7xl mx-auto">
             <div class="md:w-1/2 relative">
                 <img src="{{ asset('/uploads/' . $negocio->imagen) }}" alt="{{ $negocio->nombre }}"
-                    class="w-full h-72 md:h-[550px] object-cover object-center">
+                    class="w-full h-72 md:h-[550px] rounded-md object-cover object-center">
                 <div
                     class="absolute top-4 left-4 bg-[#4CAF50] text-white text-xs font-semibold px-3 py-1 rounded-full tracking-wide opacity-90">
                     {{ $negocio->categoria->nombre }}</div>
-                <div class="absolute top-4 right-4 flex space-x-3">
-                    <button
-                        class="bg-white p-2.5 rounded-full shadow-md text-gray-700 hover:bg-gray-100 transition duration-200"><i
-                            class="bi bi-heart text-base"></i></button>
-                    <button
-                        class="bg-white p-2.5 rounded-full shadow-md text-gray-700 hover:bg-gray-100 transition duration-200"><i
-                            class="bi bi-share text-base"></i></button>
-                </div>
+
             </div>
 
             <div class="md:w-1/2 p-6 md:p-10 flex flex-col justify-center">
@@ -98,9 +91,6 @@
                             <div class="relative">
                                 <img src="{{ asset('/uploads/' . $producto->imagen) }}" alt="{{ $producto->nombre }}"
                                     class="w-full h-48 object-cover object-center">
-                                <button
-                                    class="absolute top-3 right-3 bg-white p-2 rounded-full text-gray-600 hover:text-red-500 shadow-sm transition duration-200"><i
-                                        class="bi bi-heart text-base"></i></button>
 
                                 @if ($producto->precio_oferta && $producto->precio_oferta < $producto->precio)
                                     <span

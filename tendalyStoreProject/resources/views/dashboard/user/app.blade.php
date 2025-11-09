@@ -26,18 +26,17 @@
                 </svg>
             </button>
 
-            <a href="/"
+            <a href="{{ route('home') }}"
                 class="mx-auto md:mx-0 text-xl font-bold text-red-600 flex items-center justify-center w-full md:w-auto">
                 <img src="{{ asset('assets/images/logo.svg') }}" alt="LOGO TENDALY" width="100px" />
             </a>
             <div class="flex items-center space-x-4">
 
                 <div class="relative">
-                    <button class="flex items-center space-x-2 hover:text-red-200 focus:outline-none"
+                    <button class="flex items-center space-x-2 hover:text-red-600 focus:outline-none"
                         id="userMenuButton">
-                        <img src="{{ asset('assets/images/about.jpg') }}" alt="Avatar"
-                            class="w-8 h-8 rounded-full border-2 bg-red-500">
-                        <span>{{ auth()->user()->username }}</span>
+                        <img src="{{ auth()->user()->imagen ? asset('/perfiles/' . auth()->user()->imagen) : asset('assets/images/default-profile.png') }}"
+                            alt="Avatar" class="w-8 h-8 rounded-full border-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
@@ -69,7 +68,7 @@
             <ul>
                 <li>
                     <a href="{{ route('dashboard') }}"
-                        class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200 active-link">
+                        class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
                         <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

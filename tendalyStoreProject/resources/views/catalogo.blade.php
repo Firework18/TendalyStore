@@ -24,7 +24,7 @@
             </div>
         </section>
         <!-- Barra de búsqueda y filtros -->
-        <div class="bg-white py-8 px-4 md:px-8 shadow-md sticky top-20 z-30 border-b border-gray-200">
+        <div class="bg-white py-8 px-4 md:px-8 shadow-md  top-20 z-30 border-b border-gray-200">
             <div
                 class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-6">
                 <div class="flex-1 w-full md:w-auto">
@@ -46,12 +46,11 @@
                     <select id="category-select"
                         class="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[var(--color-primary)] transition flex-1">
                         <option value="">Selecciona una categoría</option>
-                        <option value="alimentacion">Alimentación</option>
-                        <option value="cosmetica">Cosmética y Bienestar</option>
-                        <option value="ecoturismo">Ecoturismo</option>
-                        <option value="energia">Energía Renovable</option>
-                        <option value="moda">Moda Sostenible</option>
-                        <option value="eficiencia">Eficiencia de Recursos</option>
+                        @foreach ($categorias as $categoria)
+                            <option value="{{ $categoria->id }}"
+                                {{ old('categoria_negocio_id') == $categoria->id ? 'selected' : '' }}>
+                                {{ $categoria->nombre }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -68,9 +67,9 @@
                         <img src={{ asset('/uploads/' . $negocio->imagen) }} alt="EcoFresh Orgánicos"
                             class="w-full h-48 object-cover">
                         <span
-                            class="absolute top-3 left-3 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">Alimentación</span>
+                            class="absolute top-3 left-3 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">{{ $negocio->categoria->nombre }}</span>
                         <span
-                            class="absolute top-3 right-3 bg-gray-900 bg-opacity-75 text-white text-sm font-bold px-2 py-1 rounded-md">4.9
+                            class="absolute top-3 right-3 bg-gray-900 bg-opacity-75 text-white text-sm font-bold px-2 py-1 rounded-md">{{ $negocio->comentarios ? $negocio->comentarios->avg('rating') : 0 }}
                             <i class="bi bi-star-fill text-yellow-400 text-xs"></i></span>
                     </div>
                     <div class="p-6">
@@ -86,39 +85,10 @@
                     </div>
                 </div>
             @endforeach
-
-
-
-
+            <div class="mt-6">
+                {{ $negocios->links() }}
+            </div>
         </div>
-
-        <!-- Paginación -->
-        <div class="max-w-6xl mx-auto px-4 md:px-8 py-8 flex justify-center">
-            <nav class="flex space-x-2" aria-label="Pagination">
-                <a href="#"
-                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
-                    Previous
-                </a>
-                <a href="#"
-                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-[var(--color-primary)] border border-[var(--color-primary)] rounded-md hover:bg-[#a93226]">
-                    1
-                </a>
-                <a href="#"
-                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
-                    2
-                </a>
-                <a href="#"
-                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
-                    3
-                </a>
-                <a href="#"
-                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
-                    Next
-                </a>
-            </nav>
-        </div>
-
-
     </main>
 @endsection
 </body>

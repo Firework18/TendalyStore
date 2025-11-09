@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Negocio;
+use Illuminate\Http\Request;
+use App\Models\CategoriaNegocio;
 
 class CatalogoController extends Controller
 {
 
-    
-
     public function index(){
-        $negocios = Negocio::all();
-        return view('catalogo',compact('negocios'));
+        $negocios = Negocio::paginate(9);
+        $categorias = CategoriaNegocio::get();
+        return view('catalogo',compact('negocios','categorias'));
     }
 }

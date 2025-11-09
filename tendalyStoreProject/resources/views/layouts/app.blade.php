@@ -17,7 +17,7 @@
 
         <header
             class="header-top fixed top-0 left-0 right-0 bg-white shadow-md p-4 flex items-center justify-between z-50">
-            <a href="/"
+            <a href="{{ route('home') }}"
                 class="mx-auto md:mx-0 text-xl font-bold text-red-600 flex items-center justify-center w-full md:w-auto">
                 <img src="{{ asset('assets/images/logo.svg') }}" alt="LOGO TENDALY" width="100px" />
             </a>

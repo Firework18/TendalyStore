@@ -15,8 +15,9 @@ class ProductoController extends Controller
 
     public function productoDashboard(){
         $negocio = auth()->user()->negocios;
-        $productos = $negocio ? Producto::where('negocio_id',$negocio->id)->paginate(4) : collect(); 
-        return view('dashboard.user.productos.productos',compact('productos','negocio'));
+        $productos = $negocio ? Producto::where('negocio_id',$negocio->id)->paginate(4) : collect();
+        $productosEliminados = $negocio ? Producto::onlyTrashed()->where('negocio_id',$negocio->id)->paginate(4) : collect(); 
+        return view('dashboard.user.productos.productos',compact('productos','negocio','productosEliminados'));
     }
 
     public function create(){
@@ -48,8 +49,19 @@ class ProductoController extends Controller
     }
 
     public function destroy(Producto $producto){
+
+        $this->authorize('delete',$producto);
         $producto->delete();
+        
         return redirect()->back()->with('success','Producto eliminado correctamente');
+        
+    }
+
+    public function restore($id){
+        $producto = Producto::onlyTrashed()->findOrFail($id);
+        $producto->restore();
+
+        return back()->with('status','Producto restaurado con éxito');
     }
 
 }
