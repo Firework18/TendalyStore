@@ -12,7 +12,6 @@
     <p class="text-lg text-red-800 mb-6">¡Bienvenido de nuevo, <span class="font-semibold">{{ $user->name }}</span>!
         Aquí tienes un resumen de tu actividad.
         @if ($user->negocios && $user->negocios->count() > 0)
-            {{-- Asumiendo que 'negocios' es una colección o array --}}
             También puedes ver el rendimiento de tu negocio.
         @else
             Explora nuestros productos y ofertas especiales.
@@ -23,13 +22,12 @@
 @section('contenido')
     <div class="space-y-8">
 
-        {{-- SECCIÓN PARA USUARIOS CLIENTES (siempre visible o la base) --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <div
-                class="bg-gradient-to-br from-red-700 to-red-900 text-white p-6 rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out flex items-center justify-between">
+                class="bg-gradient-to-br from-red-600 to-red-900 text-white p-6 rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out flex items-center justify-between">
                 <div>
                     <h3 class="text-lg font-semibold mb-1 opacity-90">Pedidos Activos</h3>
-                    <p class="text-4xl font-bold">2</p> {{-- Valor dinámico --}}
+                    <p class="text-4xl font-bold">2</p>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="size-6">
                     <path fill-rule="evenodd"
@@ -45,8 +43,8 @@
                 class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-red-600 transform hover:scale-105 transition duration-300 ease-in-out flex items-center justify-between">
                 <div>
                     <h3 class="text-lg font-semibold text-red-900 mb-1">Última Compra</h3>
-                    <p class="text-3xl font-bold text-red-800">$75.99</p> {{-- Valor dinámico --}}
-                    <p class="text-gray-600 text-sm mt-1">hace 3 días</p> {{-- Valor dinámico --}}
+                    <p class="text-3xl font-bold text-red-800">$75.99</p>
+                    <p class="text-gray-600 text-sm mt-1">hace 3 días</p>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" class="size-6">
                     <path
@@ -61,7 +59,6 @@
 
         </div>
 
-        <!-- Mis Últimos Pedidos -->
         <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600 mb-8">
             <h3 class="text-xl font-semibold text-red-900 mb-4">Mis Últimos Pedidos</h3>
             <div class="overflow-x-auto">
@@ -133,18 +130,16 @@
 
 
 
-        {{-- SECCIÓN PARA USUARIOS CON NEGOCIO (condicionalmente visible) --}}
         @if ($user->negocios && $user->negocios->count() > 0)
             <h2 class="text-2xl font-bold text-red-900 mt-10 mb-6 border-b-2 border-red-200 pb-2">Tu Negocio:
                 {{ $user->Negocios->nombre }}
             </h2>
 
-            <!-- Métricas Principales del Negocio -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div
-                    class="bg-gradient-to-br from-red-700 to-red-900 text-white p-6 rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+                    class="bg-gradient-to-br from-red-600 to-red-900 text-white p-6 rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
                     <h3 class="text-lg font-semibold mb-2 opacity-90">Ventas Totales</h3>
-                    <p class="text-4xl font-bold">$12,450</p> {{-- Valor dinámico --}}
+                    <p class="text-4xl font-bold">$12,450</p>
                     <p class="text-red-200 text-sm mt-1 flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -157,7 +152,7 @@
                 <div
                     class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-red-600 transform hover:scale-105 transition duration-300 ease-in-out">
                     <h3 class="text-lg font-semibold text-red-900 mb-2">Pedidos Nuevos</h3>
-                    <p class="text-4xl font-bold text-red-800">158</p> {{-- Valor dinámico --}}
+                    <p class="text-4xl font-bold text-red-800">158</p>
                     <p class="text-gray-600 text-sm mt-1 flex items-center">
                         <svg class="w-4 h-4 mr-1 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -171,7 +166,7 @@
                 <div
                     class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-red-600 transform hover:scale-105 transition duration-300 ease-in-out">
                     <h3 class="text-lg font-semibold text-red-900 mb-2">Productos Vendidos</h3>
-                    <p class="text-4xl font-bold text-red-800">540</p> {{-- Valor dinámico --}}
+                    <p class="text-4xl font-bold text-red-800">540</p>
                     <p class="text-gray-600 text-sm mt-1 flex items-center">
                         <svg class="w-4 h-4 mr-1 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -185,7 +180,7 @@
                 <div
                     class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-red-600 transform hover:scale-105 transition duration-300 ease-in-out">
                     <h3 class="text-lg font-semibold text-red-900 mb-2">Nuevos Clientes</h3>
-                    <p class="text-4xl font-bold text-red-800">72</p> {{-- Valor dinámico --}}
+                    <p class="text-4xl font-bold text-red-800">72</p>
                     <p class="text-gray-600 text-sm mt-1 flex items-center">
                         <svg class="w-4 h-4 mr-1 text-green-500" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -198,9 +193,6 @@
                 </div>
             </div>
 
-
-
-            <!-- Ventas Recientes del Negocio -->
             <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600 mb-8">
                 <h3 class="text-xl font-semibold text-red-900 mb-4">Ventas Recientes del Negocio</h3>
                 <div class="overflow-x-auto">
@@ -275,7 +267,6 @@
                 </div>
             </div>
 
-            <!-- Tareas Pendientes o Notificaciones del Negocio -->
             <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-red-600">
                 <h3 class="text-xl font-semibold text-red-900 mb-4">Notificaciones y Tareas de tu Negocio</h3>
                 <ul class="space-y-4">

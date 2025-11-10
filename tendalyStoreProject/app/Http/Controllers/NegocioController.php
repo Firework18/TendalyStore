@@ -31,7 +31,7 @@ class NegocioController extends Controller
                         ->orderByRaw('CASE WHEN user_id = ? THEN 0 ELSE 1 END',[$user_id])
                         ->get();
 
-        $puntuacion = $comentarios->avg('rating');
+        $puntuacion = number_format($comentarios->avg('rating'),1);
 
         $comentarioUsuario = Comentario::where('negocio_id',$negocio->id)
                                 ->where('user_id',$user_id)

@@ -24,8 +24,7 @@
 
             <nav class="hidden md:flex">
                 <div class="items-center space-x-4 flex">
-                    <a class="flex items-center space-x-2 text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
-                        href="/dashboard">
+                    <a class="flex items-center space-x-2 text-black hover:text-red-600 transition" href="/dashboard">
                         <i class="bi bi-person text-2xl"></i>
                         <span class="text-sm">
                             @auth
@@ -34,13 +33,11 @@
                         </span>
                     </a>
 
-                    <a class="relative text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
-                        href="#carrito">
+                    <a class="relative text-black hover:text-red-600 transition" href="#carrito">
                         <i class="bi bi-cart text-2xl"></i>
                     </a>
                     <div class="relative">
-                        <button id="userMenuButton"
-                            class="relative text-[var(--primary-blue)] hover:text-[var(--secondary-red)] transition"
+                        <button id="userMenuButton" class="relative text-black hover:text-red-600 transition"
                             href="#carrito">
                             <i class="bi bi-list text-2xl"></i>
                         </button>

@@ -3,7 +3,6 @@
 
 @section('contenido')
     <main class="min-h-screen pb-12">
-        <!-- Hero de Catálogo -->
         <section id="hero"
             class="hero-section relative h-96 md:h-[200px] flex items-center justify-center text-center bg-cover bg-center"
             style="
@@ -59,36 +58,14 @@
         <!-- Cuadrícula de Productos -->
         <div class="max-w-6xl mx-auto px-4 md:px-8 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <!-- Tarjeta de Producto 1 -->
-            @foreach ($negocios as $negocio)
-                <div
-                    class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transform transition-transform duration-200 hover:scale-105">
-                    <div class="relative">
-                        <img src={{ asset('/uploads/' . $negocio->imagen) }} alt="EcoFresh Orgánicos"
-                            class="w-full h-48 object-cover">
-                        <span
-                            class="absolute top-3 left-3 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">{{ $negocio->categoria->nombre }}</span>
-                        <span
-                            class="absolute top-3 right-3 bg-gray-900 bg-opacity-75 text-white text-sm font-bold px-2 py-1 rounded-md">{{ $negocio->comentarios ? $negocio->comentarios->avg('rating') : 0 }}
-                            <i class="bi bi-star-fill text-yellow-400 text-xs"></i></span>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-[var(--color-primary)] mb-2">{{ $negocio->nombre }}</h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">{{ $negocio->descripcion }}</p>
-                        <p class="text-gray-500 text-xs mb-4">Desde: Lima, Perú</p>
-                        <div class="flex justify-between items-center">
-                            <a href="{{ route('negocio.show', $negocio->nombre) }}"
-                                class="px-4 py-2 bg-[var(--color-secondary)] hover:bg-[#bb4900] text-white text-sm font-semibold rounded-lg transition-colors duration-200 flex items-center space-x-2">
-                                <span>Ver Negocio</span> <i class="bi bi-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-            <div class="mt-6">
-                {{ $negocios->links() }}
-            </div>
+            <x-listar-negocio :negocios="$negocios"></x-listar-negocio>
+
         </div>
+
+        <div class="mt-6">
+            {{ $negocios->links() }}
+        </div>
+
     </main>
 @endsection
 </body>

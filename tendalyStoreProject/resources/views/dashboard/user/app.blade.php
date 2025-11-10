@@ -13,8 +13,6 @@
 
 <body class="bg-gray-100 font-sans antialiased">
 
-    <!-- Navbar Superior -->
-    <!-- ¡IMPORTANTE! Asegúrate de añadir la clase 'navbar' aquí: -->
     <nav class="bg-white p-4 shadow-md fixed w-full top-0 navbar ">
         <div class="container mx-auto flex justify-between items-center">
 
@@ -59,11 +57,10 @@
         </div>
     </nav>
 
-    <!-- Overlay para la sidebar en mobile -->
+    <!-- SIDEBAR EN MOVIL -->
     <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
-    <!-- Sidebar de Navegación -->
-    <aside id="sidebar" class="sidebar bg-red-900 text-white fixed h-full shadow-lg">
+    <aside id="sidebar" class="sidebar bg-red-700 text-white fixed h-full shadow-lg">
         <nav class="mt-5">
             <ul>
                 <li>
@@ -170,18 +167,16 @@
     </main>
 
     <script>
-        // Script para el menú desplegable del usuario
         const userMenuButton = document.getElementById('userMenuButton');
         const userMenu = document.getElementById('userMenu');
 
-        if (userMenuButton) { // Asegúrate de que el botón exista antes de añadir el listener
+        if (userMenuButton) {
             userMenuButton.addEventListener('click', (event) => {
                 userMenu.classList.toggle('hidden');
-                event.stopPropagation(); // Evita que el clic se propague al window y cierre el menú inmediatamente
+                event.stopPropagation();
             });
         }
 
-        // Ocultar el menú de usuario si se hace clic fuera
         window.addEventListener('click', (event) => {
             if (userMenu && !userMenu.contains(event.target) && userMenuButton && !userMenuButton.contains(event
                     .target)) {
@@ -189,7 +184,6 @@
             }
         });
 
-        // Script para la interactividad de la sidebar (active link)
         document.querySelectorAll('.sidebar a').forEach(item => {
             item.addEventListener('click', event => {
                 document.querySelectorAll('.sidebar a').forEach(link => {
@@ -197,15 +191,13 @@
                 });
                 event.currentTarget.classList.add('active-link');
 
-                // Cierra la sidebar en mobile al hacer clic en un enlace
-                if (window.innerWidth < 1024) { // Menor que el breakpoint 'lg' de Tailwind
+                if (window.innerWidth < 1024) {
                     document.getElementById('sidebar').classList.remove('active');
                     document.getElementById('sidebarOverlay').classList.remove('active');
                 }
             });
         });
 
-        // Script para la barra lateral responsiva (toggle con botón de hamburguesa)
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
@@ -217,7 +209,6 @@
             });
         }
 
-        // Cerrar la sidebar cuando se hace clic en el overlay
         if (sidebarOverlay) {
             sidebarOverlay.addEventListener('click', () => {
                 sidebar.classList.remove('active');
@@ -225,12 +216,11 @@
             });
         }
 
-        // Asegurarse de que la sidebar se ajuste en resize (desktop vs mobile)
         window.addEventListener('resize', () => {
-            if (window.innerWidth >= 1024) { // Si es desktop (>= lg breakpoint)
-                sidebar.classList.remove('active'); // Asegura que no tenga la clase active de mobile
-                sidebarOverlay.classList.remove('active'); // Oculta el overlay
-            }
+            if (window.innerWidth >= 1024)
+                sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+        }
         });
     </script>
     @vite('resources/js/app.js')
