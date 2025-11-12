@@ -8,7 +8,11 @@ export default {
 
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['"Poppins"', 'sans-serif'], // <-- aquí agregas la fuente
+      },
+    },
   },
   plugins: [],
 }

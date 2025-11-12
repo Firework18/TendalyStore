@@ -8,7 +8,7 @@
                 <span
                     class="absolute top-3 left-3 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">{{ $negocio->categoria->nombre }}</span>
                 <span
-                    class="absolute top-3 right-3 bg-gray-900 bg-opacity-75 text-white text-sm font-bold px-2 py-1 rounded-md">{{ number_format($negocio->comentarios->avg('rating'), 2) }}
+                    class="absolute top-3 right-3 bg-gray-900 bg-opacity-75 text-white text-sm font-bold px-2 py-1 rounded-md">{{ number_format($negocio->comentarios->avg('rating'), 1) }}
                     <i class="bi bi-star-fill text-yellow-400 text-xs"></i></span>
             </div>
             <div class="p-6">

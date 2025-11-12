@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TendalyStore - @yield('titulo')</title>
     @stack('styles')
-    @vite(['resources/css/app.css'])
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+    @vite(['resources/css/app.css'])
     <link rel="stylesheet" href="{{ asset('assets/styles.css') }}">
+
+    @livewireStyles
 </head>
 
 <body>
@@ -131,7 +136,7 @@
                                 class="w-full p-3 mb-3 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[var(--accent-yellow)] resize-none"
                                 required></textarea>
                             <button type="submit"
-                                class="w-full font-bold py-3 px-4 rounded-lg bg-[var(--accent-yellow)] text-[var(--primary-blue)] hover:bg-yellow-400 transition">
+                                class="w-full font-bold py-3 px-4 rounded-lg bg-red-600 text-[var(--primary-blue)] hover:bg-red-700 transition">
                                 Enviar
                             </button>
                         </form>
@@ -165,6 +170,7 @@
         });
     </script>
     @stack('scripts')
+    @livewireScripts
 </body>
 
 </html>

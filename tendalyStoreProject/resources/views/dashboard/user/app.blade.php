@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard TendalyStore - @yield('titulo')</title>
     @stack('styles')
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css'])
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="{{ asset('assets/stylesDashboard.css') }}">
@@ -29,7 +30,6 @@
                 <img src="{{ asset('assets/images/logo.svg') }}" alt="LOGO TENDALY" width="100px" />
             </a>
             <div class="flex items-center space-x-4">
-
                 <div class="relative">
                     <button class="flex items-center space-x-2 hover:text-red-600 focus:outline-none"
                         id="userMenuButton">
@@ -49,7 +49,6 @@
                             @csrf
                             <button type="submit" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Cerrar
                                 Sesión</button>
-
                         </form>
                     </div>
                 </div>
@@ -220,7 +219,6 @@
             if (window.innerWidth >= 1024)
                 sidebar.classList.remove('active');
             sidebarOverlay.classList.remove('active');
-        }
         });
     </script>
     @vite('resources/js/app.js')

@@ -4,6 +4,7 @@
   --color-accent: #f4b400; /* Color para elementos */
   --color-background: #fae5d3; /* Fondo principal o de secciones */
   --color-text: #4a2c2a; /* Color del texto principal */
+  --color-footer: #000000;
 }
 
 html {
@@ -11,7 +12,6 @@ html {
 }
 
 body {
-  font-family: "Inter", sans-serif;
   background-color: white;
   color: var(--color-text);
 }
@@ -65,7 +65,7 @@ body {
 
 .footer-section {
   grid-area: footer;
-  background-color: var(--color-primary);
+  background-color: var(--color-footer);
   color: white;
 }
 

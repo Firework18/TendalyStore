@@ -153,7 +153,7 @@
                             empaques sostenibles en tu emprendimiento.
                         </p>
                         <a href="#"
-                            class="inline-block text-sm font-semibold text-white bg-[var(--primary-blue)] px-5 py-2 rounded-full hover:bg-[var(--secondary-red)] transition text-center">
+                            class="inline-block text-sm font-semibold text-white bg-red-600 px-5 py-2 rounded-full hover:bg-red-700 transition text-center">
                             Leer más <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
@@ -172,7 +172,7 @@
                             impulsando la economía circular.
                         </p>
                         <a href="#"
-                            class="inline-block text-sm font-semibold text-white bg-[var(--primary-blue)] px-5 py-2 rounded-full hover:bg-[var(--secondary-red)] transition text-center">
+                            class="inline-block text-sm font-semibold text-white bg-red-600 px-5 py-2 rounded-full hover:bg-red-700 transition text-center">
                             Leer más <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
@@ -191,7 +191,7 @@
                             responsables en Latinoamérica.
                         </p>
                         <a href="#"
-                            class="inline-block text-sm font-semibold text-white bg-[var(--primary-blue)] px-5 py-2 rounded-full hover:bg-[var(--secondary-red)] transition text-center">
+                            class="inline-block text-sm font-semibold text-white bg-red-600 px-5 py-2 rounded-full hover:bg-red-700 transition text-center">
                             Leer más <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
