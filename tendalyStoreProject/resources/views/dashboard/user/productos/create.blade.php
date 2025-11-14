@@ -88,21 +88,40 @@
                   @enderror
             </div>
             <div class="mb-5">
-              <label for="unidad_medida" class="mb-2 block uppercase text-gray-500 font-bold">
-                  Unidad de Medida
-              </label>
-              <input 
-                  type="text"
-                  id="unidad_medida"
-                  name="unidad_medida"
-                  placeholder="Ej: lt, kg, un"
-                  value="{{old('unidad_medida')}}"
-                  class="border p-3 w-full rounded-lg  @error('unidad_medida') border-red-500 @enderror"
-                  >
-                  @error('unidad_medida')
-                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>   
-                  @enderror
-            </div>
+    <label for="unidad_medida" class="block text-gray-700 text-sm font-semibold mb-2">
+        Unidad de Medida <span class="text-red-500">*</span>
+    </label>
+
+    <select id="unidad_medida" name="unidad_medida"
+        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tendaly-green
+        @error('unidad_medida') border-red-500 @enderror">
+
+        <option value="">Selecciona una unidad</option>
+
+        <option value="unidad"     {{ old('unidad_medida') == 'unidad' ? 'selected' : '' }}>Unidad</option>
+        <option value="kg"         {{ old('unidad_medida') == 'kg' ? 'selected' : '' }}>Kilogramo (kg)</option>
+        <option value="g"          {{ old('unidad_medida') == 'g' ? 'selected' : '' }}>Gramo (g)</option>
+        <option value="lt"         {{ old('unidad_medida') == 'lt' ? 'selected' : '' }}>Litro (lt)</option>
+        <option value="ml"         {{ old('unidad_medida') == 'ml' ? 'selected' : '' }}>Mililitro (ml)</option>
+        <option value="m"          {{ old('unidad_medida') == 'm' ? 'selected' : '' }}>Metro (m)</option>
+        <option value="cm"         {{ old('unidad_medida') == 'cm' ? 'selected' : '' }}>Centímetro (cm)</option>
+        <option value="paquete"    {{ old('unidad_medida') == 'paquete' ? 'selected' : '' }}>Paquete</option>
+        <option value="caja"       {{ old('unidad_medida') == 'caja' ? 'selected' : '' }}>Caja</option>
+        <option value="par"        {{ old('unidad_medida') == 'par' ? 'selected' : '' }}>Par</option>
+        <option value="docena"     {{ old('unidad_medida') == 'docena' ? 'selected' : '' }}>Docena</option>
+        <option value="bolsa"      {{ old('unidad_medida') == 'bolsa' ? 'selected' : '' }}>Bolsa</option>
+        <option value="rollo"      {{ old('unidad_medida') == 'rollo' ? 'selected' : '' }}>Rollo</option>
+        <option value="kit"        {{ old('unidad_medida') == 'kit' ? 'selected' : '' }}>Kit</option>
+
+    </select>
+
+    @error('unidad_medida')
+        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+            {{ $message }}
+        </p>
+    @enderror
+</div>
+
             <div class="mb-5">
             <input
                 name="imagen"

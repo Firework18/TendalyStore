@@ -20,7 +20,7 @@
         </div>
     @endif
 
-    @if (session('error'))
+    @if (session('errorComentario'))
         <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-6 rounded-md">
             <div class="flex">
                 <div class="flex-shrink-0">
@@ -94,3 +94,35 @@
         </div>
     @endif
 </div>
+
+@push('scripts')
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+    document.addEventListener('livewire:init', () => {
+    Livewire.on('comentarioAgregado', (data) => {
+        Swal.fire({
+            icon: data.type,
+            title: data.message,
+            text: data.text,
+            showConfirmButton: true,
+            timer: 2500,
+        });
+        });
+    });
+    </script>
+   @if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            timer: 2500,
+            title: "{{ session('error') }}",
+            showConfirmButton: true
+        });
+    </script>
+@endif
+        
+@endpush
+
+
+

@@ -13,11 +13,13 @@
                         <div class="relative">
                             <img src="{{ asset('/uploads/' . $producto->imagen) }}" alt="{{ $producto->nombre }}"
                                 class="w-full h-48 object-cover object-center">
-
-                            @if ($producto->precio_oferta && $producto->precio_oferta < $producto->precio)
+                            @if ($producto->stock>0)
+                                @if ($producto->precio_oferta && $producto->precio_oferta < $producto->precio)
                                 <span
                                     class="absolute bottom-3 left-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">Oferta</span>
+                                @endif
                             @endif
+                            
                         </div>
 
                         <div class="p-4">
@@ -25,21 +27,30 @@
                             <p class="text-gray-500 text-sm mb-3">{{ Str::limit($producto->descripcion, 50) }}</p>
 
                             <div class="flex items-baseline mb-3">
-                                @if ($producto->precio_oferta && $producto->precio_oferta < $producto->precio)
+                                @if ($producto->stock>0)
+                                    @if ($producto->precio_oferta && $producto->precio_oferta < $producto->precio)
                                     <span
                                         class="text-red-700 font-extrabold text-xl mr-2">S/.{{ number_format($producto->precio_oferta, 2) }}</span>
                                     <span
                                         class="text-gray-500 line-through text-base">S/.{{ number_format($producto->precio, 2) }}</span>
-                                @else
+                                    @else
                                     <span
                                         class="text-gray-800 font-extrabold text-xl">S/.{{ number_format($producto->precio, 2) }}</span>
-                                @endif
-                            </div>
+                                    @endif
 
-                            <button
+                                @else
+                                    <span
+                                        class="text-red-700 font-extrabold text-xl mr-2">PRODUCTO AGOTADO</span>                                
+                                @endif
+                                
+                            </div>
+                            <a href="{{route('producto.show',$producto)}}">
+                                <button 
                                 class="w-full bg-red-700 text-white py-2.5 px-4 rounded-lg hover:bg-red-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 font-semibold">
                                 Ver más
-                            </button>
+                                </button>
+                            </a>
+                            
                         </div>
                     </div>
                 @endforeach
@@ -54,6 +65,6 @@
             <p class="text-lg font-medium">Este negocio aún no tiene productos registrados.</p>
         </div>
     @endif
-</div>
+    </div>
 </div>
 

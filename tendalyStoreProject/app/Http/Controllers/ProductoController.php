@@ -13,6 +13,13 @@ class ProductoController extends Controller
         $this->middleware('auth')->except(['index']);
     }
 
+    public function show(Producto $producto){
+
+        $negocio = Negocio::find($producto->negocio_id);
+
+        return view('negocios.producto',compact('producto','negocio'));
+    }
+
     public function productoDashboard(){
         $negocio = auth()->user()->negocios;
         $productos = $negocio ? Producto::where('negocio_id',$negocio->id)->paginate(4) : collect();

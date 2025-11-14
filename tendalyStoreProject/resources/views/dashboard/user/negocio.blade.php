@@ -224,23 +224,6 @@
             </div>
         </div>
 
-        <!-- Gráfico de Ventas (opcional, para visualización) -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                <svg class="w-6 h-6 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
-                </svg>
-                Rendimiento de Ventas (Últimos 30 Días)
-            </h3>
-            <div class="h-64 flex items-center justify-center bg-gray-50 rounded-lg border border-gray-200 text-gray-400">
-                Gráfico de Ventas (requiere Chart.js o similar)
-            </div>
-            <p class="text-sm text-gray-500 mt-3">Aquí se mostraría una visualización de tus ventas a lo largo del tiempo.
-            </p>
-        </div>
+        
     @endif
 @endsection

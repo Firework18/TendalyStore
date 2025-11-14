@@ -38,7 +38,11 @@
                         </span>
                     </a>
 
-                    <a class="relative text-black hover:text-red-600 transition" href="#carrito">
+                    <a class="flex items-center space-x-2 text-black hover:text-red-600 transition" href="{{ route('catalogo') }}">
+                        Catálogo
+                    </a>
+
+                    <a class="relative text-black hover:text-red-600 transition" href="{{ route('carrito.index') }}">
                         <i class="bi bi-cart text-2xl"></i>
                     </a>
                     <div class="relative">
@@ -51,6 +55,12 @@
                             @auth
                                 <a href="{{ route('post.index', auth()->user()->username) }}"
                                     class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Mi Muro</a>
+
+                                <a href="{{ route('dashboard') }}"
+                                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
+
+                                <a href="{{ route('dashboard.negocio') }}"
+                                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Visitar Negocio</a>
 
                             @endauth
                             <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Configuración</a>

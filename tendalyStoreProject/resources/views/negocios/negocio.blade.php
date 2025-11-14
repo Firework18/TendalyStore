@@ -82,17 +82,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
     <h2 class="text-3xl font-bold text-gray-900 mb-6">Reseñas</h2>
 
-        @if (session('error'))
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                <strong class="font-bold">¡Error!</strong>
-                <span class="block sm:inline">{{ session('error') }}</span>
-            </div>
-        @elseif (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-                <strong class="font-bold">¡Éxito!</strong>
-                <span class="block sm:inline">{{ session('success') }}</span>
-            </div>
-        @endif
+        
 
         @auth
             @if ($negocio->user_id !== auth()->id())
@@ -138,50 +128,4 @@
     </div>
     @endsection
 
-    @push('scripts')
-        {{-- Script para manejar la selección de estrellas y enviar el rating --}}
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const starRatingContainer = document.getElementById('star-rating');
-                const ratingInput = document.getElementById('rating');
-
-                if (starRatingContainer && ratingInput) {
-                    const stars = starRatingContainer.querySelectorAll('.bi-star, .bi-star-fill');
-
-                    const updateStars = (selectedRating) => {
-                        stars.forEach((star, index) => {
-                            if (index < selectedRating) {
-                                star.classList.remove('bi-star');
-                                star.classList.add('bi-star-fill');
-                            } else {
-                                star.classList.remove('bi-star-fill');
-                                star.classList.add('bi-star');
-                            }
-                        });
-                    };
-
-                    // Inicializar las estrellas si ya hay un valor
-                    updateStars(parseInt(ratingInput.value));
-
-                    stars.forEach(star => {
-                        star.addEventListener('click', () => {
-                            const newRating = parseInt(star.dataset.rating);
-                            ratingInput.value = newRating;
-                            updateStars(newRating);
-                        });
-
-                        star.addEventListener('mouseover', () => {
-                            const hoverRating = parseInt(star.dataset.rating);
-                            updateStars(hoverRating);
-                        });
-
-                        star.addEventListener('mouseout', () => {
-                            const currentRating = parseInt(ratingInput.value);
-                            updateStars(currentRating);
-                        });
-                    });
-                }
-            });
-        </script>
-        
-    @endpush
+    

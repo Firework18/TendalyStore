@@ -30,31 +30,38 @@ class Negocio extends Model
         'user_id',
     ];
 
-    public function user(){
-        return $this->belongsTo(User::class,'user_id');
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function productos(){
+    public function productos()
+    {
         return $this->hasMany(Producto::class);
     }
 
-    public function distrito(){
+    public function distrito()
+    {
         return $this->belongsTo(Distrito::class);
     }
 
-    public function provincia(){
+    public function provincia()
+    {
         return $this->belongsTo(Provincia::class);
     }
 
-    public function departamento(){
+    public function departamento()
+    {
         return $this->belongsTo(Departamento::class);
     }
 
-    public function categoria(){
-        return $this->belongsTo(CategoriaNegocio::class,'categoria_negocio_id');
+    public function categoria()
+    {
+        return $this->belongsTo(CategoriaNegocio::class, 'categoria_negocio_id');
     }
 
-    public function comentarios(){
+    public function comentarios()
+    {
         return $this->hasMany(Comentario::class);
     }
 }

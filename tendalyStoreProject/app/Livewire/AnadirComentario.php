@@ -32,7 +32,7 @@ class AnadirComentario extends Component
 
         // Si ya comentó, no permitimos otro comentario
         if ($this->yaComento) {
-            session()->flash('error', 'Ya has comentado anteriormente.');
+            session()->flash('errorComentario', 'Ya has comentado anteriormente.');
             return;
         }
 
@@ -52,14 +52,13 @@ class AnadirComentario extends Component
         session()->flash('success', 'Comentario publicado correctamente.');
 
         // Emitir evento para actualizar lista de comentarios
-        $this->dispatch('comentarioAgregado');
+        $this->dispatch('comentarioAgregado',type:'success',message:'Comentario agregado correctamente',text:'Muchas gracias por valorar este negocio.');
 
     }
 
 
     public function render()
     {   
-    
         return view('livewire.anadir-comentario');
     }
 }
