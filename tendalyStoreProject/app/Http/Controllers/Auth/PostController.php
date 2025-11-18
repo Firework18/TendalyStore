@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Negocio;
 use App\Models\Departamento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,8 +17,11 @@ class PostController extends Controller
 
     public function index(User $user){
         
+        $negocio = auth()->user()->negocios;
+     
         return view('muro',[
-            'user'=>$user
+            'user'=>$user,
+            'negocio'=>$negocio
         ]);
     }
 

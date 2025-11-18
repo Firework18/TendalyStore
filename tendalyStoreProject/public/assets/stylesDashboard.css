@@ -1,0 +1,98 @@
+        /* Estilos personalizados si los necesitas, aunque Tailwind es suficiente */
+        
+        /* Navbar Superior */
+        .navbar {
+    z-index: 60; /* sigue por encima del contenido */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+        /* Sidebar general */
+.sidebar {
+    width: 250px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    z-index: 50;
+    position: fixed;
+    left: 0;
+    background-color: #7f1d1d; /* red-900 */
+    color: white;
+}
+
+/* En pantallas pequeñas: debajo de la navbar */
+@media (max-width: 1023px) {
+    .sidebar {
+        top: 64px; /* debajo de la navbar */
+        height: calc(100vh - 64px);
+    }
+}
+
+/* En pantallas grandes: desde arriba (sin ser tapada por la navbar) */
+@media (min-width: 1024px) {
+    .sidebar {
+        transform: translateX(0%);
+        -webkit-transform: translateX(0%);
+        top: 0; /* ahora empieza desde arriba */
+        height: 100vh;
+        z-index: 40; /* más bajo que la navbar, pero ya no se superponen */
+    }
+    .content {
+        margin-left: 250px; /* espacio para la sidebar */
+        padding-top: 64px; /* para no quedar debajo de la navbar */
+    }
+}
+
+        /* Clase para mostrar la sidebar en mobile */
+        .sidebar.active {
+            transform: translateX(0%);
+            -webkit-transform: translateX(0%);
+        }
+
+        /* Clase para el enlace activo en la sidebar */
+        .active-link {
+            background-color: #DC2626; /* red-600 */
+        }
+
+        /* Overlay para superponer la sidebar en mobile */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 40; /* Menos que la sidebar pero más que el contenido */
+            display: none; /* Oculto por defecto */
+        }
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* Ajuste para el contenido principal para que no quede debajo de la navbar */
+        .content {
+            padding-top: 64px; /* Asegura que el contenido principal empieza después de la navbar */
+            min-height: calc(100vh - 64px); /* Ajusta la altura mínima para que ocupe el resto del viewport */
+        }
+        /* --- Ajuste navbar y sidebar para vista escritorio --- */
+@media (min-width: 1024px) {
+    .navbar {
+        left: 250px;          /* Mueve la navbar para que empiece después de la sidebar */
+        width: calc(100% - 250px); /* Reduce su ancho para que no la tape */
+    }
+
+    .sidebar {
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+        top: 0;
+        height: 100vh;
+        z-index: 50; /* por debajo de la navbar, pero visibles lado a lado */
+    }
+
+    .content {
+        margin-left: 250px;
+        padding-top: 64px;
+    }
+}

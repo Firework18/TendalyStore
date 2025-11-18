@@ -16,6 +16,6 @@ class CategoriaNegocio extends Model
         'descripcion'];
     
     public function negocios(){
-        return $this->hasMany(Negocio::class);
+        return $this->hasMany(Negocio::class,'categoria_negocio_id');
     }
 }

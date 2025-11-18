@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('dashboard.user.app') 
 
 @section('titulo', 'Crear Nuevo Negocio - Paso 1')
 
@@ -9,7 +9,7 @@
 @section('contenido')
 
 <main class="min-h-screen  bg-[var(--color-background)]">
-    <div class="container mx-auto px-4 py-8 bg">
+    <div class="container mx-auto">
         <h2 class="text-2xl font-bold text-gray-800 mb-2">Registrar Nuevo Negocio</h2>
         <p class="text-gray-600 mb-6">Completa el formulario para registrar tu negocio en nuestra plataforma</p>
 
@@ -218,7 +218,7 @@
 
         <!-- Action Buttons -->
         <div class="flex justify-end space-x-4 mb-8">
-            <a href="{{route('perfil')}}" class="px-6 py-2 border bg-red-500 border-gray-300 rounded-lg text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-gray-300 ">Cancelar</a>
+            <a href="{{route('dashboard')}}" class="px-6 py-2 border bg-red-500 border-gray-300 rounded-lg text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-gray-300 ">Cancelar</a>
             <input type="submit" value="Registrar Negocio" 
             class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-tendaly-green focus:ring-opacity-50 flex items-center space-x-2">
         </div>
