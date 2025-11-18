@@ -18,6 +18,7 @@ class Producto extends Model
         'descripcion',
         'imagen',
         'precio',
+        'precio_oferta',
         'stock',
         'negocio_id',
         'unidad_medida',

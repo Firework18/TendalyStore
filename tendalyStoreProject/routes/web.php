@@ -45,9 +45,10 @@ Route::post('/negocio', [NegocioController::class, 'store'])->name('negocio.stor
 Route::get('/dashboard/negocio', [NegocioController::class, 'negocioDashboard'])->name('dashboard.negocio');
 
 //Producto
-Route::get('/producto/{producto:nombre}', [ProductoController::class, 'show'])->name('producto.show');
 Route::get('/producto/create', [ProductoController::class, 'create'])->name('producto.create');
+Route::get('/producto/{producto:nombre}', [ProductoController::class, 'show'])->name('producto.show');
 Route::post('/producto', [ProductoController::class, 'store'])->name('producto.store');
+Route::get('/dashboard/productos/{producto:nombre}/edit',[ProductoController::class,'edit'])->name('producto.edit');
 Route::get('/dashboard/productos', [ProductoController::class, 'productoDashboard'])->name('dashboard.producto');
 Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('producto.destroy');
 Route::patch('/productos/{id}/restore', [ProductoController::class, 'restore'])->name('producto.restore');

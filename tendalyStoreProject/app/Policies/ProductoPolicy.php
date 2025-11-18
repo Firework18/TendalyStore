@@ -37,7 +37,7 @@ class ProductoPolicy
      */
     public function update(User $user, Producto $producto): bool
     {
-        return false;
+        return $user->id === $producto->negocio->user->id;
     }
 
     /**

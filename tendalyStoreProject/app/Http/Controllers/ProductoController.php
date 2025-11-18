@@ -55,6 +55,13 @@ class ProductoController extends Controller
         return redirect()->route('dashboard.negocio');
     }
 
+    public function edit(Producto $producto){
+        
+        $this->authorize('update',$producto);
+
+        return view('dashboard.user.productos.edit',compact('producto'));
+    }
+
     public function destroy(Producto $producto){
 
         $this->authorize('delete',$producto);
