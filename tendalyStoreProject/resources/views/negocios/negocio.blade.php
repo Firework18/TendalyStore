@@ -14,10 +14,10 @@
     <div class="bg-white overflow-hidden mb-10">
         <div class="md:flex max-w-7xl mx-auto">
             <div class="md:w-1/2 relative">
-                <img src="{{ asset('/uploads/' . $negocio->imagen) }}" alt="{{ $negocio->nombre }}"
+                <img src="{{ asset('/storage/negocios/' . $negocio->imagen) }}" alt="{{ $negocio->nombre }}"
                     class="w-full h-72 md:h-[550px] rounded-md object-cover object-center">
                 <div
-                    class="absolute top-4 left-4 bg-[#4CAF50] text-white text-xs font-semibold px-3 py-1 rounded-full tracking-wide opacity-90">
+                    class="absolute top-4 left-4 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full tracking-wide opacity-90">
                     {{ $negocio->categoria->nombre }}</div>
 
             </div>
@@ -28,23 +28,24 @@
                 <div class="flex items-center mb-5 text-sm text-gray-600">
                     <i class="bi bi-star-fill text-yellow-400 mr-1 text-base"></i>
                     <livewire:mostrar-rating :negocio_id="$negocio->id">
-                    <span class="mx-3 text-gray-300">|</span>
-                    <i class="bi bi-geo-alt-fill mr-1 text-base text-gray-500"></i>
-                    <span>Lima, Perú</span>
+                        <span class="mx-3 text-gray-300">|</span>
+                        <i class="bi bi-geo-alt-fill mr-1 text-base text-gray-500"></i>
+                        <span>Lima, Perú</span>
                 </div>
                 <p class="text-gray-700 text-base leading-relaxed mb-7">
                     {{ $negocio->descripcion }}
                 </p>
 
                 <div class="flex flex-wrap gap-2.5">
-                    <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-3 py-1 rounded-full">Productos
-                        Amazónicos</span>
-                    <span class="bg-green-100 text-green-700 text-xs font-medium px-3 py-1 rounded-full">Comercio
-                        Justo</span>
-                    <span class="bg-yellow-100 text-yellow-700 text-xs font-medium px-3 py-1 rounded-full">Ingredientes
-                        Naturales</span>
-                    <span class="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">Sostenibilidad</span>
+                    @foreach ($negocio->tags as $tag)
+                        <span class="text-xs font-medium px-3 py-1 rounded-full shadow-sm"
+                            style="background-color: {{ $tag->color }}20; color: {{ $tag->color }};">
+                            {{ $tag->nombre }}
+                        </span>
+                    @endforeach
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -75,14 +76,14 @@
         </div>
     </div>
 
-    <livewire:productos-negocio :negocio_id="$negocio->id"/>
+    <livewire:productos-negocio :negocio_id="$negocio->id" />
 
-    
+
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
-    <h2 class="text-3xl font-bold text-gray-900 mb-6">Reseñas</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Reseñas</h2>
 
-        
+
 
         @auth
             @if ($negocio->user_id !== auth()->id())
@@ -99,34 +100,42 @@
         @guest
             <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 rounded-md">
                 <p class="text-sm text-yellow-800">
-                    Necesitas <a href="{{ route('login') }}" class="font-medium underline text-yellow-800 hover:text-yellow-900">
+                    Necesitas <a href="{{ route('login') }}"
+                        class="font-medium underline text-yellow-800 hover:text-yellow-900">
                         iniciar sesión
                     </a> para dejar un comentario.
                 </p>
             </div>
         @endguest
-    
-    {{-- Listado de comentarios Livewire --}}
-    <livewire:lista-comentarios :negocio_id="$negocio->id" />
+
+        {{-- Listado de comentarios Livewire --}}
+        <livewire:lista-comentarios :negocio_id="$negocio->id" />
     </div>
 
 
-        {{-- Sección Negocios Similares --}}
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-            <h2 class="text-3xl font-bold text-gray-900 mb-6">Negocios Similares</h2>
+    {{-- Sección Negocios Similares --}}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 mt-10">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Negocios Similares</h2>
+
+        @if ($negociosSimilares !== null && $negociosSimilares->count() > 0)
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 xl:gap-8">
                 @foreach ($negociosSimilares as $negocioSimilar)
                     <a href="{{ route('negocio.show', $negocioSimilar) }}"
                         class="bg-white rounded-xl shadow-sm p-4 flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1">
-                        <img src="{{ asset('uploads/' . $negocioSimilar->imagen) }}" alt="Logo Amazonia Verde"
+                        <img src="{{ asset('/storage/negocios/' . $negocioSimilar->imagen) }}" alt="Logo Amazonia Verde"
                             class="w-28 h-28  mb-3 rounded-full border border-gray-200  shadow-sm">
                         <h3 class="font-semibold text-gray-800 text-base">{{ $negocioSimilar->nombre }}</h3>
                     </a>
                 @endforeach
             </div>
-        </div>
-    </div>
-   
-    @endsection
+        @else
+            <div
+                class="bg-white rounded-xl shadow-sm p-6 text-center flex items-center text-gray-600 mb-10 border border-gray-100">
+                <p class="text-lg font-medium">No hay negocios similares.</p>
+            </div>
+        @endif
 
-    
+    </div>
+    </div>
+
+@endsection

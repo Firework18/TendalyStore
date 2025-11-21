@@ -22,7 +22,7 @@ class CarritoItem extends Pivot
     ];
 
     public function producto(){
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo(Producto::class,'producto_id');
     }
 
     public function negocio(){

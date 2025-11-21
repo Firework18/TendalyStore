@@ -82,8 +82,15 @@ class NegocioController extends Controller
             'imagen'=> $request->imagen,
             'user_id'=> auth()->user()->id
         ]);
+        session()->flash('exito','¡Negocio creado con éxito!');
+        return redirect()->route('dashboard.negocio');
 
-        return redirect()->route('post.index',auth()->user()->username);
+    }
 
+    public function edit(Negocio $negocio){
+        
+        $this->authorize('update',$negocio);
+
+        return view('negocios.edit',compact('negocio'));
     }
 }
