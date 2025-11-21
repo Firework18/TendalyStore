@@ -8,7 +8,6 @@
     @stack('styles')
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
     @vite(['resources/css/app.css'])
     <link rel="stylesheet" href="{{ asset('assets/styles.css') }}">
@@ -16,9 +15,9 @@
     @livewireStyles
 </head>
 
-<body>
+
+<body class="bg-gray-50">
     <div class="grid-container">
-        <!-- Cabecera de la página Inicio -->
 
         <header
             class="header-top fixed top-0 left-0 right-0 bg-white shadow-md p-4 flex items-center justify-between z-50">
@@ -27,77 +26,28 @@
                 <img src="{{ asset('assets/images/logo.svg') }}" alt="LOGO TENDALY" width="100px" />
             </a>
 
-            <nav class="hidden md:flex">
-                <div class="items-center space-x-4 flex">
-                    <a class="flex items-center space-x-2 text-black hover:text-red-600 transition" href="/dashboard">
-                        <i class="bi bi-person text-2xl"></i>
-                        <span class="text-sm">
-                            @auth
-                                Mi cuenta
-                            @endauth
-                        </span>
-                    </a>
+            <nav class="hidden md:flex items-center gap-2">
 
-                    <a class="flex items-center space-x-2 text-black hover:text-red-600 transition" href="{{ route('catalogo') }}">
-                        Catálogo
-                    </a>
+                <a href="{{ route('nosotros') }}" class="text-red-500"><i class="bi bi-body-text"></i> <span
+                        class="text-sm">Nosotros</span></a>
 
-                    <a class="relative text-black hover:text-red-600 transition" href="{{ route('carrito.index') }}">
-                        <i class="bi bi-cart text-2xl"></i>
-                    </a>
-                    <div class="relative">
-                        <button id="userMenuButton" class="relative text-black hover:text-red-600 transition"
-                            href="#carrito">
-                            <i class="bi bi-list text-2xl"></i>
-                        </button>
-                        <div id="userMenu"
-                            class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden">
-                            @auth
-                                <a href="{{ route('post.index', auth()->user()->username) }}"
-                                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Mi Muro</a>
 
-                                <a href="{{ route('dashboard') }}"
-                                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
+                <a href="{{ route('catalogo') }}" class="text-red-500"><i class="bi bi-grid"></i> <span
+                        class="text-sm">Catálogo</span></a>
 
-                                <a href="{{ route('dashboard.negocio') }}"
-                                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Visitar Negocio</a>
+                <a href="{{ route('carrito.index') }}" class="text-red-500"><i class="bi bi-cart"></i> <span
+                        class="text-sm">Carrito</span></a>
 
-                            @endauth
-                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Configuración</a>
-                            @auth
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Cerrar
-                                        Sesión</button>
-
-                                </form>
-                            @endauth
-                        </div>
-                    </div>
-                </div>
+                <x-nav-horizontal />
             </nav>
         </header>
 
-        <div class="md:hidden fixed bottom-0 left-0 right-0 bg-red-800  z-40 shadow-lg">
-            <div class="flex items-center  justify-between px-4 py-4">
+        <x-nav-celular />
 
-                <a href="{{ route('dashboard.perfil') }}">
-                    <i class="bi bi-person text-2xl text-white"></i>
-                </a>
-                <a href="#carrito">
-                    <i class="bi bi-cart text-2xl text-white"></i>
-                </a>
-
-                <a href="#">
-                    <i class="bi bi-list text-2xl text-white"></i>
-                </a>
-            </div>
-        </div>
 
         @yield('contenido')
 
-        <!-- Sección de contacto / pie de página -->
-        <footer id="contact" class="footer-section pt-12 pb-24  md:pb-12 px-4 bg-[var(--primary-blue)] text-white">
+        <footer id="contact" class="footer-section pt-12 pb-28 md:pb-12 px-4 bg-[var(--primary-blue)] text-white">
             <div class="content-wrapper max-w-6xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 border-b border-white border-opacity-20 pb-8">
                     <div>
@@ -106,8 +56,7 @@
                         </h4>
                         <p class="mb-2">
                             <i class="bi bi-geo-alt-fill mr-2 text-[var(--accent-yellow)]"></i>
-                            Av. Antonio Miroquesada (ex Juan de Aliaga) 425 - 4° piso,
-                            urbanización San Felipe - Magdalena del Mar - Lima
+                            Av. Antonio Miroquesada 425 - Lima
                         </p>
                         <p class="mb-2">
                             <i class="bi bi-telephone-fill mr-2 text-[var(--accent-yellow)]"></i>
@@ -115,70 +64,23 @@
                         </p>
                         <p class="mb-4 break-all">
                             <i class="bi bi-envelope-fill mr-2 text-[var(--accent-yellow)]"></i>
-                            bioyeconegocios@minam.gob.pe
+                            contacto@tendalystore.com
                         </p>
-                        <div class="flex space-x-4 text-2xl mt-4">
-                            <a href="#" class="hover:text-[var(--accent-yellow)] transition"><i
-                                    class="bi bi-facebook"></i></a>
-                            <a href="#" class="hover:text-[var(--accent-yellow)] transition"><i
-                                    class="bi bi-instagram"></i></a>
-                            <a href="#" class="hover:text-[var(--accent-yellow)] transition"><i
-                                    class="bi bi-linkedin"></i></a>
-                            <a href="#" class="hover:text-[var(--accent-yellow)] transition"><i
-                                    class="bi bi-youtube"></i></a>
-                        </div>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-2xl mb-4 text-[var(--accent-yellow)]">
-                            Déjanos un mensaje
-                        </h4>
-                        <form>
-                            <input type="text" placeholder="Nombre y Apellido"
-                                class="w-full p-3 mb-3 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[var(--accent-yellow)]"
-                                required />
-                            <input type="email" placeholder="Correo electrónico"
-                                class="w-full p-3 mb-3 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[var(--accent-yellow)]"
-                                required />
-                            <input type="text" placeholder="Asunto"
-                                class="w-full p-3 mb-3 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[var(--accent-yellow)]"
-                                required />
-                            <textarea placeholder="Mensaje" rows="4"
-                                class="w-full p-3 mb-3 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[var(--accent-yellow)] resize-none"
-                                required></textarea>
-                            <button type="submit"
-                                class="w-full font-bold py-3 px-4 rounded-lg bg-red-600 text-[var(--primary-blue)] hover:bg-red-700 transition">
-                                Enviar
-                            </button>
-                        </form>
-                    </div>
+
                 </div>
-                <div class="text-center text-sm text-gray-300 mt-8">
-                    &copy; {{ now()->year }} tendalyStore. Todos los derechos reservados.
+                <div>
+                    <div class="flex justify-center text-center md:text-left">
+                        <p>&copy; {{ now()->year }} tendalyStore.</p>
+                    </div>
                 </div>
             </div>
         </footer>
     </div>
+
     @vite('resources/js/app.js')
-    <script>
-        // Script para el menú desplegable del usuario
-        const userMenuButton = document.getElementById('userMenuButton');
-        const userMenu = document.getElementById('userMenu');
 
-        if (userMenuButton) { // Asegúrate de que el botón exista antes de añadir el listener
-            userMenuButton.addEventListener('click', (event) => {
-                userMenu.classList.toggle('hidden');
-                event.stopPropagation(); // Evita que el clic se propague al window y cierre el menú inmediatamente
-            });
-        }
-
-        // Ocultar el menú de usuario si se hace clic fuera
-        window.addEventListener('click', (event) => {
-            if (userMenu && !userMenu.contains(event.target) && userMenuButton && !userMenuButton.contains(event
-                    .target)) {
-                userMenu.classList.add('hidden');
-            }
-        });
-    </script>
+    <!-- Scripts -->
     @stack('scripts')
     @livewireScripts
 </body>

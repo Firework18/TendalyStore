@@ -10,10 +10,10 @@
 
     <main class="min-h-screen  bg-[var(--color-background)]">
         <div class="container mx-auto">
-            <h2 class="text-2xl font-bold text-gray-800 mb-2">Registrar Nuevo Negocio</h2>
-            <p class="text-gray-600 mb-6">Completa el formulario para registrar tu negocio en nuestra plataforma</p>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Editar Negocio: {{ $negocio->nombre }}</h2>
+            <p class="text-gray-600 mb-6">Completa el formulario para editar tu negocio en nuestra plataforma</p>
 
-            @livewire('crear-negocio')
+            @livewire('editar-negocio', ['negocio' => $negocio])
 
         </div>
     </main>

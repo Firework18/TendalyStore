@@ -38,6 +38,7 @@ class AnadirCarrito extends Component
         }
 
         if (Auth::id() === $this->producto->negocio->user_id) {
+            
             return redirect()->route('negocio.show', $this->producto->negocio->nombre)->with('error', 'No puedes agregar productos de tu propio negocio.');
         }
 
@@ -56,8 +57,13 @@ class AnadirCarrito extends Component
             $nuevaCantidad = $item->cantidad + $this->cantidad;
             
             if($nuevaCantidad > $this->producto->stock ){
-                session()->flash('error','No hay suficiente stock disponible.');
-                return redirect()->route('negocio.show',$this->producto->negocio->nombre);
+                
+                $this->dispatch(
+                'mostrar-alerta-error',
+                type: 'error',
+                message: 'No hay suficiente stock disponible.'
+                );
+                return;
             }
             
             

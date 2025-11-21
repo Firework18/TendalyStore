@@ -10,6 +10,7 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CatalogoController;
+use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\Auth\PostController;
 use App\Http\Controllers\UbicacionController;
@@ -38,11 +39,15 @@ Route::post('/dashboard/perfil', [PerfilController::class, 'store'])->name('dash
 //Catalogo
 Route::get('/catalogo', [CatalogoController::class, 'index'])->name('catalogo');
 
+//Nosotros
+Route::get('/nosotros',[NosotrosController::class,'index'])->name('nosotros');
+
 //Enviar al Negocio
 Route::get('/negocios/{negocio:nombre}', [NegocioController::class, 'show'])->name('negocio.show');
-Route::get('/negocio/create', [NegocioController::class, 'create'])->name('negocio.create');
+Route::get('/dashboard/negocio/create', [NegocioController::class, 'create'])->name('negocio.create');
 Route::post('/negocio', [NegocioController::class, 'store'])->name('negocio.store');
 Route::get('/dashboard/negocio', [NegocioController::class, 'negocioDashboard'])->name('dashboard.negocio');
+Route::get('/dashboard/negocio/{negocio:nombre}/edit',[NegocioController::class,'edit'])->name('negocio.edit');
 
 //Producto
 Route::get('/producto/create', [ProductoController::class, 'create'])->name('producto.create');

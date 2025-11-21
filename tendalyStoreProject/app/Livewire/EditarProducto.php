@@ -30,7 +30,7 @@ class EditarProducto extends Component
         'precio_oferta'=>'nullable|numeric',
         'stock' => 'required',
         'unidad_medida' => 'required',
-        'imagen_nueva' => 'required|image',
+        'imagen_nueva' => 'nullable|image',
     ];
 
     public function mount(Producto $producto){
@@ -67,6 +67,11 @@ class EditarProducto extends Component
 
         if($this->negocio_id !== auth()->user()->negocios->id){
             session()->flash('error','No tienes permiso de editar este producto.');
+            return redirect()->route('dashboard.producto');
+        }
+
+        if($this->precio <= $this->precio_oferta){
+            session()->flash('error','No puedes asignar un precio de oferta menor al precio regular');
             return redirect()->route('dashboard.producto');
         }
 

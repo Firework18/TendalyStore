@@ -24,7 +24,6 @@
         </div>
     @else
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            <!-- Tarjeta de Detalles del Negocio -->
             <div class="bg-white p-6 rounded-lg shadow-md col-span-1 md:col-span-2">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
                     <svg class="w-6 h-6 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -63,10 +62,12 @@
                     </p>
                 </div>
                 <div class="mt-6 flex justify-end space-x-3">
-                    <button
-                        class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
-                        Editar Información
-                    </button>
+                    <a href="{{ route('negocio.edit', $negocio->nombre) }}">
+                        <button
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+                            Editar Información
+                        </button>
+                    </a>
                     <a href="{{ route('negocio.show', $negocio->nombre) }}"
                         class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
                         Ver Página de Negocio
@@ -74,7 +75,6 @@
                 </div>
             </div>
 
-            <!-- Tarjeta de Resumen de Productos -->
             <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
                 <div>
                     <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
@@ -97,13 +97,9 @@
                     @else
                         <p class="text-4xl font-bold text-gray-900 mb-2">{{ $negocio->productos->count() }}</p>
                         <p class="text-gray-600 mt-2">Productos activos en tu tienda.</p>
-                        {{-- A futuro: Mostrar un detalle extra, por ejemplo, el producto más vendido o el de mayor stock --}}
-                        {{-- @php
-                            $mostStockedProduct = $negocio->products->sortByDesc('stock')->first();
-                        @endphp
-                        @if ($mostStockedProduct)
-                            <p class="text-sm text-gray-500 mt-2">Producto con más stock: <span class="font-medium">{{ $mostStockedProduct->nombre }} ({{ $mostStockedProduct->stock }} unidades)</span></p>
-                        @endif --}}
+
+                        {{-- A futuro: Mostrar un detalle extra, el producto más vendido o el de mayor stock --}}
+
                         <a href="{{ route('producto.create') }}"
                             class="text-red-600 hover:text-red-700 font-semibold mt-4 block">Registrar Nuevo Producto
                             &rarr;</a>
@@ -137,7 +133,7 @@
                 </div>
                 <div class="p-4 bg-red-50 rounded-lg">
                     <p class="text-sm text-gray-600">Ventas Hoy</p>
-                    <p class="text-3xl font-bold text-red-800 mt-1">5</p> {{-- Este valor sería dinámico --}}
+                    <p class="text-3xl font-bold text-red-800 mt-1">5</p>
                 </div>
             </div>
             <div class="mt-6">
@@ -213,7 +209,6 @@
                                     Completado
                                 </td>
                             </tr>
-                            <!-- Más filas de ventas aquí -->
                         </tbody>
                     </table>
                 </div>
@@ -225,4 +220,16 @@
         </div>
     @endif
 @endsection
-
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('negocio'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                timer: 2500,
+                title: "{{ session('negocio') }}",
+                showConfirmButton: true
+            });
+        </script>
+    @endif
+@endpush

@@ -64,4 +64,8 @@ class Negocio extends Model
     {
         return $this->hasMany(Comentario::class);
     }
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
+    }
 }

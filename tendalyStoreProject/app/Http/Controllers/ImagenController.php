@@ -16,7 +16,7 @@ class ImagenController extends Controller
 
         $imagenServidor = Image::read($imagen)->resize(1200,1000);
 
-        $imagenPath = public_path('uploads') . '/' . $nombreImagen;
+        $imagenPath = public_path('/storage/negocios') . '/' . $nombreImagen;
         $imagenServidor->save($imagenPath);
 
         return response()->json(['imagen'=>$nombreImagen]);

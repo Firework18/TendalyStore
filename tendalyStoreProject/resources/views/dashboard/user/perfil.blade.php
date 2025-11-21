@@ -8,7 +8,7 @@
     <div class="container mx-auto ">
         <div class="bg-white shadow rounded-lg p-6 lg:p-8">
             <div class="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-8">
-                <!-- Sección de Imagen de Perfil -->
+
                 <div class="flex-shrink-0">
                     <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-red-500 shadow-md">
                         <img src="{{ $user->imagen ? asset('/perfiles/' . $user->imagen) : asset('assets/images/default-profile.png') }}"
@@ -16,7 +16,6 @@
                     </div>
                 </div>
 
-                <!-- Sección de Información del Usuario -->
                 <div class="flex-grow w-full">
                     <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center lg:text-left">Información Personal</h3>
 
@@ -24,7 +23,6 @@
                         novalidate>
                         @csrf
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Nombre de Usuario -->
                             <div>
                                 <label for="username" class="block text-sm font-medium text-gray-700">Nombre de
                                     Usuario</label>
@@ -36,8 +34,6 @@
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
-
-                            <!-- Nombre -->
                             <div>
                                 <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
                                 <input type="text" name="name" id="name"
@@ -48,8 +44,6 @@
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
-
-                            <!-- Apellido Paterno -->
                             <div>
                                 <label for="apellido_paterno" class="block text-sm font-medium text-gray-700">Apellido
                                     Paterno</label>
@@ -60,8 +54,6 @@
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
-
-                            <!-- Apellido Materno -->
                             <div>
                                 <label for="apellido_materno" class="block text-sm font-medium text-gray-700">Apellido
                                     Materno</label>
@@ -72,8 +64,6 @@
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
-
-                            <!-- Email -->
                             <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                                 <input type="email" name="email" id="email"
@@ -81,8 +71,6 @@
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm bg-gray-100 text-gray-700 sm:text-sm cursor-not-allowed"
                                     disabled>
                             </div>
-
-                            <!-- Teléfono -->
                             <div>
                                 <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
                                 <input type="tel" name="telefono" id="telefono"
@@ -92,8 +80,6 @@
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
-
-                            <!-- Dirección -->
                             <div class="md:col-span-2">
                                 <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección</label>
                                 <input type="text" name="direccion" id="direccion"
@@ -103,8 +89,6 @@
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
-
-                            <!-- Información Adicional -->
                             <div class="md:col-span-2">
                                 <label for="info" class="block text-sm font-medium text-gray-700">Información
                                     Adicional</label>
@@ -114,14 +98,12 @@
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <!-- Imagen del usuario -->
                             <div class="md:col-span-2">
                                 <label for="imagen" class="block text-sm font-medium text-gray-700">Imagen Perfil</label>
                                 <input type="file" id="imagen" name="imagen" class="border p-3 w-full rounded-lg"
                                     value="" accept=".jpg, .jpeg, .png">
                             </div>
 
-                            <!-- Fecha de Creación -->
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-medium text-gray-700">Miembro desde</label>
                                 <p class="mt-1 text-red-500 font-semibold">
@@ -143,7 +125,6 @@
 
             <hr class="my-10 border-gray-200">
 
-            <!-- Sección de Funcionalidades Adicionales (Dashboard de Usuario) -->
             <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center lg:text-left">Funcionalidades del Dashboard</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div
@@ -206,7 +187,6 @@
 
 @push('scripts')
     <script>
-        // Script para previsualizar la imagen de perfil
         document.addEventListener('DOMContentLoaded', function() {
             const profileImageUpload = document.getElementById('profileImageUpload');
             const profileImagePreview = document.getElementById('profileImagePreview');

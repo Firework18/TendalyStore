@@ -18,7 +18,7 @@
             <a href="{{ route('negocio.show', $negocio->nombre) }}"
                 class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition duration-300 ease-in-out">
                 <i class="bi bi-arrow-left mr-2"></i>
-                Volver
+                Ir al negocio
             </a>
         </div>
     </div>

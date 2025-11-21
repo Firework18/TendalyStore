@@ -25,7 +25,7 @@ class Producto extends Model
     ];
 
     public function negocio(){
-        return $this->belongsTo(Negocio::class);
+        return $this->belongsTo(Negocio::class,'negocio_id');
     }
 
     public function carritoItems(){

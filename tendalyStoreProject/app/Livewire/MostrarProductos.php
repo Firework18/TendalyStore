@@ -14,7 +14,7 @@ class MostrarProductos extends Component
 
     public $negocio;
 
-    public function mount(Negocio $negocio)
+    public function mount($negocio)
     {
         $this->negocio = $negocio;
     }
@@ -25,7 +25,13 @@ class MostrarProductos extends Component
     }
 
     public function render()
-    {
+    {      
+
+        if (!$this->negocio) {
+            return view('livewire.mostrar-productos', [
+                'productos' => collect(),
+            ]);
+        }
         return view('livewire.mostrar-productos', [
             'productos' => Producto::where('negocio_id', $this->negocio->id)
                 ->paginate(5,['*'],'productosPage'),

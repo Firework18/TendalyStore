@@ -5,225 +5,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard TendalyStore - @yield('titulo')</title>
-    @stack('styles')
+
+    <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
+    <!-- Estilos de Laravel y Livewire -->
     @vite(['resources/css/app.css'])
     @livewireStyles
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
+
     <link rel="stylesheet" href="{{ asset('assets/stylesDashboard.css') }}">
+
+    @stack('styles')
 </head>
 
 <body class="bg-gray-100 font-sans antialiased">
 
-    <nav class="bg-white p-4 shadow-md fixed w-full top-0 navbar ">
-        <div class="container mx-auto flex justify-between items-center">
+    <!-- 1. NAVBAR SUPERIOR (z-50 para estar encima de todo) -->
+    <nav class="bg-white px-4 py-2 shadow-md fixed w-full top-0 z-50 h-16 flex items-center justify-between">
 
-            <button id="sidebarToggle" class="text-red-500 lg:hidden mr-4 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
+        <!-- IZQUIERDA: Botón Toggle (Móvil) -->
+        <div class="flex items-center">
+            <button id="sidebarToggle"
+                class="text-red-600 lg:hidden focus:outline-none hover:bg-red-50 p-2 rounded-md transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
                     </path>
                 </svg>
             </button>
+        </div>
 
-            <a href="{{ route('home') }}"
-                class="mx-auto md:mx-0 text-xl font-bold text-red-600 flex items-center justify-center w-full md:w-auto">
-                <img src="{{ asset('assets/images/logo.svg') }}" alt="LOGO TENDALY" width="100px" />
-            </a>
-            <div class="flex items-center space-x-4">
-                <div class="relative">
-                    <button class="flex items-center space-x-2 hover:text-red-600 focus:outline-none"
-                        id="userMenuButton">
-                        <img src="{{ auth()->user()->imagen ? asset('/perfiles/' . auth()->user()->imagen) : asset('assets/images/default-profile.png') }}"
-                            alt="Avatar" class="w-8 h-8 rounded-full border-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div id="userMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden">
-                        <a href="{{ route('dashboard.perfil') }}"
-                            class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Mi Perfil</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Configuración</a>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Cerrar
-                                Sesión</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <!-- CENTRO: Logo -->
+        <a href="{{ route('home') }}"
+            class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+            <!-- Asegúrate que la ruta de la imagen sea correcta -->
+            <img src="{{ asset('assets/images/logo.svg') }}" alt="LOGO" class="h-10 w-auto" />
+        </a>
+
+        <!-- DERECHA: Menú de Usuario (Alpine.js) -->
+        <div class="hidden md:flex items-center space-x-4">
+            <x-nav-horizontal />
         </div>
     </nav>
+    <!-- 2. OVERLAY PARA MÓVIL -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden transition-opacity lg:hidden">
+    </div>
 
-    <!-- SIDEBAR EN MOVIL -->
-    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+    <!-- 3. SIDEBAR (z-40 para estar debajo del navbar, pero encima del contenido) -->
+    <!-- Se añade pt-16 para que el contenido no quede tapado por el navbar fijo -->
+    <aside id="sidebar"
+        class="fixed top-0 left-0 z-40 w-64 h-screen pt-16 bg-red-700 text-white transition-transform duration-300 transform -translate-x-full lg:translate-x-0">
 
-    <aside id="sidebar" class="sidebar bg-red-700 text-white fixed h-full shadow-lg">
-        <nav class="mt-5">
-            <ul>
+        <nav class="h-full overflow-y-auto mt-2">
+            <ul class="space-y-1">
+                <!-- Item Dashboard -->
                 <li>
                     <a href="{{ route('dashboard') }}"
-                        class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
-                            </path>
-                        </svg>
+                        class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white {{ request()->routeIs('dashboard') ? 'bg-red-800 border-white' : '' }}">
+                        <i class="bi bi-speedometer2 mr-3 text-xl"></i>
                         Dashboard
                     </a>
                 </li>
+                <!-- Item Perfil -->
                 <li>
                     <a href="{{ route('dashboard.perfil') }}"
-                        class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                        </svg>
+                        class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white {{ request()->routeIs('dashboard.perfil') ? 'bg-red-800 border-white' : '' }}">
+                        <i class="bi bi-person mr-3 text-xl"></i>
                         Mi Perfil
                     </a>
                 </li>
+                <!-- Item Negocio -->
                 <li>
                     <a href="{{ route('dashboard.negocio') }}"
-                        class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 13.25V7A2.75 2.75 0 0018.25 4H5.75A2.75 2.75 0 003 7v10.5A2.75 2.75 0 005.75 20h12.5A2.75 2.75 0 0021 17.25v-4">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7v5"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l-3-3-3 3">
-                            </path>
-                        </svg>
+                        class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white {{ request()->routeIs('dashboard.negocio') ? 'bg-red-800 border-white' : '' }}">
+                        <i class="bi bi-briefcase mr-3 text-xl"></i>
                         Mi Negocio
                     </a>
                 </li>
+                <!-- Item Productos -->
                 <li>
                     <a href="{{ route('dashboard.producto') }}"
-                        class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M7 7h.01M7 3h5m-5 0h-2a2 2 0 00-2 2v4m0 0v4a2 2 0 002 2h2m4-4h4m-4 0a2 2 0 002-2V7a2 2 0 00-2-2h-4V3.01">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M10 20v-4a2 2 0 012-2h4a2 2 0 012 2v4m-6 0a2 2 0 002 2h4a2 2 0 002-2"></path>
-                        </svg>
+                        class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white {{ request()->routeIs('dashboard.producto') ? 'bg-red-800 border-white' : '' }}">
+                        <i class="bi bi-box-seam mr-3 text-xl"></i>
                         Productos
                     </a>
                 </li>
+                <!-- Item Ventas -->
                 <li>
-                    <a href="#" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 19V6a2 2 0 00-2-2H5a2 2 0 00-2 2v13m6 0a2 2 0 002 2h2a2 2 0 002-2m-6 0H9m7 0h2a2 2 0 002-2v-3m-6 0a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2m-6 0H6">
-                            </path>
-                        </svg>
+                    <a href="#"
+                        class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white">
+                        <i class="bi bi-currency-dollar mr-3 text-xl"></i>
                         Ventas
                     </a>
                 </li>
+                <!-- Item Pedidos -->
                 <li>
-                    <a href="#" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
-                        </svg>
-                        Reportes
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center p-4 hover:bg-red-700 transition-colors duration-200">
-                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                        Configuración
+                    <a href="#"
+                        class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white">
+                        <i class="bi bi-bag-check mr-3 text-xl"></i>
+                        Mis pedidos
                     </a>
                 </li>
             </ul>
         </nav>
     </aside>
 
-    <!-- Contenido Principal -->
-    <main class="content p-8 pt-24 min-h-screen">
+    <x-nav-celular />
+    <!-- 4. CONTENIDO PRINCIPAL -->
+    <!-- lg:ml-64 empuja el contenido cuando el sidebar está visible en desktop -->
+    <main class="p-8 pt-24 transition-all duration-300 min-h-screen lg:ml-64">
         <header class="mb-8">
-            <h2 class="text-3xl font-semibold text-gray-800-darker">@yield('titulo_contenido')</h2>
-            <p class="text-gray-600">@yield('primera_descripcion')</p>
+            <h2 class="text-3xl font-semibold text-gray-800">@yield('titulo_contenido')</h2>
+            <p class="text-gray-600 mt-1">@yield('primera_descripcion')</p>
         </header>
 
-        @yield('contenido')
 
+
+
+        <div class="bg-white rounded-lg shadow p-6">
+            @yield('contenido')
+        </div>
     </main>
 
+    @livewireScripts
+    @vite('resources/js/app.js')
+
+    <!-- Lógica del Sidebar -->
     <script>
-        const userMenuButton = document.getElementById('userMenuButton');
-        const userMenu = document.getElementById('userMenu');
-
-        if (userMenuButton) {
-            userMenuButton.addEventListener('click', (event) => {
-                userMenu.classList.toggle('hidden');
-                event.stopPropagation();
-            });
-        }
-
-        window.addEventListener('click', (event) => {
-            if (userMenu && !userMenu.contains(event.target) && userMenuButton && !userMenuButton.contains(event
-                    .target)) {
-                userMenu.classList.add('hidden');
-            }
-        });
-
-        document.querySelectorAll('.sidebar a').forEach(item => {
-            item.addEventListener('click', event => {
-                document.querySelectorAll('.sidebar a').forEach(link => {
-                    link.classList.remove('active-link');
-                });
-                event.currentTarget.classList.add('active-link');
-
-                if (window.innerWidth < 1024) {
-                    document.getElementById('sidebar').classList.remove('active');
-                    document.getElementById('sidebarOverlay').classList.remove('active');
-                }
-            });
-        });
-
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
 
+        function toggleSidebar() {
+            // Alternar la clase de ocultamiento (-translate-x-full)
+            sidebar.classList.toggle('-translate-x-full');
+
+            // Manejar el overlay
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebarOverlay.classList.add('hidden');
+            } else {
+                sidebarOverlay.classList.remove('hidden');
+            }
+        }
+
         if (sidebarToggle) {
-            sidebarToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('active');
-                sidebarOverlay.classList.toggle('active');
+            sidebarToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleSidebar();
             });
         }
 
         if (sidebarOverlay) {
             sidebarOverlay.addEventListener('click', () => {
-                sidebar.classList.remove('active');
-                sidebarOverlay.classList.remove('active');
+                toggleSidebar(); // Cerrar al hacer click afuera
             });
         }
 
+        // Cerrar sidebar al hacer resize a pantalla grande (limpieza)
         window.addEventListener('resize', () => {
-            if (window.innerWidth >= 1024)
-                sidebar.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
+            if (window.innerWidth >= 1024) {
+                sidebarOverlay.classList.add('hidden');
+                // En desktop siempre queremos ver el sidebar, así que quitamos la clase que lo oculta
+                // PERO en tu lógica, lg:translate-x-0 ya lo maneja. 
+                // Solo nos aseguramos que el overlay se vaya.
+            }
         });
     </script>
-    @livewireScripts
-    @vite('resources/js/app.js')
     @stack('scripts')
 </body>
 

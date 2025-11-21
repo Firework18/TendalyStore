@@ -52,9 +52,8 @@
                 que contribuyen al desarrollo de una economía más verde y
                 responsable en el Perú.
             </p>
-            <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <x-listar-negocio :negocios="$negocios" />
-            </div>
+            <x-listar-negocio :negocios="$negocios" />
+
         </div>
     </section>
     <section id="eco-business" class="eco-business-section py-0 md:py-0 px-0 text-center">
