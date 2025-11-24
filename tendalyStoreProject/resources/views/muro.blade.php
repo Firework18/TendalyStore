@@ -1,128 +1,199 @@
 @extends('layouts.app')
+
 @section('titulo')
     Perfil de {{ $user->username }}
 @endsection
 
 @section('contenido')
-    <main class="min-h-screen pt-2 pb-12  flex items-center justify-center p-4">
-        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-4xl ">
-
-            <div
-                class="relative h-48 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-t-lg mb-16">
+    <div class="min-h-screen bg-gray-50 pb-12">
+        <!-- Banner Superior -->
+        <div class="relative h-64 bg-gradient-to-r from-red-600 to-black overflow-hidden">
+            <!-- Elementos decorativos de fondo -->
+            <div class="absolute inset-0 bg-white/10 opacity-20"
+                style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;">
             </div>
+        </div>
 
-            <div class="relative -mt-32 flex flex-col items-center">
-                <div class="w-40 h-40 rounded-full overflow-hidden border-6 border-white shadow-lg z-10 bg-gray-200">
-                    @if ($user->imagen)
-                        <img src="{{ asset('/perfiles/' . $user->imagen) }}" alt="Foto de Perfil de Usuario"
-                            class="w-full h-full object-cover">
-                    @else
-                        <img src="{{ asset('assets/images/default-profile.png') }}" alt="Foto de Perfil de Usuario"
-                            class="w-full h-full object-cover">
-                    @endif
+        <!-- Contenedor Principal -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-24 relative z-10">
 
-                </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
+                <!-- Columna Izquierda: Tarjeta de Perfil y Datos Rápidos (4 columnas) -->
+                <div class="lg:col-span-4 xl:col-span-3 space-y-6">
 
-                <h1 class="text-4xl font-extrabold text-[var(--color-text)] mt-4 mb-2 text-center">{{ $user->name }}
-                    {{ $user->apellido_paterno }}</h1>
-                <p class="text-lg text-gray-500 mb-6 text-center"></p>
-
-                <div class="w-24 h-1 bg-[var(--color-accent)] rounded-full mb-8"></div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 w-full max-w-2xl px-4">
-
-                    <div class="col-span-full mb-6">
-                        <h2 class="text-2xl font-bold text-[var(--color-primary)] mb-3 flex items-center">
-                            <i class="bi bi-person-circle text-3xl mr-3 text-[var(--color-secondary)]"></i>
-                            Acerca de Mí
-                        </h2>
-
-                        @if ($user->informacion)
-                            <p class="text-gray-700 leading-relaxed">
-                                {{ $user->informacion }}
-                            </p>
-                        @else
-                            <p class="text-gray-700 leading-relaxed font-bold">
-                                No presenta información...
-                            </p>
-                        @endif
-                    </div>
-
-                    <div>
-                        <h2 class="text-2xl font-bold text-[var(--color-primary)] mb-3 flex items-center">
-                            <i class="bi bi-info-circle-fill text-3xl mr-3 text-[var(--color-secondary)]"></i>
-                            Información
-                        </h2>
-                        <ul class="space-y-3 text-gray-700">
-                            <li class="flex items-center">
-                                <i class="bi bi-envelope-fill text-lg mr-3 text-[var(--color-accent)]"></i>
-                                <span class="font-medium">Correo:</span> usuario@email.com
-                            </li>
-                            <li class="flex items-center">
-                                <i class="bi bi-telephone-fill text-lg mr-3 text-[var(--color-accent)]"></i>
-                                <span class="font-medium">Teléfono:</span> +51 987 654 321
-                            </li>
-                            <li class="flex items-center">
-                                <i class="bi bi-geo-alt-fill text-lg mr-3 text-[var(--color-accent)]"></i>
-                                <span class="font-medium">Ubicación:</span> Lima, Perú
-                            </li>
-                            <li class="flex items-center">
-                                <i class="bi bi-calendar-event-fill text-lg mr-3 text-[var(--color-accent)]"></i>
-                                <span class="font-medium">Miembro desde:</span> Enero 2022
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h2 class="text-2xl font-bold text-[var(--color-primary)] mb-3 flex items-center">
-                            <i class="bi bi-shop text-3xl mr-3 text-[var(--color-secondary)]"></i>
-                            Negocio Asociado
-                        </h2>
-
-                        @if ($negocio)
-                            <div class="bg-[var(--color-background)] p-4 rounded-lg shadow-sm border border-gray-200">
-                                <h3 class="text-xl font-bold text-[var(--color-primary)] mb-2">{{ $negocio->nombre }}</h3>
-                                <p class="text-gray-700 text-sm mb-3 line-clamp-2">
-                                    {{ $negocio->descripcion }}
-                                </p>
-                                <a href={{ route('negocio.show', $negocio) }}
-                                    class="inline-flex items-center text-[var(--color-secondary)] hover:text-[var(--color-primary)] font-semibold transition-colors duration-200">
-                                    Ver Negocio <i class="bi bi-arrow-right ml-2"></i>
-                                </a>
+                    <!-- Tarjeta de Identidad -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 text-center p-6">
+                        <div class="relative inline-block">
+                            <div
+                                class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-md bg-gray-200">
+                                <img src="{{ $user->imagen ? asset('/storage/perfiles/' . $user->imagen) : asset('assets/images/default-profile.png') }}"
+                                    alt="{{ $user->username }}" class="w-full h-full object-cover">
                             </div>
-                        @else
-                            No presenta negocio..
-                        @endif
+                            <!-- Indicador de estado (opcional) -->
+                            <span class="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white rounded-full"
+                                title="Usuario Activo"></span>
+                        </div>
 
+                        <h1 class="mt-4 text-xl font-bold text-gray-900">{{ $user->name }} {{ $user->apellido_paterno }}
+                        </h1>
+                        <p class="text-sm text-gray-500 font-medium">@ {{ $user->username }}</p>
 
-                    </div>
-
-                    <div class="col-span-full mt-6">
-                        <h2 class="text-2xl font-bold text-[var(--color-primary)] mb-3 flex items-center">
-                            <i class="bi bi-share-fill text-3xl mr-3 text-[var(--color-secondary)]"></i>
-                            Redes Sociales
-                        </h2>
-                        <div class="flex space-x-6 text-3xl">
-                            <a href="#" class="text-blue-600 hover:text-blue-800 transition"><i
-                                    class="bi bi-facebook"></i></a>
-                            <a href="#" class="text-pink-600 hover:text-pink-800 transition"><i
-                                    class="bi bi-instagram"></i></a>
-                            <a href="#" class="text-blue-400 hover:text-blue-600 transition"><i
-                                    class="bi bi-twitter-x"></i></a>
-                            <a href="#" class="text-blue-700 hover:text-blue-900 transition"><i
-                                    class="bi bi-linkedin"></i></a>
+                        <div class="mt-6 flex justify-center space-x-4">
+                            <!-- Botones de Acción (opcionales) -->
+                            <button
+                                class="px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg shadow hover:bg-red-700 transition">
+                                Contactar
+                            </button>
                         </div>
                     </div>
 
+                    <!-- Tarjeta de Información de Contacto -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                        <h3 class="text-gray-900 font-bold text-lg mb-4 border-b border-gray-100 pb-2">Detalles</h3>
+                        <ul class="space-y-4 text-sm">
+                            <li class="flex items-start">
+                                <i class="bi bi-envelope text-red-500 text-lg mt-0.5 mr-3"></i>
+                                <div>
+                                    <span class="block text-gray-500 text-xs">Email</span>
+                                    <span
+                                        class="text-gray-700 font-medium break-all">{{ $user->email ?? 'usuario@email.com' }}</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="bi bi-telephone text-red-500 text-lg mt-0.5 mr-3"></i>
+                                <div>
+                                    <span class="block text-gray-500 text-xs">Teléfono</span>
+                                    <span
+                                        class="text-gray-700 font-medium">{{ $user->telefono ?? 'No especificado' }}</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="bi bi-geo-alt text-red-500 text-lg mt-0.5 mr-3"></i>
+                                <div>
+                                    <span class="block text-gray-500 text-xs">Ubicación</span>
+                                    <span class="text-gray-700 font-medium">{{ $user->direccion ?? 'Lima, Perú' }}</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="bi bi-calendar3 text-red-500 text-lg mt-0.5 mr-3"></i>
+                                <div>
+                                    <span class="block text-gray-500 text-xs">Miembro desde</span>
+                                    <span
+                                        class="text-gray-700 font-medium">{{ $user->created_at->locale('es')->isoFormat('MMM YYYY') }}</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- Redes Sociales -->
+                        <div class="mt-6 pt-6 border-t border-gray-100">
+                            <p class="text-xs text-gray-400 uppercase font-semibold mb-3 tracking-wider">Social</p>
+                            <div class="flex justify-start gap-4">
+                                <a href="#"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 text-gray-500 hover:bg-blue-50 hover:text-blue-600 transition-all">
+                                    <i class="bi bi-facebook text-xl"></i>
+                                </a>
+                                <a href="#"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 text-gray-500 hover:bg-pink-50 hover:text-pink-600 transition-all">
+                                    <i class="bi bi-instagram text-xl"></i>
+                                </a>
+                                <a href="#"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 text-gray-500 hover:bg-gray-200 hover:text-black transition-all">
+                                    <i class="bi bi-twitter-x text-xl"></i>
+                                </a>
+                                <a href="#"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 text-gray-500 hover:bg-blue-50 hover:text-blue-700 transition-all">
+                                    <i class="bi bi-linkedin text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Columna Derecha: Contenido Principal (8 columnas) -->
+                <div class="lg:col-span-8 xl:col-span-9 space-y-6">
 
+                    <!-- Sección Acerca de Mí -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 lg:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="p-2 bg-red-50 rounded-lg text-red-600 mr-3">
+                                <i class="bi bi-person-lines-fill text-2xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800">Acerca de Mí</h2>
+                        </div>
 
+                        <div class="prose prose-red max-w-none text-gray-600 leading-relaxed">
+                            @if ($user->informacion)
+                                {!! nl2br(e($user->informacion)) !!}
+                            @else
+                                <div
+                                    class="flex flex-col items-center justify-center py-8 text-gray-400 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+                                    <i class="bi bi-text-paragraph text-4xl mb-2 opacity-50"></i>
+                                    <p>Este usuario aún no ha agregado una biografía.</p>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- Sección Negocio Asociado -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 lg:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="p-2 bg-red-50 rounded-lg text-red-600 mr-3">
+                                <i class="bi bi-briefcase-fill text-2xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-800">Negocio Asociado</h2>
+                        </div>
+
+                        @if ($negocio)
+                            <div
+                                class="group relative bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md hover:border-red-300 transition-all duration-300">
+                                <div class="md:flex">
+                                    <!-- Placeholder de imagen de negocio (o real si tienes) -->
+                                    <div
+                                        class="md:shrink-0 bg-gray-100 w-full md:w-48 h-48 md:h-auto flex items-center justify-center text-gray-300">
+                                        <img src="{{ asset('/storage/negocios/' . $negocio->imagen) }}" alt="">
+                                    </div>
+                                    <div class="p-6 flex flex-col justify-between w-full">
+                                        <div>
+                                            <div class="uppercase tracking-wide text-sm text-red-600 font-semibold">
+                                                Empresa</div>
+                                            <h3
+                                                class="mt-1 text-xl font-bold text-gray-900 group-hover:text-red-600 transition-colors">
+                                                {{ $negocio->nombre }}
+                                            </h3>
+                                            <p class="mt-2 text-gray-500 line-clamp-2">
+                                                {{ $negocio->descripcion }}
+                                            </p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <a href="{{ route('negocio.show', $negocio) }}"
+                                                class="inline-flex items-center text-red-600 font-semibold hover:text-red-800 transition-colors">
+                                                Ver perfil del negocio
+                                                <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            <div
+                                class="flex flex-col items-center justify-center py-10 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200 text-center">
+                                <div class="bg-white p-4 rounded-full shadow-sm mb-3">
+                                    <i class="bi bi-shop-window text-3xl text-gray-300"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-900">Sin negocio asociado</h3>
+                                <p class="text-gray-500 max-w-sm mt-1">Actualmente este usuario no tiene ningún negocio
+                                    vinculado a su perfil público.</p>
+                            </div>
+                        @endif
+                    </div>
+
+                </div>
             </div>
         </div>
-    </main>
+    </div>
 @endsection
-</body>
-
-</html>

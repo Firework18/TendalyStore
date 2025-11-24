@@ -14,7 +14,7 @@
         @auth
             <div class="px-5 py-4 bg-gray-50 border-b border-gray-100 flex items-center gap-3">
                 <div class="bg-red-100 text-red-600 w-10 h-10 rounded-full flex items-center justify-center shrink-0">
-                    <img src="{{ auth()->user()->imagen ? asset('perfiles/' . auth()->user()->imagen) : asset('assets/images/default-profile.png') }}"
+                    <img src="{{ auth()->user()->imagen ? asset('/storage/perfiles/' . auth()->user()->imagen) : asset('assets/images/default-profile.png') }}"
                         class="w-full h-full rounded-full object-cover">
                 </div>
                 <div class="overflow-hidden">
