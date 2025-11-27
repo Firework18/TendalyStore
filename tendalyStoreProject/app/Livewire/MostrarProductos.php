@@ -19,7 +19,7 @@ class MostrarProductos extends Component
         $this->negocio = $negocio;
     }
 
-     #[On('eliminar')]
+    #[On('eliminar')]
     public function eliminarProducto(Producto $producto){
         Producto::find($producto->id)->delete();
     }

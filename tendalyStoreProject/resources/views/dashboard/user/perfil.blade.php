@@ -32,7 +32,7 @@
 
 
             <!-- Card 3 -->
-            <a href="#"
+            <a href="{{ route('direcciones.index') }}"
                 class="group relative bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-lg hover:border-red-200 transition-all duration-300">
                 <div class="flex items-center gap-4 mb-4">
                     <div

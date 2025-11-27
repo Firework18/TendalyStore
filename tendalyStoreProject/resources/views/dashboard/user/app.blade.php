@@ -24,10 +24,8 @@
 
 <body class="bg-gray-100 font-sans antialiased">
 
-    <!-- 1. NAVBAR SUPERIOR (z-50 para estar encima de todo) -->
     <nav class="bg-white px-4 py-2 shadow-md fixed w-full top-0 z-50 h-16 flex items-center justify-between">
 
-        <!-- IZQUIERDA: Botón Toggle (Móvil) -->
         <div class="flex items-center">
             <button id="sidebarToggle"
                 class="text-red-600 lg:hidden focus:outline-none hover:bg-red-50 p-2 rounded-md transition">
@@ -38,30 +36,23 @@
             </button>
         </div>
 
-        <!-- CENTRO: Logo -->
         <a href="{{ route('home') }}"
             class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-            <!-- Asegúrate que la ruta de la imagen sea correcta -->
             <img src="{{ asset('assets/images/logo.svg') }}" alt="LOGO" class="h-10 w-auto" />
         </a>
 
-        <!-- DERECHA: Menú de Usuario (Alpine.js) -->
         <div class="hidden md:flex items-center space-x-4">
             <x-nav-horizontal />
         </div>
     </nav>
-    <!-- 2. OVERLAY PARA MÓVIL -->
     <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden transition-opacity lg:hidden">
     </div>
 
-    <!-- 3. SIDEBAR (z-40 para estar debajo del navbar, pero encima del contenido) -->
-    <!-- Se añade pt-16 para que el contenido no quede tapado por el navbar fijo -->
     <aside id="sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-screen pt-16 bg-red-700 text-white transition-transform duration-300 transform -translate-x-full lg:translate-x-0">
 
         <nav class="h-full overflow-y-auto mt-2">
             <ul class="space-y-1">
-                <!-- Item Dashboard -->
                 <li>
                     <a href="{{ route('dashboard') }}"
                         class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white {{ request()->routeIs('dashboard') ? 'bg-red-800 border-white' : '' }}">
@@ -69,7 +60,6 @@
                         Dashboard
                     </a>
                 </li>
-                <!-- Item Perfil -->
                 <li>
                     <a href="{{ route('dashboard.perfil') }}"
                         class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white {{ request()->routeIs('dashboard.perfil') ? 'bg-red-800 border-white' : '' }}">
@@ -77,7 +67,6 @@
                         Mi Perfil
                     </a>
                 </li>
-                <!-- Item Negocio -->
                 <li>
                     <a href="{{ route('dashboard.negocio') }}"
                         class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white {{ request()->routeIs('dashboard.negocio') ? 'bg-red-800 border-white' : '' }}">
@@ -85,7 +74,6 @@
                         Mi Negocio
                     </a>
                 </li>
-                <!-- Item Productos -->
                 <li>
                     <a href="{{ route('dashboard.producto') }}"
                         class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white {{ request()->routeIs('dashboard.producto') ? 'bg-red-800 border-white' : '' }}">
@@ -93,7 +81,6 @@
                         Productos
                     </a>
                 </li>
-                <!-- Item Ventas -->
                 <li>
                     <a href="#"
                         class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white">
@@ -101,7 +88,6 @@
                         Ventas
                     </a>
                 </li>
-                <!-- Item Pedidos -->
                 <li>
                     <a href="#"
                         class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white">
@@ -114,18 +100,13 @@
     </aside>
 
     <x-nav-celular />
-    <!-- 4. CONTENIDO PRINCIPAL -->
-    <!-- lg:ml-64 empuja el contenido cuando el sidebar está visible en desktop -->
+
     <main class="p-8 pt-24 transition-all duration-300 min-h-screen lg:ml-64">
         <header class="mb-8">
             <h2 class="text-3xl font-semibold text-gray-800">@yield('titulo_contenido')</h2>
             <p class="text-gray-600 mt-1">@yield('primera_descripcion')</p>
         </header>
-
-
-
-
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="bg-white rounded-lg shadow p-6 mb-10">
             @yield('contenido')
         </div>
     </main>
@@ -133,17 +114,13 @@
     @livewireScripts
     @vite('resources/js/app.js')
 
-    <!-- Lógica del Sidebar -->
     <script>
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
 
         function toggleSidebar() {
-            // Alternar la clase de ocultamiento (-translate-x-full)
             sidebar.classList.toggle('-translate-x-full');
-
-            // Manejar el overlay
             if (sidebar.classList.contains('-translate-x-full')) {
                 sidebarOverlay.classList.add('hidden');
             } else {
@@ -160,17 +137,13 @@
 
         if (sidebarOverlay) {
             sidebarOverlay.addEventListener('click', () => {
-                toggleSidebar(); // Cerrar al hacer click afuera
+                toggleSidebar();
             });
         }
 
-        // Cerrar sidebar al hacer resize a pantalla grande (limpieza)
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 1024) {
                 sidebarOverlay.classList.add('hidden');
-                // En desktop siempre queremos ver el sidebar, así que quitamos la clase que lo oculta
-                // PERO en tu lógica, lg:translate-x-0 ya lo maneja. 
-                // Solo nos aseguramos que el overlay se vaya.
             }
         });
     </script>
