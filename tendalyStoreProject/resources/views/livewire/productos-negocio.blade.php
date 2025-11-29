@@ -2,22 +2,18 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
         @if ($productos->count())
             <div class="mb-12">
-                <!-- Encabezado de Sección -->
                 <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-gray-200 pb-4">
                     <div>
                         <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Nuestros Productos</h2>
                         <p class="text-gray-500 mt-1">Calidad y sostenibilidad en cada detalle</p>
                     </div>
-                    <!-- Aquí podrías poner un filtro u ordenamiento en el futuro -->
                 </div>
 
-                <!-- Grid de Productos -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 xl:gap-8">
                     @foreach ($productos as $producto)
                         <div
                             class="group bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:border-gray-200 transition-all duration-300 flex flex-col h-full relative">
 
-                            <!-- 1. Imagen del Producto -->
                             <div class="relative aspect-[4/3] overflow-hidden rounded-t-2xl bg-gray-100">
                                 <!-- Link en la imagen para UX -->
                                 <a href="{{ route('producto.show', $producto) }}" class="block w-full h-full">
@@ -26,7 +22,6 @@
                                         class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110 {{ $producto->stock <= 0 ? 'grayscale opacity-60' : '' }}">
                                 </a>
 
-                                <!-- Badge Oferta -->
                                 @if ($producto->stock > 0 && $producto->precio_oferta && $producto->precio_oferta < $producto->precio)
                                     <span
                                         class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold px-2.5 py-1 rounded uppercase tracking-wider shadow-sm">
@@ -34,7 +29,6 @@
                                     </span>
                                 @endif
 
-                                <!-- Overlay Agotado -->
                                 @if ($producto->stock <= 0)
                                     <div class="absolute inset-0 flex items-center justify-center bg-gray-900/10">
                                         <span
@@ -45,9 +39,7 @@
                                 @endif
                             </div>
 
-                            <!-- 2. Información del Producto -->
                             <div class="p-5 flex flex-col flex-1">
-                                <!-- Título -->
                                 <h3
                                     class="font-bold text-gray-800 text-lg mb-2 leading-tight group-hover:text-red-700 transition-colors">
                                     <a href="{{ route('producto.show', $producto) }}">

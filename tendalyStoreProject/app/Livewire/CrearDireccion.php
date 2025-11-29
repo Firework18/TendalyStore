@@ -20,7 +20,7 @@ class CrearDireccion extends Component
         'direccion'=>'required',
         'referencia'=>'required',
         'telefono'=>'required',
-        'es_principal' => 'boolean',
+        'es_principal' => 'nullable|boolean',
     ];
 
     public function existePrincipal(){

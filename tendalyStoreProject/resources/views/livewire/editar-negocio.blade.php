@@ -263,12 +263,15 @@
             </div>
         </section>
 
-        <!-- Action Buttons -->
-        <div class="flex justify-end space-x-4 mb-8">
+        <div class="flex flex-col md:flex-row md:justify-end md:space-x-4 space-y-4 md:space-y-0 mb-8">
             <a href="{{ route('dashboard') }}"
-                class="px-6 py-2 border bg-red-500 border-gray-300 rounded-lg text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-gray-300 ">Cancelar</a>
+                class="px-6 py-2 border bg-red-500 border-gray-300 rounded-lg text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                Cancelar
+            </a>
+
             <input type="submit" value="Guardar Cambios"
                 class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-tendaly-green focus:ring-opacity-50 flex items-center space-x-2">
         </div>
+
     </form>
 </div>

@@ -20,7 +20,9 @@
                 icon: 'success',
                 timer: 2500,
                 title: "{{ session('exito') }}",
-                showConfirmButton: true
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end'
             });
         </script>
     @elseif (session('error'))
@@ -29,10 +31,10 @@
                 icon: 'error',
                 timer: 2500,
                 title: "{{ session('error') }}",
-                showConfirmButton: true
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end'
             });
         </script>
     @endif
-
-
 @endpush

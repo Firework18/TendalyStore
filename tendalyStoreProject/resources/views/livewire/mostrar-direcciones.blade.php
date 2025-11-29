@@ -11,7 +11,7 @@
                 Aún no has agregado ninguna dirección. Agrega una para recibir tus pedidos.
             </p>
 
-            <a href="{{ route('direcciones.index') }}"
+            <a href="{{ route('direcciones.create') }}"
                 class="inline-flex items-center px-5 py-2.5 bg-red-700 hover:bg-red-800 text-white font-medium rounded-lg transition-colors duration-200 shadow-sm">
                 <i class="bi bi-plus-lg mr-2"></i>
                 Agregar nueva dirección

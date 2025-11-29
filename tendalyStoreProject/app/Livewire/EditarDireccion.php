@@ -30,7 +30,7 @@ class EditarDireccion extends Component
         'direccion' => 'required|string',
         'telefono' => 'required|string',
         'referencia' => 'nullable|string',
-        'es_principal' => 'boolean',
+        'es_principal' => 'nullable|boolean',
     ];
 
     public function editarDireccion(){

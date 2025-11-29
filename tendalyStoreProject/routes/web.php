@@ -13,6 +13,7 @@ use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\Auth\PostController;
+use App\Http\Controllers\LogisticaController;
 use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ComentarioController;
@@ -64,7 +65,8 @@ Route::get('/dashboard/productos', [ProductoController::class, 'productoDashboar
 Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('producto.destroy');
 Route::patch('/productos/{id}/restore', [ProductoController::class, 'restore'])->name('producto.restore');
 
-
+//Logistica
+Route::get('/dashboard/negocios/logistica',[LogisticaController::class,'create'])->name('logistica.create');
 
 //Carrito
 Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito.index');

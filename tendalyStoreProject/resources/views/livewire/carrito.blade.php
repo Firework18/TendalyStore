@@ -1,95 +1,183 @@
-<div>
-    <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Tu Carrito de Compras</h1>
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+    <div class="flex items-center justify-between mb-8">
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Tu Carrito de Compras</h1>
+        @if ($carrito && !$carrito->items->isEmpty())
+            <span class="bg-gray-100 text-gray-600 py-1 px-3 rounded-full text-sm font-medium">
+                {{ $carrito->items->count() }} Productos
+            </span>
+        @endif
+    </div>
 
     @if (!$carrito || $carrito->items->isEmpty())
-        <div class="bg-white p-6 rounded-lg shadow-md text-center">
-            <p class="text-gray-600 text-lg mb-4">Tu carrito está vacío. ¡Añade algunos productos!</p>
+        <div class="bg-white p-12 rounded-2xl shadow-sm border border-gray-100 text-center flex flex-col items-center">
+            <div class="bg-red-50 p-4 rounded-full mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Tu carrito está vacío</h3>
+            <p class="text-gray-500 mb-8 max-w-md mx-auto">Parece que aún no has añadido nada a tu carrito. Explora
+                nuestro catálogo y encuentra los mejores productos.</p>
             <a href="{{ route('catalogo') }}"
-                class="inline-block bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700 transition duration-300">
+                class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 md:py-3 md:text-lg md:px-10 transition duration-300 shadow-lg hover:shadow-red-500/30">
                 Ir de Compras
             </a>
         </div>
     @else
-        @foreach ($carrito->items->groupBy(fn($item) => $item->producto->negocio->nombre ?? 'Sin negocio') as $negocioNombre => $itemsPorNegocio)
-            <div class="bg-white p-6 rounded-lg shadow-md mb-8">
-                <h2 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-4">{{ $negocioNombre }}</h2>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    @foreach ($itemsPorNegocio as $item)
-                        <div class="flex items-center space-x-4 border-b pb-4 mb-4 last:border-b-0 last:pb-0">
-                            <img src="{{ asset('/storage/productos/' . $item->producto->imagen) }}"
-                                alt="{{ $item->producto->nombre }}" class="w-20 h-20 object-cover rounded-md shadow-sm">
-
-                            <div class="flex-grow">
-                                <h3 class="text-lg font-medium text-gray-800">{{ $item->producto->nombre }}</h3>
-                                <p class="text-gray-600 text-sm">Cantidad: {{ $item->cantidad }}</p>
-                                <p class="text-gray-600 text-sm">Precio Unitario: S/.
-                                    {{ number_format($item->precio_unitario, 2) }}</p>
-                                <p class="text-red-600 font-bold mt-1">Subtotal: S/.
-                                    {{ number_format($item->subtotal, 2) }}</p>
-                            </div>
-
-                            <div class="flex items-center space-x-2">
-                                <button class="text-gray-500 hover:text-blue-600 transition">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green"
-                                        class="size-6">
-                                        <path
-                                            d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
-                                        <path
-                                            d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
-                                    </svg>
-
-                                </button>
-                                <button wire:click="$dispatch('mostrarAlerta',{ producto: {{ $item->producto }} })"
-                                    class="text-gray-500 hover:text-red-600 transition">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red"
-                                        class="size-6">
-                                        <path fill-rule="evenodd"
-                                            d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-
-                                </button>
-                            </div>
+        <div class="space-y-8">
+            @foreach ($carrito->items->groupBy(fn($item) => $item->producto->negocio->nombre ?? 'Sin negocio') as $negocioNombre => $itemsPorNegocio)
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-100 flex justify-between items-center gap-2">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                            <h2 class="text-lg font-bold text-gray-800">{{ $negocioNombre }}</h2>
                         </div>
-                    @endforeach
-                </div>
+                        <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Envío
+                            calculado al
+                            final</span>
+                    </div>
 
-                <div class="mt-6 pt-4 border-t flex justify-end">
-                    <button
-                        class="bg-red-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700 transition duration-300">
-                        Comprar de {{ $negocioNombre }}
-                    </button>
+                    <div class="divide-y divide-gray-100">
+                        @foreach ($itemsPorNegocio as $item)
+                            <div class="p-6 hover:bg-gray-50 transition duration-150 ease-in-out group">
+                                <div class="flex flex-col sm:flex-row items-center gap-6">
+
+                                    <div class="flex-shrink-0">
+                                        <img src="{{ asset('/storage/productos/' . $item->producto->imagen) }}"
+                                            alt="{{ $item->producto->nombre }}"
+                                            class="w-24 h-24 object-cover rounded-xl shadow-sm border border-gray-200">
+                                    </div>
+
+                                    <div class="flex-1 w-full text-center sm:text-left">
+                                        <h3
+                                            class="text-lg font-bold text-gray-900 group-hover:text-red-600 transition-colors">
+                                            {{ $item->producto->nombre }}
+                                        </h3>
+                                        <p class="text-sm text-gray-500 mt-1">
+                                            Unitario: <span class="font-medium text-gray-900">S/.
+                                                {{ number_format($item->precio_unitario, 2) }}</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Control de Cantidad con Alpine & Livewire -->
+                                    <div class="flex flex-col items-center justify-center" x-data="{
+                                        qty: {{ $item->cantidad }},
+                                        loading: false,
+                                        updateQty(val) {
+                                            if (val < 1) return;
+                                            this.qty = val;
+                                            this.loading = true;
+                                            $wire.actualizarCantidad({{ $item->id }}, val).then(() => {
+                                                this.loading = false;
+                                            });
+                                        }
+                                    }">
+
+                                        <div
+                                            class="flex items-center border border-gray-300 rounded-lg bg-white shadow-sm">
+                                            <button @click="updateQty(qty - 1)" :disabled="qty <= 1 || loading"
+                                                class="px-3 py-1 text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed rounded-l-lg transition">
+                                                -
+                                            </button>
+
+                                            <input type="text" readonly x-model="qty"
+                                                class="w-12 text-center text-sm font-semibold text-gray-700 border-none focus:ring-0 p-0 select-none bg-transparent">
+
+                                            <button @click="updateQty(qty + 1)"
+                                                :disabled="{{ $item->producto->stock }} <= qty || loading"
+                                                class="px-3 py-1 text-gray-600 hover:bg-gray-100 disabled:opacity-50 rounded-r-lg transition">
+                                                +
+                                            </button>
+                                        </div>
+                                        <div class="h-4 mt-1">
+                                            <span x-show="loading"
+                                                class="text-xs text-red-500 animate-pulse">Actualizando...</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Subtotal -->
+                                    <div class="text-right min-w-[100px]">
+                                        <p class="text-sm text-gray-500">Subtotal</p>
+                                        <p class="text-lg font-bold text-red-600">
+                                            S/. {{ number_format($item->subtotal, 2) }}
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <button
+                                            wire:click="$dispatch('mostrarAlerta',{ producto: {{ $item->producto }} })"
+                                            class="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-full transition duration-200"
+                                            title="Eliminar producto">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div
+                        class="bg-gray-50 px-6 py-4 flex flex-col sm:flex-row justify-end items-center gap-4 border-t border-gray-100">
+                        <span class="hidden">{{ $subtotalNegocio = $itemsPorNegocio->sum('subtotal') }}</span>
+                        <div class="text-gray-600 text-sm">
+                            Subtotal {{ $negocioNombre }}: <span class="font-bold text-gray-900">S/.
+                                {{ number_format($subtotalNegocio, 2) }}</span>
+                        </div>
+                        <button
+                            class="w-full sm:w-auto bg-white border border-red-600 text-red-600 font-semibold py-2 px-6 rounded-lg hover:bg-red-600 hover:text-white transition duration-300 shadow-sm">
+                            Comprar solo de {{ $negocioNombre }}
+                        </button>
+                    </div>
+                </div>
+            @endforeach
+
+            <div
+                class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 mt-8 flex flex-col sm:flex-row justify-between items-center gap-6">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-500">Total a Pagar</h3>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center gap-6">
+                    <span class="hidden">{{ $totalCarrito = $carrito->items->sum('subtotal') }}</span>
+
+                    <div class="text-3xl font-extrabold text-gray-900">
+                        S/. {{ number_format($totalCarrito, 2) }}
+                    </div>
                 </div>
             </div>
-        @endforeach
-
-        <div class="mt-10 text-right">
-            @php
-                $totalCarrito = $carrito->items->sum('subtotal');
-            @endphp
-            <p class="text-2xl font-bold text-gray-800 mb-4">
-                Total del Carrito:
-                <span class="text-red-600">S/. {{ number_format($totalCarrito, 2) }}</span>
-            </p>
-
         </div>
     @endif
 </div>
+
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
         document.addEventListener('livewire:init', () => {
             Livewire.on('mostrarAlerta', (producto) => {
                 Swal.fire({
-                    title: "¿Está seguro?",
-                    text: "El producto se eliminará del carrito de compras.",
+                    title: "¿Eliminar producto?",
+                    text: "Se quitará " + producto.nombre + " de tu carrito.",
                     icon: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Sí, elimínalo.",
-                    cancelButtonText: "Cancelar"
+                    confirmButtonColor: "#ef4444",
+                    cancelButtonColor: "#9ca3af",
+                    confirmButtonText: "Sí, eliminar",
+                    cancelButtonText: "Cancelar",
+                    customClass: {
+                        popup: 'rounded-xl',
+                        confirmButton: 'rounded-lg px-6 py-2',
+                        cancelButton: 'rounded-lg px-6 py-2'
+                    }
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Livewire.dispatch('eliminar', producto);
@@ -101,6 +189,7 @@
                     }
                 });
             });
+
         });
     </script>
 @endpush
