@@ -134,10 +134,12 @@
                             Subtotal {{ $negocioNombre }}: <span class="font-bold text-gray-900">S/.
                                 {{ number_format($subtotalNegocio, 2) }}</span>
                         </div>
-                        <button
-                            class="w-full sm:w-auto bg-white border border-red-600 text-red-600 font-semibold py-2 px-6 rounded-lg hover:bg-red-600 hover:text-white transition duration-300 shadow-sm">
-                            Comprar solo de {{ $negocioNombre }}
-                        </button>
+                        <a href="{{ route('orden.checkout', $negocioNombre) }}">
+                            <button
+                                class="w-full sm:w-auto bg-white border border-red-600 text-red-600 font-semibold py-2 px-6 rounded-lg hover:bg-red-600 hover:text-white transition duration-300 shadow-sm">
+                                Comprar solo de {{ $negocioNombre }}
+                            </button>
+                        </a>
                     </div>
                 </div>
             @endforeach

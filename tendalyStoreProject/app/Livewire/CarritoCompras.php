@@ -13,12 +13,9 @@ class CarritoCompras extends Component
 {
 
     public $carrito;
-
-
     public function mount(Carrito $carrito)
     {
         $this->carrito = $carrito->load("items.producto.negocio");
-        
     }
 
     #[On('eliminar')]

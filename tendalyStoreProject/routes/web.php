@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
 
+use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CatalogoController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\Auth\PostController;
@@ -73,6 +75,9 @@ Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito.index
 
 //Comentarios
 Route::post('/comentario', [ComentarioController::class, 'store'])->name('comentario.store');
+
+Route::get('/checkout/{negocio:nombre}',[CheckoutController::class,'index'])->name('orden.checkout');
+Route::get('/ordenes/confirmado/{orden:id}',[OrdenController::class,'exito'])->name('orden.exito');
 
 //Enviar al muro
 Route::get('/{user:username}', [PostController::class, 'index'])->name('post.index');
