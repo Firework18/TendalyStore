@@ -26,8 +26,8 @@
             </ul>
         </div>
     @endif
-
-    @if ($producto->negocio === auth()->user()->negocios)
+    {{-- {{ dd($producto->negocio === auth()->user()->negocios) }} --}}
+    @if ($producto->negocio->user_id === auth()->user()->id)
         <span class="font-extrabold text-center text-red-600 bg-red-200">USTED ES EL DUEÑO, NO PUEDE COMPRAR</span>
     @else
         <div class="flex items-center space-x-2 mb-4">

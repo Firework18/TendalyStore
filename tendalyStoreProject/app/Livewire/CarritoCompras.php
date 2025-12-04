@@ -13,7 +13,6 @@ class CarritoCompras extends Component
 {
 
     public $carrito;
-
     public function mount(Carrito $carrito)
     {
         $this->carrito = $carrito->load("items.producto.negocio");
@@ -24,8 +23,23 @@ class CarritoCompras extends Component
         CarritoItem::where('producto_id',$producto->id)->delete();
     }
 
+    public function actualizarCantidad($itemId, $cantidad){
+        if ($cantidad < 1) return;
+
+        $item = CarritoItem::find($itemId);
+
+        if ($item) {
+            $item->cantidad = $cantidad;
+            
+            $item->subtotal = $item->precio_unitario * $cantidad;
+            $item->save();
+            
+            $this->dispatch('carritoActualizado');
+        }
+    }
+
     public function render()
-    {
+    {   
         return view('livewire.carrito');
     }
 }

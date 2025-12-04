@@ -4,7 +4,7 @@
             @foreach ($comentarios as $comentario)
                 <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                     <div class="flex items-center mb-3">
-                        <img src="{{ $comentario->usuarios->imagen ? asset('perfiles/' . $comentario->usuarios->imagen) : asset('assets/images/default-profile.png') }}"
+                        <img src="{{ $comentario->usuarios->imagen ? asset('/storage/perfiles/' . $comentario->usuarios->imagen) : asset('assets/images/default-profile.png') }}"
                             class="w-12 h-12 rounded-full mr-4 object-cover">
                         <div>
                             <a href="{{ route('post.index', $comentario->usuarios->username) }}"
@@ -16,7 +16,8 @@
                                     <i
                                         class="bi {{ $i <= $comentario->rating ? 'bi-star-fill' : 'bi-star' }} text-yellow-400 text-base mr-1"></i>
                                 @endfor
-                                <span class="ml-2 text-gray-500 text-xs">{{ $comentario->created_at->diffForHumans() }}</span>
+                                <span
+                                    class="ml-2 text-gray-500 text-xs">{{ $comentario->created_at->diffForHumans() }}</span>
                             </div>
                         </div>
                     </div>

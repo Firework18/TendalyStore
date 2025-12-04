@@ -78,7 +78,7 @@ class EditarProducto extends Component
         $producto->save();
 
         //Redireccionar
-        session()->flash('exito','Producto se editó correctamente.');
+        session()->flash('exito','Producto editado correctamente.');
 
         redirect()->route('dashboard.producto');
 

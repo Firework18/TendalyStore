@@ -12,6 +12,7 @@ class CarritoItem extends Pivot
 {
     use HasFactory;
 
+
     protected $fillables = [
         'carrito_id',
         'negocio_id',
