@@ -51,43 +51,7 @@
             </a>
 
 
-            <!-- Card 5 -->
-            <a href="#"
-                class="group relative bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-lg hover:border-red-200 transition-all duration-300">
-                <div class="flex items-center gap-4 mb-4">
-                    <div
-                        class="p-3 bg-red-50 text-red-600 rounded-xl group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
-                        <i class="bi bi-shield-lock text-2xl"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-gray-800 group-hover:text-red-600 transition-colors">Privacidad
-                    </h4>
-                </div>
-                <p class="text-gray-500 text-sm mb-4 line-clamp-2">Revisa y ajusta tus configuraciones de privacidad y
-                    datos personales.</p>
-                <span
-                    class="text-red-600 font-medium text-sm flex items-center group-hover:translate-x-2 transition-transform">
-                    Configurar privacidad <span class="ml-2">&rarr;</span>
-                </span>
-            </a>
 
-            <!-- Card 6 -->
-            <a href="#"
-                class="group relative bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-lg hover:border-red-200 transition-all duration-300">
-                <div class="flex items-center gap-4 mb-4">
-                    <div
-                        class="p-3 bg-red-50 text-red-600 rounded-xl group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
-                        <i class="bi bi-file-earmark-text text-2xl"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-gray-800 group-hover:text-red-600 transition-colors">Mis Pedidos
-                    </h4>
-                </div>
-                <p class="text-gray-500 text-sm mb-4 line-clamp-2">Consulta el estado, historial y detalles de tus
-                    compras anteriores.</p>
-                <span
-                    class="text-red-600 font-medium text-sm flex items-center group-hover:translate-x-2 transition-transform">
-                    Ver historial <span class="ml-2">&rarr;</span>
-                </span>
-            </a>
         </div>
     </div>
 @endsection

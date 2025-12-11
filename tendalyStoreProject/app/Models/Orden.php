@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Tag;
 use App\Models\User;
+use App\Models\Orden;
 use App\Models\Negocio;
 use App\Models\OrdenItem;
 use Illuminate\Database\Eloquent\Model;
@@ -50,5 +52,9 @@ class Orden extends Model
 
     public function items(){
         return $this->hasMany(OrdenItem::class);
+    }
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class,'orden_tag')->withTimestamps();
     }
 }

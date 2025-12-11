@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('titulo', 'Compra Finalizada - ' . $negocio->nombre)
 @section('contenido')
-    <div class="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
+    <div class="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-10">
         <div class="max-w-md w-full bg-white rounded-3xl shadow-xl overflow-hidden text-center p-8">
 
             <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="flex justify-between border-t border-gray-200 pt-2 mt-2">
                     <span class="text-gray-800 font-semibold">Total Pagado:</span>
-                    <span class="text-purple-600 font-bold">S/. {{ number_format($orden->total, 2) }}</span>
+                    <span class="text-red-600 font-bold">S/. {{ number_format($orden->total, 2) }}</span>
                 </div>
             </div>
 
@@ -34,8 +34,10 @@
                     class="block w-full bg-gray-900 text-white font-bold py-3 rounded-xl hover:bg-gray-800 transition shadow-lg">
                     Seguir Comprando
                 </a>
-                <!-- botón para ver "Mis Pedidos" en un futuro -->
+
             </div>
+            <a href="{{ route('orden.cliente.detalle', $orden->codigo) }}"
+                class="text-red-500 font-semibold hover:text-red-700 transition-colors">Ver Orden</a>
         </div>
     </div>
 @endsection

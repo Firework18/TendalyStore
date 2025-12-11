@@ -321,9 +321,6 @@
                     </span>
                 </button>
 
-                <p class="text-xs text-center text-gray-400 mt-4">
-                    Al confirmar, aceptas nuestros términos y condiciones.
-                </p>
             </div>
         </div>
     </div>

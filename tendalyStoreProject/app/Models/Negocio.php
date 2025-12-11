@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Orden;
 use App\Models\Distrito;
 use App\Models\Producto;
 use App\Models\Provincia;
@@ -67,5 +68,9 @@ class Negocio extends Model
 
     public function tags(){
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function ordenes(){
+        return $this->hasMany(Orden::class);
     }
 }

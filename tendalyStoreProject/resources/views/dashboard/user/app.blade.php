@@ -49,53 +49,100 @@
     </div>
 
     <aside id="sidebar"
-        class="fixed top-0 left-0 z-40 w-64 h-screen pt-16 bg-red-700 text-white transition-transform duration-300 transform -translate-x-full lg:translate-x-0">
+        class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 bg-gradient-to-b from-red-700 to-red-800 text-white transition-transform duration-300 transform -translate-x-full lg:translate-x-0 shadow-xl border-r border-red-800">
 
-        <nav class="h-full overflow-y-auto mt-2">
-            <ul class="space-y-1">
+        <nav class="h-full overflow-y-auto px-3 pb-4">
+
+            {{-- Sección: GENERAL --}}
+            <div class="mb-2 mt-2 px-4 text-xs font-semibold text-red-200 uppercase tracking-wider">
+                General
+            </div>
+
+            <ul class="space-y-1 mb-6">
                 <li>
                     <a href="{{ route('dashboard') }}"
-                        class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white {{ request()->routeIs('dashboard') ? 'bg-red-800 border-white' : '' }}">
-                        <i class="bi bi-speedometer2 mr-3 text-xl"></i>
-                        Dashboard
+                        class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 group
+                   {{ request()->routeIs('dashboard')
+                       ? 'bg-white text-red-700 shadow-md font-semibold'
+                       : 'text-red-50 hover:bg-white/10 hover:text-white' }}">
+
+                        <i class="bi bi-speedometer2 mr-3 text-xl transition-transform group-hover:scale-110"></i>
+                        <span>Dashboard</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('dashboard.perfil') }}"
-                        class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white {{ request()->routeIs('dashboard.perfil') ? 'bg-red-800 border-white' : '' }}">
-                        <i class="bi bi-person mr-3 text-xl"></i>
-                        Mi Perfil
+                        class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 group
+                   {{ request()->routeIs('dashboard.perfil')
+                       ? 'bg-white text-red-700 shadow-md font-semibold'
+                       : 'text-red-50 hover:bg-white/10 hover:text-white' }}">
+
+                        <i class="bi bi-person mr-3 text-xl transition-transform group-hover:scale-110"></i>
+                        <span>Mi Perfil</span>
                     </a>
                 </li>
+            </ul>
+
+            {{-- Sección: GESTIÓN --}}
+            <div class="mb-2 px-4 text-xs font-semibold text-red-200 uppercase tracking-wider">
+                Gestión
+            </div>
+
+            <ul class="space-y-1">
                 <li>
                     <a href="{{ route('dashboard.negocio') }}"
-                        class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white {{ request()->routeIs('dashboard.negocio') ? 'bg-red-800 border-white' : '' }}">
-                        <i class="bi bi-briefcase mr-3 text-xl"></i>
-                        Mi Negocio
+                        class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 group
+                   {{ request()->routeIs('dashboard.negocio')
+                       ? 'bg-white text-red-700 shadow-md font-semibold'
+                       : 'text-red-50 hover:bg-white/10 hover:text-white' }}">
+
+                        <i class="bi bi-briefcase mr-3 text-xl transition-transform group-hover:scale-110"></i>
+                        <span>Mi Negocio</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('dashboard.producto') }}"
-                        class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white {{ request()->routeIs('dashboard.producto') ? 'bg-red-800 border-white' : '' }}">
-                        <i class="bi bi-box-seam mr-3 text-xl"></i>
-                        Productos
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white">
-                        <i class="bi bi-currency-dollar mr-3 text-xl"></i>
-                        Ventas
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center p-4 hover:bg-red-800 transition-colors border-l-4 border-transparent hover:border-white">
-                        <i class="bi bi-bag-check mr-3 text-xl"></i>
-                        Mis pedidos
+                        class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 group
+                   {{ request()->routeIs('dashboard.producto')
+                       ? 'bg-white text-red-700 shadow-md font-semibold'
+                       : 'text-red-50 hover:bg-white/10 hover:text-white' }}">
+
+                        <i class="bi bi-box-seam mr-3 text-xl transition-transform group-hover:scale-110"></i>
+                        <span>Productos</span>
                     </a>
                 </li>
             </ul>
+
+            {{-- Sección: TRANSACCIONES --}}
+            <div class="mb-2 mt-6 px-4 text-xs font-semibold text-red-200 uppercase tracking-wider">
+                Transacciones
+            </div>
+
+            <ul class="space-y-1">
+                <li>
+                    <a href="{{ route('orden.negocio') }}"
+                        class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 group
+                   {{ request()->routeIs('orden.negocio')
+                       ? 'bg-white text-red-700 shadow-md font-semibold'
+                       : 'text-red-50 hover:bg-white/10 hover:text-white' }}">
+
+                        <i class="bi bi-currency-dollar mr-3 text-xl transition-transform group-hover:scale-110"></i>
+                        <span>Ventas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('orden.cliente') }}"
+                        class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 group
+                   {{ request()->routeIs('orden.cliente')
+                       ? 'bg-white text-red-700 shadow-md font-semibold'
+                       : 'text-red-50 hover:bg-white/10 hover:text-white' }}">
+
+                        <i class="bi bi-bag-check mr-3 text-xl transition-transform group-hover:scale-110"></i>
+                        <span>Mis Pedidos</span>
+                    </a>
+                </li>
+            </ul>
+
         </nav>
     </aside>
 

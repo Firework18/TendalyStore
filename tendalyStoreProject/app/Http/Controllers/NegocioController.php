@@ -43,7 +43,18 @@ class NegocioController extends Controller
 
     public function negocioDashboard(){
         $negocio = auth()->user()->negocios;
-        return view('dashboard.user.negocio',compact('negocio'));
+
+        $ultimasOrdenes = collect();
+
+        if ($negocio) {
+            $ultimasOrdenes = $negocio->ordenes()
+                ->with(['usuario', 'tags'])
+                ->latest()
+                ->take(5) 
+                ->get();
+        }
+
+        return view('dashboard.user.negocio', compact('negocio', 'ultimasOrdenes'));
     }
 
     public function create(){

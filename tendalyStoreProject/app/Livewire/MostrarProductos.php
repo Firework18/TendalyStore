@@ -14,6 +14,8 @@ class MostrarProductos extends Component
 
     public $negocio;
 
+    public $termino;
+
     public function mount($negocio)
     {
         $this->negocio = $negocio;
@@ -24,6 +26,12 @@ class MostrarProductos extends Component
         Producto::find($producto->id)->delete();
     }
 
+    public function buscar($termino){
+        $this->termino = $termino;
+    }
+
+    protected $listeners = ['filtrar'=>'buscar'];
+
     public function render()
     {      
 
@@ -33,8 +41,10 @@ class MostrarProductos extends Component
             ]);
         }
         return view('livewire.mostrar-productos', [
-            'productos' => Producto::where('negocio_id', $this->negocio->id)
-                ->paginate(5,['*'],'productosPage'),
+            
+            'productos' => Producto::when($this->termino,function($query){
+                $query->where('nombre','LIKE','%'.$this->termino.'%');
+            })->where('negocio_id',$this->negocio->id)->paginate(10)
         ]);
     }
 }

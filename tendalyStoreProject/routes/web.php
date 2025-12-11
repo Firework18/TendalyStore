@@ -78,6 +78,10 @@ Route::post('/comentario', [ComentarioController::class, 'store'])->name('coment
 
 Route::get('/checkout/{negocio:nombre}',[CheckoutController::class,'index'])->name('orden.checkout');
 Route::get('/ordenes/confirmado/{orden:id}',[OrdenController::class,'exito'])->name('orden.exito');
+Route::get('/dashboard/cliente/ordenes',[OrdenController::class,'cliente'])->name('orden.cliente');
+Route::get('/dashboard/cliente/ordenes/detalle/{orden:codigo}',[OrdenController::class,'detalleCliente'])->name('orden.cliente.detalle');
+Route::get('/dashboard/negocio/ordenes',[OrdenController::class,'negocio'])->name('orden.negocio');
+Route::get('/dashboard/negocio/ordenes/detalle/{orden:codigo}',[OrdenController::class,'detalleNegocio'])->name('orden.negocio.detalle');
 
 //Enviar al muro
 Route::get('/{user:username}', [PostController::class, 'index'])->name('post.index');

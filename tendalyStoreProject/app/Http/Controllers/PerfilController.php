@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Orden;
 use App\Models\Negocio;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -15,9 +16,58 @@ class PerfilController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
+     public function index(){
         $user = auth()->user();
-        return view('dashboard.user.principal',compact('user'));
+
+        $misCompras = Orden::where('user_id', $user->id)
+            ->with('tags') 
+            ->latest()
+            ->take(5)
+            ->get();
+
+        $ultimaCompra = $misCompras->first();
+
+        $comprasActivas = Orden::where('user_id', $user->id)
+            ->whereHas('tags', function($q) {
+                $q->whereIn('nombre', ['pendiente', 'pagado', 'en camino', 'preparando']); 
+            })->count();
+
+        
+        $negocio = $user->negocios()->first(); 
+
+        $ventasRecientes = collect();
+        $statsNegocio = [
+            'ingresos' => 0,
+            'pedidos_nuevos' => 0,
+            'total_ventas' => 0
+        ];
+
+        if ($negocio) {
+            $ventasRecientes = Orden::where('negocio_id', $negocio->id)
+                ->with(['usuario', 'tags']) //traemos datos del cliente y estado
+                ->latest()
+                ->take(5)
+                ->get();
+
+            $statsNegocio['total_ventas'] = Orden::where('negocio_id', $negocio->id)->count();
+            
+            $statsNegocio['ingresos'] = Orden::where('negocio_id', $negocio->id)->sum('total');
+            
+            $statsNegocio['pedidos_nuevos'] = Orden::where('negocio_id', $negocio->id)
+                ->whereHas('tags', function($q){
+                    $q->where('nombre', 'pendiente'); 
+                })->count();
+        }
+
+        return view('dashboard.user.principal', compact(
+            'user', 
+            'negocio', 
+            'misCompras', 
+            'ultimaCompra', 
+            'comprasActivas',
+            'ventasRecientes',
+            'statsNegocio'
+        ));
     }
 
     public function perfil(){
@@ -27,7 +77,6 @@ class PerfilController extends Controller
 
     public function store(Request $request){
 
-        //Modificar el request evitando usuarios duplicados
         $request->request->add(['username'=> Str::slug($request->username)]);
 
         $this->validate($request,[
@@ -59,7 +108,6 @@ class PerfilController extends Controller
 
         $usuario->save();
 
-        //Redireccionar
         return redirect()->route('dashboard.perfil')->with('success','Perfil editado correctamente');
 
     }
