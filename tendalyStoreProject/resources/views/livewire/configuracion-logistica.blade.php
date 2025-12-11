@@ -1,6 +1,5 @@
 <div class="max-w-5xl mx-auto">
 
-    <!-- Header simple -->
     <div class="mb-6 flex justify-between items-center">
         <h2 class="text-2xl font-bold text-gray-800">Configuración de Logística y Pagos</h2>
         <a href="{{ route('dashboard') }}"
@@ -56,7 +55,6 @@
                         </div>
                     </div>
 
-                    <!-- Input: Costo de Envío -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Costo Estándar (S/)</label>
                         <div class="relative rounded-md shadow-sm">
@@ -76,7 +74,6 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 2: PAGOS (YAPE) -->
             <div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
                 <div class="p-6 border-b border-gray-50 bg-gray-50/50 flex items-center">
                     <div class="bg-purple-100 p-2 rounded-lg mr-3">
@@ -87,7 +84,6 @@
 
                 <div class="p-8 space-y-6">
 
-                    <!-- Input: Número Yape -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Número Yape</label>
                         <div class="relative rounded-md shadow-sm">
@@ -108,26 +104,20 @@
                         @enderror
                     </div>
 
-                    <!-- Upload QR Yape -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Código QR (Imagen)</label>
 
                         <div class="flex items-start space-x-6">
-                            <!-- Zona de Previsualización -->
                             <div class="shrink-0 relative">
                                 @if ($qr_yape_nuevo)
-                                    <!-- Previsualización de la NUEVA imagen cargada temporalmente -->
                                     <img src="{{ $qr_yape_nuevo->temporaryUrl() }}"
                                         class="h-32 w-32 object-cover rounded-lg border-2 border-purple-500 p-1 shadow-sm">
                                     <span
                                         class="absolute top-0 right-0 -mt-2 -mr-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full shadow">Nuevo</span>
                                 @elseif ($imagen_qr_yape)
-                                    <!-- Previsualización de la imagen guardada en BD -->
-
                                     <img src="{{ asset('storage/qr_imagenes_negocios/' . $imagen_qr_yape) }}"
                                         class="h-32 w-32 object-cover rounded-lg border-2 border-gray-200 p-1">
                                 @else
-                                    <!-- Placeholder vacío -->
                                     <div
                                         class="h-32 w-32 rounded-lg border-2 border-dashed border-gray-300 flex flex-col items-center justify-center bg-gray-50 text-gray-400">
                                         <svg class="w-8 h-8 mb-1" fill="none" stroke="currentColor"
@@ -140,7 +130,6 @@
                                     </div>
                                 @endif
 
-                                <!-- Spinner de carga al subir imagen -->
                                 <div wire:loading wire:target="qr_yape_nuevo"
                                     class="absolute inset-0 bg-white/80 flex items-center justify-center rounded-lg">
                                     <svg class="animate-spin h-6 w-6 text-purple-600"
@@ -154,7 +143,6 @@
                                 </div>
                             </div>
 
-                            <!-- Input File -->
                             <div class="flex-1">
                                 <label class="block w-full cursor-pointer group">
                                     <span class="sr-only">Elegir imagen</span>
@@ -183,7 +171,6 @@
             </div>
         </div>
 
-        <!-- Botón Guardar con estado de carga -->
         <div class="mt-8 flex justify-end">
             <button type="submit" wire:loading.attr="disabled"
                 class="inline-flex items-center bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
@@ -213,7 +200,6 @@
     </form>
 </div>
 
-<!-- Integración SweetAlert con Eventos de Livewire -->
 @script
     <script>
         Livewire.on('swal:success', (data) => {

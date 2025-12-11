@@ -32,7 +32,7 @@ class CrearProducto extends Component
     {
         $datos = $this->validate();
 
-        //Almacenar la imagen
+        //Almacenarla imagen
         $imagen = $this->imagen->store('productos', 'public');
         $datos['imagen'] = basename($imagen);
 

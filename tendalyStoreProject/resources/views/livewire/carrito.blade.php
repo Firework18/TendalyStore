@@ -66,7 +66,6 @@
                                         </p>
                                     </div>
 
-                                    <!-- Control de Cantidad con Alpine & Livewire -->
                                     <div class="flex flex-col items-center justify-center" x-data="{
                                         qty: {{ $item->cantidad }},
                                         loading: false,
@@ -102,7 +101,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Subtotal -->
                                     <div class="text-right min-w-[100px]">
                                         <p class="text-sm text-gray-500">Subtotal</p>
                                         <p class="text-lg font-bold text-red-600">

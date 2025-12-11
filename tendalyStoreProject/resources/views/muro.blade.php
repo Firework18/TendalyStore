@@ -6,23 +6,16 @@
 
 @section('contenido')
     <div class="min-h-screen bg-gray-50 pb-12">
-        <!-- Banner Superior -->
         <div class="relative h-64 bg-gradient-to-r from-red-600 to-black overflow-hidden">
-            <!-- Elementos decorativos de fondo -->
             <div class="absolute inset-0 bg-white/10 opacity-20"
                 style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;">
             </div>
         </div>
 
-        <!-- Contenedor Principal -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-24 relative z-10">
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-
-                <!-- Columna Izquierda: Tarjeta de Perfil y Datos Rápidos (4 columnas) -->
                 <div class="lg:col-span-4 xl:col-span-3 space-y-6">
-
-                    <!-- Tarjeta de Identidad -->
                     <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 text-center p-6">
                         <div class="relative inline-block">
                             <div
@@ -30,7 +23,6 @@
                                 <img src="{{ $user->imagen ? asset('/storage/perfiles/' . $user->imagen) : asset('assets/images/default-profile.png') }}"
                                     alt="{{ $user->username }}" class="w-full h-full object-cover">
                             </div>
-                            <!-- Indicador de estado (opcional) -->
                             <span class="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white rounded-full"
                                 title="Usuario Activo"></span>
                         </div>
@@ -40,7 +32,6 @@
                         <p class="text-sm text-gray-500 font-medium">@ {{ $user->username }}</p>
 
                         <div class="mt-6 flex justify-center space-x-4">
-                            <!-- Botones de Acción (opcionales) -->
                             <button
                                 class="px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg shadow hover:bg-red-700 transition">
                                 Contactar
@@ -48,7 +39,6 @@
                         </div>
                     </div>
 
-                    <!-- Tarjeta de Información de Contacto -->
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
                         <h3 class="text-gray-900 font-bold text-lg mb-4 border-b border-gray-100 pb-2">Detalles</h3>
                         <ul class="space-y-4 text-sm">
@@ -85,7 +75,6 @@
                             </li>
                         </ul>
 
-                        <!-- Redes Sociales -->
                         <div class="mt-6 pt-6 border-t border-gray-100">
                             <p class="text-xs text-gray-400 uppercase font-semibold mb-3 tracking-wider">Social</p>
                             <div class="flex justify-start gap-4">
@@ -110,10 +99,7 @@
                     </div>
                 </div>
 
-                <!-- Columna Derecha: Contenido Principal (8 columnas) -->
                 <div class="lg:col-span-8 xl:col-span-9 space-y-6">
-
-                    <!-- Sección Acerca de Mí -->
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 lg:p-8">
                         <div class="flex items-center mb-6">
                             <div class="p-2 bg-red-50 rounded-lg text-red-600 mr-3">
@@ -135,7 +121,6 @@
                         </div>
                     </div>
 
-                    <!-- Sección Negocio Asociado -->
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 lg:p-8">
                         <div class="flex items-center mb-6">
                             <div class="p-2 bg-red-50 rounded-lg text-red-600 mr-3">
@@ -148,7 +133,6 @@
                             <div
                                 class="group relative bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md hover:border-red-300 transition-all duration-300">
                                 <div class="md:flex">
-                                    <!-- Placeholder de imagen de negocio (o real si tienes) -->
                                     <div
                                         class="md:shrink-0 bg-gray-100 w-full md:w-48 h-48 md:h-auto flex items-center justify-center text-gray-300">
                                         <img src="{{ asset('/storage/negocios/' . $negocio->imagen) }}" alt="">

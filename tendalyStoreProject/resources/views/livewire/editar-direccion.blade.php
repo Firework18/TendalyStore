@@ -1,5 +1,4 @@
 <div class="max-w-4xl mx-auto">
-    {{-- Formulario --}}
     <form wire:submit.prevent='editarDireccion' method="POST" class="space-y-6" novalidate>
         @csrf
 

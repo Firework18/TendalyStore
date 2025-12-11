@@ -33,11 +33,10 @@ class Orden extends Model
 
         static::creating(function ($orden) {
 
-            // Obtener el último ID
             $ultimo = Orden::latest('id')->first();
             $nuevoNumero = $ultimo ? $ultimo->id + 1 : 1;
 
-            // Formato: O-0001
+            //Formato: O-0001
             $orden->codigo = 'O-' . str_pad($nuevoNumero, 4, '0', STR_PAD_LEFT);
         });
     }

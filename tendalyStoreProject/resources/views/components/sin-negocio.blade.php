@@ -13,7 +13,6 @@
             </div>
         </div>
 
-        {{-- Texto --}}
         <h2 class="text-2xl font-bold text-gray-800 mb-2 tracking-tight">
             ¡Crea tu Negocio Digital!
         </h2>

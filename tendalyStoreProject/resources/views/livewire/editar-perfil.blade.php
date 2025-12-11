@@ -4,7 +4,6 @@
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
 
-            <!-- Columna Izquierda (Datos Principales) -->
             <div class="md:col-span-8 space-y-6">
                 <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
                     <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b border-gray-200 pb-2">Datos de
@@ -98,7 +97,6 @@
                 </div>
             </div>
 
-            <!-- Columna Derecha (Imagen y Acción) -->
             <div class="md:col-span-4 space-y-6">
                 <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm sticky top-6">
                     <h4 class="text-lg font-semibold text-gray-800 mb-4">Actualizar Foto</h4>

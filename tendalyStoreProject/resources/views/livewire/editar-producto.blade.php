@@ -87,7 +87,6 @@
             @enderror
         </div>
 
-        <!-- Sección de Imagen con input type="file" -->
         <div class="mb-5 mt-8 p-6 border-t border-gray-200">
             <h3 class="text-xl font-semibold text-gray-700 mb-4 text-center">Imagen del Producto</h3>
             <p class="text-gray-500 text-sm mb-4 text-center">Sube una imagen para tu producto. Formato: JPG, PNG.

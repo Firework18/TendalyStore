@@ -1,5 +1,4 @@
 <div class="max-w-4xl mx-auto">
-    {{-- Formulario --}}
     <form wire:submit.prevent='crearDireccion' method="POST" class="space-y-6" novalidate>
         @csrf
 
@@ -73,7 +72,6 @@
                 <div class="col-span-1 md:col-span-2 mt-2">
                     <div class="flex items-start">
                         <div class="flex items-center h-5">
-                            {{-- Input oculto para enviar '0' si no está marcado (opcional, depende de tu controlador) --}}
                             <input type="hidden" wire:model="es_principal" value="0">
 
                             <input id="es_principal" wire:model="es_principal" type="checkbox" value="1"

@@ -17,7 +17,6 @@ class AnadirComentario extends Component
     {
         $this->negocio_id = $negocio_id;
 
-        // Verificamos si el usuario ya comentó
         $this->yaComento = Comentario::where('negocio_id', $negocio_id)
             ->where('user_id', Auth::id())
             ->exists();
@@ -30,7 +29,6 @@ class AnadirComentario extends Component
             'rating' => 'required|integer|min:1|max:5',
         ]);
 
-        // Si ya comentó, no permitimos otro comentario
         if ($this->yaComento) {
             session()->flash('errorComentario', 'Ya has comentado anteriormente.');
             return;
@@ -45,13 +43,10 @@ class AnadirComentario extends Component
 
         $this->reset('comentario', 'rating');
 
-        // Marcar que ya comentó → Livewire re-renderiza y muestra el aviso
         $this->yaComento = true;
 
-        // Enviar mensaje de éxito
         session()->flash('success', 'Comentario publicado correctamente.');
 
-        // Emitir evento para actualizar lista de comentarios
         $this->dispatch('comentarioAgregado',type:'success',message:'Comentario agregado correctamente',text:'Muchas gracias por valorar este negocio.');
 
     }

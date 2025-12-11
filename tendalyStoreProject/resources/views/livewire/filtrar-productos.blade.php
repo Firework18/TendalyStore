@@ -4,7 +4,6 @@
     <div class="relative flex items-center w-full group">
         <form wire:submit.prevent="leerDatosFormulario"
             class="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center">
-            {{-- Icono Lupa --}}
             <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
                 <svg class="w-5 h-5 text-gray-400 group-focus-within:text-red-500 transition-colors" fill="none"
                     stroke="currentColor" viewBox="0 0 24 24">

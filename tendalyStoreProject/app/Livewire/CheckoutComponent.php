@@ -111,10 +111,8 @@ class CheckoutComponent extends Component
             'comprobante' => 'required|image|max:5120',
         ];
 
-        // Validar dirección solo si es Delivery
         if ($this->tipo_entrega == 'delivery' && $this->negocio->envio_disponible) {
             
-            // Si el usuario eligió "Usar guardadas" Y tiene direcciones en BD
             if ($this->usar_direccion_guardada && Direccion::where('user_id', auth()->id())->exists()) {
                 $reglas['direccion_seleccionada_id'] = 'required|exists:direcciones,id';
             } else {

@@ -25,7 +25,6 @@
                 const provinciaSelect = document.getElementById('provincia_id');
                 const distritoSelect = document.getElementById('distrito_id');
 
-                // Cuando cambie el departamento
                 departamentoSelect.addEventListener('change', async (e) => {
                     const departamentoId = e.target.value;
                     provinciaSelect.innerHTML = '<option value="">Selecciona provincia</option>';
@@ -47,7 +46,6 @@
                     }
                 });
 
-                // Cuando cambie la provincia
                 provinciaSelect.addEventListener('change', async (e) => {
                     const provinciaId = e.target.value;
                     distritoSelect.innerHTML = '<option value="">Selecciona distrito</option>';
