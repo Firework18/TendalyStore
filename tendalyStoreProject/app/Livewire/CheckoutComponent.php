@@ -172,6 +172,7 @@ class CheckoutComponent extends Component
                 'user_id' => auth()->id(),
                 'negocio_id' => $this->negocio->id,
                 'subtotal' => $this->subtotal,
+                'tipo_entrega'=> $this->tipo_entrega,
                 'costo_envio' => $this->costo_envio,
                 'total' => $this->total,
                 'direccion_entrega' => $textoDireccion,
@@ -180,6 +181,9 @@ class CheckoutComponent extends Component
                 'estado' => 'pendiente',
                 'imagen_pago' => $imagen
             ]);
+
+            $orden->tags()->attach(11);
+
 
             foreach ($this->itemsCheckout as $item) {
                 OrdenItem::create([

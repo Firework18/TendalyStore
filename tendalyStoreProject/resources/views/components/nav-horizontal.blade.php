@@ -46,13 +46,6 @@
                 </a>
             </div>
             <div class="py-1 border-t border-gray-100">
-                <a href="#"
-                    class="group flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition">
-                    <i class="bi bi-gear mr-3 text-gray-400 group-hover:text-red-600"></i>
-                    Configuración
-                </a>
-            </div>
-            <div class="py-1 border-t border-gray-100">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit"

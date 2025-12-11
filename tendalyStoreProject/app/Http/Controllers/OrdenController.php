@@ -16,4 +16,31 @@ class OrdenController extends Controller
         $negocio = Negocio::find($orden->negocio_id);
         return view('ordenes.exito',compact('orden','negocio'));
     }
+
+    public function cliente(){
+    
+        return view('dashboard.user.cliente.mis_pedidos');
+    }
+
+    public function detalleCliente(Orden $orden){
+
+        $this->authorize('view',$orden);
+
+        return view('dashboard.user.cliente.orden_detalle',compact('orden'));
+
+    }
+
+    #Negocio
+    public function negocio(){
+
+        return view('dashboard.user.negocio.mis_ventas');
+    }
+
+    public function detalleNegocio(Orden $orden){
+
+        $this->authorize('view',$orden);
+
+        return view('dashboard.user.cliente.orden_detalle',compact('orden'));
+
+    }
 }

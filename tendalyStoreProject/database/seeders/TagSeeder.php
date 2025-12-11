@@ -82,6 +82,42 @@ class TagSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'id' => 11,
+                'nombre' => 'pendiente',
+                'color' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 12,
+                'nombre' => 'pagado',
+                'color' => 'bg-blue-100 text-blue-800 border-blue-200',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 13,
+                'nombre' => 'en camino',
+                'color' => 'bg-indigo-100 text-indigo-800 border-indigo-200',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 14,
+                'nombre' => 'entregado',
+                'color' => 'bg-green-100 text-green-800 border-green-200',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 15,
+                'nombre' => 'rechazado',
+                'color' => 'bg-red-100 text-red-800 border-red-200', // ejemplo
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
         ]);
     }
 }
