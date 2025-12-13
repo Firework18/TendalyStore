@@ -41,23 +41,21 @@
                     <span class="font-medium">Visitar Negocio</span>
                 </a>
                 <a href="{{ route('carrito.index') }}"
-                    class="group flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition">
-                    <i class="bi bi-cart mr-3 text-gray-400 group-hover:text-red-600"></i>
-                    Tu carrito
+                    class="group flex items-center px-4 py-2  text-gray-700 hover:bg-gray-50 hover:text-red-600 transition">
+                    <i class="bi bi-cart mr-3 text-xl text-gray-400"></i>
+                    <span class="font-medium">Tu carrito</span>
                 </a>
 
-                <div class="h-px bg-gray-100 my-2 mx-5"></div>
+                <div class="h-px
+                        bg-gray-100 my-2 mx-5">
+                </div>
             @endauth
             <a href="{{ route('nosotros') }}"
                 class="flex items-center gap-3 px-5 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
                 <i class="bi bi-body-text text-xl text-gray-400"></i>
                 <span class="font-medium">Nosotros</span>
             </a>
-            <a href="{{ route('catalogo') }}"
-                class="flex items-center gap-3 px-5 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
-                <i class="bi bi-grid text-xl text-gray-400"></i>
-                <span class="font-medium">Catálogo</span>
-            </a>
+
             @auth
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf

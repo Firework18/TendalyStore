@@ -1,14 +1,10 @@
 <div>
     @if ($negocio !== null)
 
-        {{-- CASO 1: SIN PRODUCTOS --}}
         @if (!$productos && empty($search))
-            {{-- (Tu código de estado vacío se mantiene igual, estaba perfecto) --}}
             <div class="text-center py-16 px-6">
-                {{-- ... código original ... --}}
             </div>
         @else
-            {{-- CASO 2: TABLA DE PRODUCTOS --}}
             <div class="overflow-x-auto min-h-[500px]">
                 <table class="min-w-full divide-y divide-gray-200 align-middle">
                     <thead class="bg-gray-50/80 backdrop-blur-sm sticky top-0 z-10">
@@ -39,10 +35,8 @@
                         @forelse ($productos as $producto)
                             <tr class="hover:bg-indigo-50/40 transition-all duration-200 group">
 
-                                {{-- 1. COLUMNA PRODUCTO (Imagen + Nombre + Descripción) --}}
                                 <td class="pl-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        {{-- Imagen con fallback --}}
                                         <div
                                             class="flex-shrink-0 h-14 w-14 relative group-hover:scale-105 transition-transform">
                                             @if ($producto->imagen)
@@ -62,7 +56,6 @@
                                             @endif
                                         </div>
 
-                                        {{-- Datos de Texto --}}
                                         <div class="ml-4 max-w-xs">
                                             <div class="text-sm font-bold text-gray-900 truncate"
                                                 title="{{ $producto->nombre }}">
@@ -80,20 +73,17 @@
                                     </div>
                                 </td>
 
-                                {{-- 2. COLUMNA PRECIO Y UNIDAD --}}
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex flex-col">
                                         <span class="text-sm font-bold text-gray-900">
                                             S./ {{ number_format($producto->precio, 2) }}
                                         </span>
-                                        {{-- Aquí mostramos la unidad (Ej: "x Kg", "x Unidad") --}}
                                         <span class="text-xs text-gray-500">
                                             por {{ strtolower($producto->unidad ?? 'unidad') }}
                                         </span>
                                     </div>
                                 </td>
 
-                                {{-- 3. COLUMNA STOCK (Disponibilidad) --}}
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @if ($producto->stock > 10)
                                         <span
@@ -125,7 +115,6 @@
                                     @endif
                                 </td>
 
-                                {{-- 4. COLUMNA OFERTA --}}
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                     @if ($producto->precio_oferta)
                                         <div class="flex flex-col items-center">
@@ -133,26 +122,17 @@
                                                 class="text-sm font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-100">
                                                 S./ {{ number_format($producto->precio_oferta, 2) }}
                                             </span>
-                                            {{-- Calculamos el descuento visualmente --}}
-                                            @php
-                                                $descuento = 100 - ($producto->precio_oferta * 100) / $producto->precio;
-                                            @endphp
-                                            <span class="text-[10px] text-red-500 font-semibold mt-1">
-                                                -{{ round($descuento) }}% OFF
-                                            </span>
+
                                         </div>
                                     @else
                                         <span class="text-gray-400 text-xs">-</span>
                                     @endif
                                 </td>
 
-                                {{-- 5. COLUMNA ACCIONES (Siempre visibles o en hover) --}}
                                 <td class="pr-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    {{-- Hacemos que siempre se vean un poco tenues y full color al hover --}}
                                     <div
                                         class="flex items-center justify-end gap-2 text-gray-400 group-hover:text-gray-600">
 
-                                        {{-- Ver --}}
                                         <a href="{{ route('producto.show', $producto->nombre) }}"
                                             class="p-2 rounded-lg hover:bg-green-50 hover:text-green-600 transition-colors tooltip"
                                             title="Ver detalles">
@@ -165,7 +145,6 @@
                                             </svg>
                                         </a>
 
-                                        {{-- Editar --}}
                                         <a href="{{ route('producto.edit', $producto->nombre) }}"
                                             class="p-2 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
                                             title="Editar">
@@ -176,10 +155,8 @@
                                             </svg>
                                         </a>
 
-                                        {{-- Separador vertical --}}
                                         <div class="h-4 w-px bg-gray-200 mx-1"></div>
 
-                                        {{-- Eliminar --}}
                                         <button
                                             wire:click="$dispatch('mostrarAlerta',{ producto: {{ $producto }} })"
                                             class="p-2 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors"
@@ -194,7 +171,6 @@
                                 </td>
                             </tr>
                         @empty
-                            {{-- CASO 3: SIN RESULTADOS DE BÚSQUEDA --}}
                             <tr>
                                 <td colspan="5" class="px-6 py-16 text-center">
                                     <div
@@ -217,7 +193,6 @@
                 </table>
             </div>
 
-            {{-- Paginación Mejorada --}}
             <div class="px-6 py-4 border-t border-gray-200 bg-gray-50/50">
                 {{ $productos->links(data: ['scrollTo' => false]) }}
             </div>

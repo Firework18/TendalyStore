@@ -39,9 +39,7 @@
                             </svg>
                             <h2 class="text-lg font-bold text-gray-800">{{ $negocioNombre }}</h2>
                         </div>
-                        <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Envío
-                            calculado al
-                            final</span>
+
                     </div>
 
                     <div class="divide-y divide-gray-100">
@@ -66,7 +64,6 @@
                                         </p>
                                     </div>
 
-                                    <!-- Control de Cantidad con Alpine & Livewire -->
                                     <div class="flex flex-col items-center justify-center" x-data="{
                                         qty: {{ $item->cantidad }},
                                         loading: false,
@@ -102,7 +99,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Subtotal -->
                                     <div class="text-right min-w-[100px]">
                                         <p class="text-sm text-gray-500">Subtotal</p>
                                         <p class="text-lg font-bold text-red-600">

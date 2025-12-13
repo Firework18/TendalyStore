@@ -1,6 +1,5 @@
 <div class="max-w-6xl mx-auto px-4 py-8">
 
-    <!-- Encabezado -->
     <div class="mb-8 border-b border-gray-200 pb-4">
         <h1 class="text-3xl font-extrabold text-gray-900">Finalizar compra en <a
                 href="{{ route('negocio.show', $negocio->nombre) }}"
@@ -10,10 +9,8 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
-        <!-- COLUMNA IZQUIERDA: Formularios -->
         <div class="lg:col-span-7 space-y-8">
 
-            <!-- SECCIÓN 1: MÉTODO DE ENTREGA (Solo si el negocio tiene delivery) -->
             @if ($negocio->envio_disponible)
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                     <h2 class="text-xl font-bold text-gray-800 mb-4">Método de Entrega</h2>
@@ -38,12 +35,11 @@
                 </div>
             @endif
 
-            <!-- SECCIÓN 2: DIRECCIONES (Lógica: Solo si es delivery y el negocio tiene delivery) -->
             @if ($tipo_entrega == 'delivery' && $negocio->envio_disponible)
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 animate-fade-in">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                            📍 Dirección de Entrega
+                            Dirección de Entrega
                         </h2>
 
                         <!-- Toggle: Mis Direcciones vs Nueva -->
@@ -55,7 +51,6 @@
                         @endif
                     </div>
 
-                    <!-- CASO A: USAR DIRECCIONES GUARDADAS -->
                     @if ($direccionesUsuario->count() > 0 && $usar_direccion_guardada)
                         <div class="space-y-3">
                             @foreach ($direccionesUsuario as $dir)
@@ -81,8 +76,6 @@
                                 <livewire:mostrar-alerta :message="$message" />
                             @enderror
                         </div>
-
-                        <!-- CASO B: FORMULARIO NUEVA DIRECCIÓN -->
                     @else
                         <div class="space-y-5">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -122,7 +115,6 @@
                                     class="w-full rounded-lg border-gray-300 focus:ring-red-500 focus:border-red-500 shadow-sm transition">
                             </div>
 
-                            <!-- Checkbox Guardar -->
                             @if ($direccionesUsuario->count() < 3)
                                 <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
                                     <label class="flex items-center cursor-pointer">
@@ -156,8 +148,6 @@
                         </div>
                     @endif
                 </div>
-
-                <!-- Mensaje Informativo si NO es Delivery -->
             @elseif(!$negocio->envio_disponible)
                 <div
                     class="bg-blue-50 border border-blue-200 p-4 rounded-2xl text-blue-800 text-sm flex gap-3 items-center">
@@ -176,7 +166,6 @@
             @endif
 
 
-            <!-- SECCIÓN 3: PAGO YAPE (Tu código integrado) -->
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                 <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
                     <div class="bg-purple-100 p-2 rounded-lg mr-3">
@@ -186,7 +175,6 @@
                 </h2>
 
                 <div class="flex flex-col md:flex-row gap-8 items-center">
-                    <!-- QR Section -->
                     <div class="w-full md:w-1/2 bg-red-50 p-6 rounded-2xl text-center border border-red-100">
                         <p class="text-sm font-semibold text-red-800 mb-3">Escanea el QR para pagar</p>
 
@@ -208,7 +196,6 @@
                         </div>
                     </div>
 
-                    <!-- Upload Section -->
                     <div class="w-full md:w-1/2">
                         <label class="block text-sm font-bold text-gray-700 mb-3">Sube la captura (Screenshot)</label>
 
@@ -216,7 +203,6 @@
                             <input type="file" wire:model="comprobante" accept="image/*"
                                 class="block w-full text-sm text-gray-500 file:mr-4 file:py-3 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 cursor-pointer border border-gray-300 rounded-xl bg-white hover:bg-gray-50 transition" />
 
-                            <!-- Preview y Loading -->
                             <div class="mt-3 min-h-[24px]">
                                 <span wire:loading wire:target="comprobante"
                                     class="flex items-center gap-2 text-xs text-red-600 font-medium bg-red-50 px-3 py-1 rounded-full w-fit">
@@ -255,12 +241,10 @@
 
         </div>
 
-        <!-- COLUMNA DERECHA: RESUMEN (Sticky) -->
         <div class="lg:col-span-5">
             <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 sticky top-4">
                 <h3 class="text-lg font-bold text-gray-900 mb-6 pb-2 border-b border-gray-100">Resumen del Pedido</h3>
 
-                <!-- Lista de Items -->
                 <div class="max-h-[300px] overflow-y-auto mb-6 pr-2 space-y-4 custom-scrollbar">
                     @foreach ($itemsCheckout as $item)
                         <div class="flex gap-3">
@@ -280,7 +264,6 @@
                     @endforeach
                 </div>
 
-                <!-- Totales -->
                 <div class="bg-gray-50 p-4 rounded-xl space-y-3 mb-6">
                     <div class="flex justify-between text-gray-600 text-sm">
                         <span>Subtotal Productos</span>
@@ -304,7 +287,6 @@
                     </div>
                 </div>
 
-                <!-- Botón de Confirmación -->
                 <button wire:click="procesarCompra" wire:loading.attr="disabled"
                     class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white font-bold py-4 rounded-xl hover:from-red-700 hover:to-red-800 transition duration-300 transform hover:scale-[1.02] shadow-lg shadow-red-500/30 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2">
                     <span wire:loading.remove>Confirmar Pedido</span>

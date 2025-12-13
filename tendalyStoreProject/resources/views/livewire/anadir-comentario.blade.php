@@ -1,5 +1,4 @@
 <div>
-    {{-- Mensajes flash --}}
     @if (session('success'))
         <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-6 rounded-md">
             <div class="flex">
@@ -40,7 +39,6 @@
         </div>
     @endif
 
-    {{-- Mostrar aviso o formulario según el estado --}}
     @if ($yaComento)
         <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-8 rounded-md">
             <div class="flex">
@@ -96,33 +94,30 @@
 </div>
 
 @push('scripts')
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-    document.addEventListener('livewire:init', () => {
-    Livewire.on('comentarioAgregado', (data) => {
-        Swal.fire({
-            icon: data.type,
-            title: data.message,
-            text: data.text,
-            showConfirmButton: true,
-            timer: 2500,
-        });
-        });
-    });
-    </script>
-   @if (session('error'))
-    <script>
-        Swal.fire({
-            icon: 'error',
-            timer: 2500,
-            title: "{{ session('error') }}",
-            showConfirmButton: true
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('comentarioAgregado', (data) => {
+                Swal.fire({
+                    icon: data.type,
+                    title: data.message,
+                    text: data.text,
+                    showConfirmButton: true,
+                    timer: 2500,
+                });
+            });
         });
     </script>
-@endif
-        
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                timer: 2500,
+                title: "{{ session('error') }}",
+                showConfirmButton: true
+            });
+        </script>
+    @endif
+
 @endpush
-
-
-

@@ -36,12 +36,12 @@ class CrearNegocio extends Component
     public function toggleTag($tagId)
     {
         if (in_array($tagId, $this->tagsSeleccionados)) {
-            // Si ya está, se quita
+            //si ya está se quita
             $this->tagsSeleccionados = array_filter($this->tagsSeleccionados, fn($id) => $id != $tagId);
             return;
         }
 
-        // Limitar a 5
+        //limitar a 5
         if (count($this->tagsSeleccionados) >= 5) {
             $this->dispatch('mostrarAlerta', message: 'Solo puedes seleccionar hasta 5 etiquetas.');
             return;

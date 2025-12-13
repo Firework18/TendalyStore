@@ -15,21 +15,43 @@ class OrdenNegocio extends Component
     public $estado;
     public $tagId;
 
-    public function cambiarEstado($ordenId, $tagId)
-    {
+    public function cambiarEstado($ordenId, $tagId){
         if (!$ordenId || !$tagId) return;
 
-        $orden = Orden::find($ordenId);
+        $orden = Orden::with('items.productos')->find($ordenId);
         
         if ($orden) {
+            $estadoAnterior = strtolower($orden->estado); 
             $orden->tags()->sync([(int) $tagId]);
-
             $nuevoTag = Tag::find($tagId);
+
             if ($nuevoTag) {
+                $nuevoNombreTag = strtolower($nuevoTag->nombre);
                 $orden->update(['estado' => $nuevoTag->nombre]);
-                $this->dispatch('estadoEditado',type:'success',message:'Estado actualizado',text:'El estado de la orden se ha actualizado exitosamente');
+                
+                $this->dispatch('estadoEditado',type: 'success',message: 'Estado actualizado',text: 'El estado de la orden se ha actualizado exitosamente');
+
+                $estadosNoConsumenStock = ['pendiente', 'rechazado', 'cancelado'];
+
+                $esNuevoEstadoValido = !in_array($nuevoNombreTag, $estadosNoConsumenStock); 
+                $veniaDeEstadoSinConsumo = in_array($estadoAnterior, $estadosNoConsumenStock);
+
+                if ($veniaDeEstadoSinConsumo && $esNuevoEstadoValido) {
+                    foreach ($orden->items as $item) {
+                        if ($item->productos) {
+                            $item->productos()->decrement('stock', $item->cantidad);
+                        }
+                    }
+                }
+                elseif (!$veniaDeEstadoSinConsumo && !$esNuevoEstadoValido) {
+                    
+                    foreach ($orden->items as $item) {
+                        if ($item->productos) {
+                            $item->productos()->increment('stock', $item->cantidad);
+                        }
+                    }
+                }
             }
-            
         }
     }
 

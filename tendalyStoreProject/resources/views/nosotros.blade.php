@@ -13,7 +13,7 @@
             <div class="relative z-10 max-w-4xl mx-auto px-4 flex flex-col items-center">
                 <div
                     class="mb-8 bg-white p-4 rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300 inline-block">
-                    <a href="https://nexo-itnperu.com/"><img src="{{ asset('assets/images/logo-nexo.png') }}"
+                    <a href="https://nexo-itnperu.com/" target="_blank"><img src="{{ asset('assets/images/logo-nexo.png') }}"
                             alt="Logo Nexo IT" class="h-16 md:h-20 object-contain"></a>
                 </div>
 
@@ -54,12 +54,10 @@
 
                 <div class="grid grid-cols-2 gap-4 relative">
                     <div class="absolute -inset-4 bg-red-100/50 rounded-full blur-3xl -z-10"></div>
-                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=500&q=80"
-                        class="rounded-2xl shadow-lg transform translate-y-8 hover:-translate-y-2 transition duration-500 w-full h-64 object-cover"
-                        alt="Oficina Nexo">
-                    <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=500&q=80"
-                        class="rounded-2xl shadow-lg hover:-translate-y-2 transition duration-500 w-full h-64 object-cover"
-                        alt="Tecnología Nexo">
+                    <img src="{{ asset('assets/images/nosotros1.jpg') }}"
+                        class="rounded-2xl shadow-lg w-full h-64 object-cover" alt="Oficina Nexo">
+                    <img src="{{ asset('assets/images/nosotros2.jpg') }}"
+                        class="rounded-2xl shadow-lg w-full h-64 object-cover" alt="Tecnología Nexo">
                 </div>
             </div>
         </section>

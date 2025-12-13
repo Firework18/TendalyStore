@@ -37,7 +37,7 @@
 
             </div>
             <a href="{{ route('orden.cliente.detalle', $orden->codigo) }}"
-                class="text-red-500 font-semibold hover:text-red-700 transition-colors">Ver Orden</a>
+                class="text-red-500 font-semibold hover:text-red-700 transition-colors" target="_blank">Ver Orden</a>
         </div>
     </div>
 @endsection

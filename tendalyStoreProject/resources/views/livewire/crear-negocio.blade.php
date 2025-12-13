@@ -1,7 +1,6 @@
 <div>
     <form method="POST" wire:submit.prevent='crearNegocio' enctype="multipart/form-data" novalidate>
         @csrf
-        <!-- Section: Información Básica del Negocio -->
         <section class="bg-white p-6 rounded-lg custom-shadow mb-6">
             <div class="flex items-center mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-tendaly-green mr-2" fill="none"
@@ -176,7 +175,6 @@
             </div>
         </section>
 
-        <!-- Section: Datos de Contacto del Negocio -->
         <section class="bg-white p-6 rounded-lg custom-shadow mb-6">
             <div class="flex items-center mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-tendaly-green mr-2" fill="none"
@@ -215,7 +213,6 @@
             </div>
         </section>
 
-        <!-- Section: Foto del Negocio -->
         <section class="bg-white p-6 rounded-lg custom-shadow mb-6">
             <div class="mb-5 mt-8 p-6 border-t border-gray-200">
                 <h3 class="text-xl font-semibold text-gray-700 mb-4 text-center">Imagen del Negocio</h3>
@@ -257,7 +254,6 @@
             </div>
         </section>
 
-        <!-- Action Buttons -->
         <div class="flex flex-col md:flex-row md:justify-end md:space-x-4 space-y-4 md:space-y-0 mb-8">
             <a href="{{ route('dashboard') }}"
                 class="px-6 py-2 border bg-red-500 border-gray-300 rounded-lg text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-gray-300 text-center">

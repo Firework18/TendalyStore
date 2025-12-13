@@ -6,13 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard TendalyStore - @yield('titulo')</title>
 
-    <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
 
-    <!-- Estilos de Laravel y Livewire -->
     @vite(['resources/css/app.css'])
     @livewireStyles
 
@@ -53,7 +50,6 @@
 
         <nav class="h-full overflow-y-auto px-3 pb-4">
 
-            {{-- Sección: GENERAL --}}
             <div class="mb-2 mt-2 px-4 text-xs font-semibold text-red-200 uppercase tracking-wider">
                 General
             </div>
@@ -83,7 +79,6 @@
                 </li>
             </ul>
 
-            {{-- Sección: GESTIÓN --}}
             <div class="mb-2 px-4 text-xs font-semibold text-red-200 uppercase tracking-wider">
                 Gestión
             </div>
@@ -113,7 +108,6 @@
                 </li>
             </ul>
 
-            {{-- Sección: TRANSACCIONES --}}
             <div class="mb-2 mt-6 px-4 text-xs font-semibold text-red-200 uppercase tracking-wider">
                 Transacciones
             </div>
