@@ -39,9 +39,7 @@
                             </svg>
                             <h2 class="text-lg font-bold text-gray-800">{{ $negocioNombre }}</h2>
                         </div>
-                        <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Envío
-                            calculado al
-                            final</span>
+
                     </div>
 
                     <div class="divide-y divide-gray-100">

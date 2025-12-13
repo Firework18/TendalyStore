@@ -8,9 +8,7 @@
 @section('contenido')
     <div class="max-w-6xl mx-auto space-y-6">
 
-        {{-- 1. ENCABEZADO SUPERIOR: Navegación y Acciones Principales --}}
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            {{-- Breadcrumb / Botón Regresar --}}
             <a href="{{ route('orden.cliente') }}"
                 class="group inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
                 <svg class="w-5 h-5 mr-2 text-gray-400 group-hover:text-gray-600" fill="none" stroke="currentColor"
@@ -24,16 +22,10 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-            {{-- 2. COLUMNA IZQUIERDA: Detalle de Productos (2/3 del ancho) --}}
             <div class="lg:col-span-2 space-y-6">
-
-                {{-- Tarjeta de Productos --}}
                 <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                    {{-- Cabecera de la sección --}}
                     <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                         <div class="flex items-center gap-3">
-                            {{-- Logo Negocio Placeholder --}}
                             <div
                                 class="h-8 w-8 rounded bg-white border border-gray-200 flex items-center justify-center text-gray-500">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,12 +44,10 @@
                         </span>
                     </div>
 
-                    {{-- Lista de Items --}}
                     <ul class="divide-y divide-gray-100">
                         @foreach ($orden->items as $item)
                             <li
                                 class="p-6 flex flex-col sm:flex-row items-start sm:items-center gap-6 hover:bg-gray-50 transition-colors">
-                                {{-- Imagen --}}
                                 <div
                                     class="h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg border border-gray-200 bg-gray-100">
                                     @if ($item->productos && $item->productos->imagen)
@@ -75,7 +65,6 @@
                                     @endif
                                 </div>
 
-                                {{-- Detalles del Producto --}}
                                 <div class="flex-1">
                                     <div class="flex justify-between">
                                         <h4 class="text-base font-medium text-gray-900">
@@ -89,7 +78,6 @@
                                     <p class="mt-1 text-sm text-gray-500">
                                         {{ $item->productos->categoria->nombre ?? 'Sin categoría' }}</p>
 
-                                    {{-- Atributos (si los tienes) --}}
                                     <div class="mt-2 text-sm text-gray-500 flex gap-4">
                                         <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs">Precio unit:
                                             ${{ number_format($item->precio_unitario, 2) }}</span>
@@ -101,7 +89,6 @@
                     </ul>
                 </div>
 
-                {{-- Opcional: Notas del Cliente --}}
                 @if ($orden->notas_cliente)
                     <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                         <h5 class="text-sm font-bold text-yellow-800 mb-1">Nota del pedido:</h5>
@@ -111,10 +98,7 @@
 
             </div>
 
-            {{-- 3. COLUMNA DERECHA: Resumen Financiero y Logística (1/3 del ancho) --}}
             <div class="lg:col-span-1 space-y-6">
-
-                {{-- Card: Resumen Financiero --}}
                 <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
                     <h2 class="text-lg font-medium text-gray-900 mb-4">Resumen de Pago</h2>
 
@@ -125,7 +109,6 @@
                                 ${{ number_format($orden->total - $orden->costo_envio, 2) }}</dd>
                         </div>
 
-                        {{-- Descuento (Si aplica) --}}
                         @if ($orden->descuento > 0)
                             <div class="flex justify-between text-green-600">
                                 <dt>Descuento</dt>
@@ -143,7 +126,6 @@
                                 @endif
                             </dd>
                         </div>
-
                         <div class="flex justify-between items-center pt-4 border-t border-gray-200">
                             <dt class="text-base font-bold text-gray-900">Total</dt>
                             <dd class="text-xl font-bold text-red-600">${{ number_format($orden->total, 2) }}</dd>
@@ -151,7 +133,6 @@
                     </dl>
                 </div>
 
-                {{-- Card: Información de Entrega --}}
                 <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
                     <h2 class="text-lg font-medium text-gray-900 mb-4">Información de Entrega</h2>
 
@@ -185,7 +166,13 @@
                                 <p
                                     class="text-sm text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-md border border-gray-100">
                                     {{ $orden->direccion_entrega }}
-                                    {{-- <br><span class="text-xs text-gray-400">Referencia: Frente al parque...</span> --}}
+                                </p>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Referencia</p>
+                                <p
+                                    class="text-sm text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-md border border-gray-100">
+                                    {{ $orden->referencia }}
                                 </p>
                             </div>
                         @endif
@@ -198,30 +185,6 @@
                         </div>
                     </div>
                 </div>
-
-                {{-- Card: Ayuda --}}
-                {{-- <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-4">
-                    <div class="flex gap-3">
-                        <div class="flex-shrink-0">
-                            <svg class="h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-medium text-indigo-800">¿Necesitas ayuda?</h3>
-                            <div class="mt-1 text-xs text-indigo-700">
-                                <p>Si tienes problemas con este pedido, contacta con soporte.</p>
-                            </div>
-                            <div class="mt-2">
-                                <a href="#"
-                                    class="text-xs font-bold text-indigo-800 hover:text-indigo-900 underline">
-                                    Contactar al vendedor
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
 
             </div>
         </div>

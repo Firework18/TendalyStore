@@ -44,7 +44,7 @@ class MostrarProductos extends Component
             
             'productos' => Producto::when($this->termino,function($query){
                 $query->where('nombre','LIKE','%'.$this->termino.'%');
-            })->where('negocio_id',$this->negocio->id)->paginate(10)
+            })->where('negocio_id',$this->negocio->id)->orderBy('updated_at','desc')->paginate(10)
         ]);
     }
 }

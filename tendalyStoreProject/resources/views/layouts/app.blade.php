@@ -60,7 +60,7 @@
                         </p>
                         <p class="mb-2">
                             <i class="bi bi-telephone-fill mr-2 text-[var(--accent-yellow)]"></i>
-                            (+511) 611 6000
+                            (+51) 999 999 999
                         </p>
                         <p class="mb-4 break-all">
                             <i class="bi bi-envelope-fill mr-2 text-[var(--accent-yellow)]"></i>

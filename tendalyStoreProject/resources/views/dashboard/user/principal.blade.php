@@ -7,7 +7,7 @@
 @endsection
 
 @section('primera_descripcion')
-    <p class="text-lg text-red-800 mb-6">
+    <p class= "mb-6">
         ¡Bienvenido de nuevo, <span class="font-semibold">{{ $user->name }}</span>!
         Aquí tienes un resumen de tu actividad reciente.
         @if ($negocio)
@@ -20,8 +20,6 @@
 
 @section('contenido')
     <div class="space-y-8">
-
-        {{-- CLIENTE --}}
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div
@@ -123,8 +121,6 @@
                 </table>
             </div>
         </div>
-
-        {{-- NEGOCIO --}}
 
         @if ($negocio)
             <div class="mt-12 pt-8 border-t border-gray-200">

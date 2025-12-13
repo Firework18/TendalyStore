@@ -1,4 +1,4 @@
-@extends('layouts.app') {{-- Asegúrate que tu layout principal se llama 'app.blade.php' --}}
+@extends('layouts.app')
 
 @section('titulo', $negocio->nombre)
 

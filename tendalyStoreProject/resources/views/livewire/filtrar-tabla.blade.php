@@ -44,7 +44,7 @@
 
             <input type="text" wire:model.live.debounce.500ms='termino'
                 class="block w-full h-12 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 shadow-sm placeholder-gray-400 transition-all hover:border-gray-300"
-                placeholder="Buscar por número de pedido, cliente...">
+                placeholder="Buscar por número de pedido">
         </div>
 
         <div class="w-full lg:w-auto">
